@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
+        <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
+    </div>
+    <div class="container">
+        <h1>Login</h1>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div>
+                <label for="email">Email (@bc.edu)</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <a href="#">Forgot password?</a>
+        <div class="google-signin">
+            <a href="https://accounts.google.com/signin">
+                <button>Sign in with Google</button>
+            </a>
+        </div>
+        <a href="{% url 'signup' %}">Create Account</a>
+    </div>
+</body>
+</html>
