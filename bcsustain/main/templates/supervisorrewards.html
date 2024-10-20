@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor Rewards</title>
+    <link rel="stylesheet" href="{% static 'supervisorrewards.css' %}">
+</head>
+<body>
+    <header class="header">
+        <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
+        <h1>BC Sustain - Supervisor Rewards</h1>
+        <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
+    </header>
+    
+    <main class="container">
+        <h1>Manage Rewards</h1>
+        <form method="POST" action="{% url 'add_reward' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="reward-name">Reward Name</label>
+                <input type="text" id="reward-name" name="reward_name" required>
+            </div>
+            <div class="form-group">
+                <label for="reward-quantity">Available Quantity</label>
+                <input type="number" id="reward-quantity" name="reward_quantity" required min="1">
+            </div>
+            <div class="form-group">
+                <label for="start-date">Start Date</label>
+                <input type="date" id="start-date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="end-date">End Date</label>
+                <input type="date" id="end-date" name="end_date" required>
+            </div>
+            <div class="form-group">
+                <label for="exchange-description">Exchange Description</label>
+                <textarea id="exchange-description" name="exchange_description" rows="4" required></textarea>
+            </div>
+            <button type="submit">Add Reward</button>
+        </form>
+        
+        <h2>Current Rewards</h2>
+        <table class="rewards-table">
+            <thead>
+                <tr>
+                    <th>Reward Name</th>
+                    <th>Quantity</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example of a reward row, replace with actual dynamic data in Django template -->
+                <tr>
+                    <td>Gold Pass</td>
+                    <td>10</td>
+                    <td>2024-09-01</td>
+                    <td>2024-12-31</td>
+                    <td>Exchange for access to exclusive events.</td>
+                </tr>
+                <!-- Loop through rewards dynamically here -->
+                {% for reward in rewards %}
+                <tr>
+                    <td>{{ reward.name }}</td>
+                    <td>{{ reward.quantity }}</td>
+                    <td>{{ reward.start_date }}</td>
+                    <td>{{ reward.end_date }}</td>
+                    <td>{{ reward.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
