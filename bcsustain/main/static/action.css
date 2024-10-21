@@ -1,119 +1,138 @@
-* {
-    margin: 0;
+nav {
+    background-color: #32cd32;
+    background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/16b2dd33-68e4-4364-ba0c-69b571fa78e1.image.png?v=1729461553838"),
+      url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463");
+    background-size: 200px, 30px;
+    background-position: left center, calc(100% - 20px) center;
+    background-repeat: no-repeat;
+    padding-left: 60px;
+    height: 60px;
+  }
+  
+  /* nav {
+      background-image: url('https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463');
+      background-position: right center;
+      
+  } */
+  
+  nav ul {
+    list-style-type: none;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
-
-header {
-    background-color: #75B52B;
-    padding: 10px;
-    color: white;
-}
-img[alt="Profile Icon"] {
-    width: 80px;  
-    height: auto;  
-}
-.navbar {
+    margin: 0;
     display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-.navbar .logo {
-    display: flex;
-    align-items: center;
-}
-
-.navbar .logo img {
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.navbar nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-    padding: 20px;
-}
-
-.navbar nav ul li {
-    color: white;
-    cursor: pointer;
-}
-
-.navbar nav ul li.active {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-main {
-    padding: 20px;
-}
-
-h2 {
-    color: #75B52B;
-    margin-bottom: 10px;
-}
-
-.card-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.card {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.card-details {
-    padding: 10px;
-    text-align: center;
-}
-
-.card-details h3 {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-}
-
-.card-details p {
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.card.empty {
-    background-color: #e0e0e0;
-}
-
-.see-more {
-    color: #75B52B;
+    margin-left: 150px;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    padding: 24px 30px;
+  }
+  
+  nav ul li a {
     text-decoration: none;
-    font-weight: bold;
-}
-
-footer {
-    background-color: #75B52B;
-    padding: 20px;
+    color: white;
+    font-weight: 600;
+  }
+  
+  nav ul li a:visited {
+    color: #51279b;
+  }
+  
+  nav ul li a:hover {
+    color: #8662c7;
+  }
+  
+  /* Style for the events container */
+  .events {
+    width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for the image section */
+  .events-image img {
+    width: 100%; /* Make the image fill the top half */
+    height: 150px; /* Set the height of the image */
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+  }
+  
+  /* Style for the information section */
+  .events-info {
+    background-color: #32cd32; /* Green background for the bottom half */
+    padding: 15px;
+    color: black; /* Text color for contrast */
     text-align: center;
-}
-
-footer .footer-logo img {
-    width: 50px;
-}
+  }
+  
+  .events-info .name {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .events-info .points,
+  .events-info .date {
+    margin: 5px 0;
+    font-size: 1em;
+  }
+  
+  .events-image {
+    position: relative; /* Make the image container the reference for the pin icon */
+  }
+  
+  /* Add this to create a horizontally scrollable container for the events */
+  .events-container {
+    display: flex; /* Align event cards horizontally */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 20px; /* Add spacing between event cards */
+    white-space: nowrap; /* Prevent cards from wrapping to a new line */
+    padding: 20px 0; /* Add some padding at the top and bottom of the container */
+    scroll-behavior: smooth; /* Optional: smooth scrolling effect */
+  }
+  
+  /* Ensure event cards maintain their size */
+  .events {
+    min-width: 300px; /* Ensure the cards do not shrink */
+    flex-shrink: 0; /* Prevent shrinking when resizing the browser */
+  }
+  
+  /* Optional: Hide the scrollbar for a cleaner look */
+  .events-container::-webkit-scrollbar {
+    display: none; /* Hides scrollbar in Chrome, Safari */
+  }
+  
+  .events-container {
+    scrollbar-width: none; /* Hides scrollbar in Firefox */
+  }
+  
+  
+  .pin-icon {
+    position: absolute;
+    top: 10px; /* 10px from the top */
+    right: 10px; /* 10px from the right */
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1; /* Ensure it's on top of the image */
+  }
+  
+  .pin-icon img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  h1 {
+    color: green;
+  }
+  
+  footer {
+    background-color: #32cd32;
+    background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
+    background-size: 30px, 30px;
+    background-position: calc(100% - 20px) center;
+    background-repeat: no-repeat;
+    height: 70px;
+    padding: 0px;
+    margin: 0px;
+  }

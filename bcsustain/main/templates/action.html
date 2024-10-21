@@ -1,135 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <title>BC Sustain</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="{% static 'action.css' %}">
-</head>
-<body>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="action.css" />
+  </head>
+  <body>
     <header>
-        <div class="navbar">
-            <div class="logo">
-                <img src="{% static 'default_profile_pic.png' %}" alt="Profile Icon">
-                <span>BC Sustain</span>
-            </div>
-            <nav>
-                <ul>
-                    <li>Rewards</li>
-                    <li>Groups</li>
-                    <li>QR Code</li>
-                    <li class="active">Action</li>
-                </ul>
-            </nav>
-        </div>
+      <nav id="topbar">
+        <ul>
+          <li><a href="#">Rewards</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">QR Code</a></li>
+          <li><a href="#">Action</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
-        <section class="section-tasks">
-            <h2>Daily On-going Tasks</h2>
-            <div class="card-container">
-                <div class="card">
-                    <img src="green2go-box.png" alt="Green2Go Box">
-                    <div class="card-details">
-                        <h3>Green2Go Box</h3>
-                        <p>Time: On-Going</p>
-                        <p>Points: 12 PTS per box</p>
-                    </div>
-                </div>
-                <div class="card empty">
-                    <img src="placeholder.png" alt="Image Not Available">
-                    <div class="card-details">
-                        <h3>Green2Go Box</h3>
-                        <p>Time: On-Going</p>
-                        <p>Points: 12 PTS per box</p>
-                    </div>
-                </div>
-                <div class="card empty">
-                    <img src="placeholder.png" alt="Image Not Available">
-                    <div class="card-details">
-                        <h3>Green2Go Box</h3>
-                        <p>Time: On-Going</p>
-                        <p>Points: 12 PTS per box</p>
-                    </div>
-                </div>
+      <section>
+        <h1>Daily On-going Tasks</h1>
+        <p class="lead text-body-secondary">
+          These tasks have no deadlines and can be completed multiple times
+          throughout the school year!
+        </p>
+      </section>
+      <div class="events-container">
+        <section class="events">
+          <div class="events-image">
+            <img
+              src="{% static 'noimage.png' %}"
+              alt="Event Image"
+              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
+            />
+            <!-- Pin Icon -->
+            <button class="pin-icon" onclick="togglePin(this)">
+              <img
+                src="{% static 'pin.png' %}"
+                alt="Pin Icon"
+              />
+            </button>
+          </div>
+          <div class="events-info">
+            <h2 class="name">Green2Go Box</h2>
+            <p class="points">Points: 12pts</p>
+            <p class="date">Time: Ongoing</p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">
+                See Description
+              </button>
             </div>
-            <a href="#" class="see-more">See More...</a>
+          </div>
         </section>
-
-        <section class="section-events">
-            <h2>Events and Speakers</h2>
-            <div class="card-container">
-                <div class="card">
-                    <img src="event-image.png" alt="Event Image">
-                    <div class="card-details">
-                        <h3>Event Name</h3>
-                        <p>Time: </p>
-                        <p>Points: </p>
-                    </div>
-                </div>
-                <div class="card empty">
-                    <img src="placeholder.png" alt="Image Not Available">
-                    <div class="card-details">
-                        <h3>Event Name</h3>
-                        <p>Time: </p>
-                        <p>Points: </p>
-                    </div>
-                </div>
-                <div class="card empty">
-                    <img src="placeholder.png" alt="Image Not Available">
-                    <div class="card-details">
-                        <h3>Event Name</h3>
-                        <p>Time: </p>
-                        <p>Points: </p>
-                    </div>
-                </div>
+        <!-- second event -->
+        <section class="events">
+          <div class="events-image">
+            <img
+              src="{% static 'noimage.png' %}"
+              alt="Event Image"
+              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
+            />
+            <!-- Pin Icon -->
+            <button class="pin-icon" onclick="togglePin(this)">
+              <img
+                src="{% static 'pin.png' %}"
+                alt="Pin Icon"
+              />
+            </button>
+          </div>
+          <div class="events-info">
+            <h2 class="name">Green2Go Box</h2>
+            <p class="points">Points: 12pts</p>
+            <p class="date">Time: Ongoing</p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">
+                See Description
+              </button>
             </div>
-            <a href="#" class="see-more">See More...</a>
+          </div>
         </section>
-
-        <section class="section-volunteer">
-            <h2>Volunteer Work</h2>
-            <div class="card-container">
-                <div class="card">
-                    <img src="volunteer-image.png" alt="Volunteer Work">
-                    <div class="card-details">
-                        <h3>Event Name</h3>
-                        <p>Time: </p>
-                        <p>Points: </p>
-                    </div>
-                </div>
-                <div class="card empty">
-                    <img src="placeholder.png" alt="Image Not Available">
-                    <div class="card-details">
-                        <h3>Event Name</h3>
-                        <p>Time: </p>
-                        <p>Points: </p>
-                    </div>
-                </div>
-                <div class="card empty">
-                    <img src="placeholder.png" alt="Image Not Available">
-                    <div class="card-details">
-                        <h3>Event Name</h3>
-                        <p>Time: </p>
-                        <p>Points: </p>
-                    </div>
-                </div>
+        <!-- third event -->
+        <section class="events">
+          <div class="events-image">
+            <img
+              src="{% static 'noimage.png' %}"
+              alt="Event Image"
+              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
+            />
+            <!-- Pin Icon -->
+            <button class="pin-icon" onclick="togglePin(this)">
+              <img
+                src="{% static 'pin.png' %}"
+                alt="Pin Icon"
+              />
+            </button>
+          </div>
+          <div class="events-info">
+            <h2 class="name">Green2Go Box</h2>
+            <p class="points">Points: 12pts</p>
+            <p class="date">Time: Ongoing</p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">
+                See Description
+              </button>
             </div>
-            <a href="#" class="see-more">See More...</a>
+          </div>
         </section>
+        <!-- fourth event -->
+        <section class="events">
+          <div class="events-image">
+            <img
+              src="{% static 'noimage.png' %}"
+              alt="Event Image"
+              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
+            />
+            <!-- Pin Icon -->
+            <button class="pin-icon" onclick="togglePin(this)">
+              <img
+                src="{% static 'pin.png' %}"
+                alt="Pin Icon"
+              />
+            </button>
+          </div>
+          <div class="events-info">
+            <h2 class="name">Green2Go Box</h2>
+            <p class="points">Points: 12pts</p>
+            <p class="date">Time: Ongoing</p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">
+                See Description
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
 
-        <section class="section-challenges">
-            <h2>Team and Individual Challenges</h2>
-            <p>There are currently no listing available for this event type.</p>
+      <!-- Second section -->
+      <section>
+        <h1>Events and Speakers</h1>
+        <p class="lead text-body-secondary">
+          We invite students to come to these informational events about sustainability!
+        </p>
+      </section>
+      <div class="events-container">
+        <section class="events">
+          <div class="events-image">
+            <img
+              src="{% static 'noimage.png' %}"
+              alt="Event Image"
+              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
+            />
+            <!-- Pin Icon -->
+            <button class="pin-icon" onclick="togglePin(this)">
+              <img
+                src="{% static 'pin.png' %}"
+                alt="Pin Icon"
+              />
+            </button>
+          </div>
+          <div class="events-info">
+            <h2 class="name">Event name</h2>
+            <p class="points">Points: __pts</p>
+            <p class="date">Time: mm/dd/yy</p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">
+                See Description
+              </button>
+            </div>
+          </div>
         </section>
+        <!-- Additional events follow same format... -->
+      </div>
     </main>
 
-    <footer>
-        <div class="footer-logo">
-            <img src="footer-logo.png" alt="Footer Logo">
-        </div>
-    </footer>
-</body>
+    <footer></footer>
+  </body>
 </html>
+
