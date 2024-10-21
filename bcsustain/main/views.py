@@ -44,3 +44,6 @@ def base(request):
 
 def supervisor(request):
     return render(request, 'supervisorLandingPage.html')
+
+def landing(request):
+    return render(request, 'landing.html')

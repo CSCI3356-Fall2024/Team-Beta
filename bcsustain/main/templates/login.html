@@ -28,7 +28,7 @@
         </form>
         <a href="#">Forgot password?</a>
         <div class="google-signin">
-            <a href="https://accounts.google.com/signin">
+            <a href="{% url 'social:begin' 'google-oauth2' %}">
                 <button>Sign in with Google</button>
             </a>
         </div>
