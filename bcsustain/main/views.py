@@ -37,3 +37,5 @@ def add_reward(request):
         return redirect('supervisorrewards')
     else:
         return HttpResponse("Invalid request method", status=400)
+def action(request):
+    return render(request, 'action.html')
