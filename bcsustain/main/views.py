@@ -39,6 +39,8 @@ def add_reward(request):
         return HttpResponse("Invalid request method", status=400)
 def action(request):
     return render(request, 'action.html')
+def base(request):
+    return render(request, 'base.html')
 
 def supervisor(request):
     return render(request, 'supervisorLandingPage.html')

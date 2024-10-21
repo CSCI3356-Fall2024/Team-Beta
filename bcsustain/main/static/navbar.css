@@ -1,5 +1,5 @@
 nav {
-    background-color: #32cd32;
+    background-color: 7FC242;
     background-image: url("{% static 'bcsustain.png' %}"),
       url("{% static '3bars.png' %}");
     background-size: 200px, 30px;
