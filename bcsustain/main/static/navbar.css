@@ -1,5 +1,5 @@
 nav {
-    background-color: 7FC242;
+    background-color: #7FC242;
     background-image: url("{% static 'bcsustain.png' %}"),
       url("{% static '3bars.png' %}");
     background-size: 200px, 30px;
@@ -35,9 +35,9 @@ nav {
   }
   
   nav ul li a:visited {
-    color: #51279b;
+    color: white;
   }
   
   nav ul li a:hover {
-    color: #8662c7;
+    color: white;
   }
