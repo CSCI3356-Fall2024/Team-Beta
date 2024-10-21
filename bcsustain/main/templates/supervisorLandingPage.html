@@ -4,70 +4,76 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title Here</title>
-    <link rel="stylesheet" href="{% static 'supervisorrewards.css' %}">
+    <title>Campaign Management</title>
+    <link rel="stylesheet" href="{% static 'supervisor.css' %}">
 </head>
 <body>
     <!-- Header Section -->
     <header class="header">
         <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
-        <h1>Page Heading Here</h1>
+        <h1>Supervisor Page</h1>
         <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
     </header>
 
     <!-- Main Content -->
     <main class="container">
-        <h1>Supervisor Landing Page</h1>
-        <form method="POST" action="{% url 'supervisor' %}">
-            {% csrf_token %}
-            <!-- Form Group: Example Text Input -->
-            <div class="form-group">
-                <label for="input-name">Input Label Here</label>
-                <input type="text" id="input-name" name="input_name" required>
-            </div>
-            <!-- Form Group: Example Date Input -->
-            <div class="form-group">
-                <label for="date-name">Date Label Here</label>
-                <input type="date" id="date-name" name="date_name" required>
-            </div>
-            <!-- Form Group: Example Textarea Input -->
-            <div class="form-group">
-                <label for="textarea-name">Textarea Label Here</label>
-                <textarea id="textarea-name" name="textarea_name" rows="4" required></textarea>
-            </div>
-            <!-- Submit Button -->
-            <button type="submit">Submit Button Text Here</button>
-        </form>
+        <h1>Campaigns</h1>
 
-        <!-- Table Section for Displaying Data -->
-        <h2>Table Title Here</h2>
+        <!-- Active Campaigns Table -->
+        <h2>Active Campaigns</h2>
         <table class="your-table-class">
             <thead>
                 <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                    <th>Column 3</th>
-                    <th>Column 4</th>
-                    <th>Column 5</th>
+                    <th>Campaign Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Location</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Example Row, replace with dynamic data -->
+                <!-- Loop through active campaigns -->
+                {% for campaign in active_campaigns %}
                 <tr>
-                    <td>Data 1</td>
-                    <td>Data 2</td>
-                    <td>Data 3</td>
-                    <td>Data 4</td>
-                    <td>Data 5</td>
+                    <td>{{ campaign.name }}</td>
+                    <td>{{ campaign.start_date }}</td>
+                    <td>{{ campaign.end_date }}</td>
+                    <td>{{ campaign.location }}</td> <!-- Location added here -->
+                    <td>{{ campaign.description }}</td>
                 </tr>
-                <!-- Loop through your dynamic data here -->
-                {% for item in items %}
+                {% empty %}
                 <tr>
-                    <td>{{ item.column1 }}</td>
-                    <td>{{ item.column2 }}</td>
-                    <td>{{ item.column3 }}</td>
-                    <td>{{ item.column4 }}</td>
-                    <td>{{ item.column5 }}</td>
+                    <td colspan="5">No active campaigns available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Past Campaigns Table -->
+        <h2>Past Campaigns</h2>
+        <table class="your-table-class">
+            <thead>
+                <tr>
+                    <th>Campaign Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through past campaigns -->
+                {% for campaign in past_campaigns %}
+                <tr>
+                    <td>{{ campaign.name }}</td>
+                    <td>{{ campaign.start_date }}</td>
+                    <td>{{ campaign.end_date }}</td>
+                    <td>{{ campaign.location }}</td> <!-- Location added here -->
+                    <td>{{ campaign.description }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No past campaigns available.</td>
                 </tr>
                 {% endfor %}
             </tbody>
