@@ -9,11 +9,23 @@
 </head>
 <body>
     <!-- Header Section -->
-    <header class="header">
-        <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
-        <h1>Supervisor Page</h1>
-        <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
+                <span>Supervisor Page</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>Campaigns</li>
+                    <li>Rewards</li>
+                    <li>Groups</li>
+                    <li class="active">Action</li>
+                </ul>
+            </nav>
+        </div>
     </header>
+
 
     <!-- Main Content -->
     <main class="container">
@@ -78,8 +90,6 @@
                 {% endfor %}
             </tbody>
         </table>
-
-
     </main>
 </body>
 </html>
