@@ -1,0 +1,43 @@
+nav {
+    background-color: #32cd32;
+    background-image: url("{% static 'bcsustain.png' %}"),
+      url("{% static '3bars.png' %}");
+    background-size: 200px, 30px;
+    background-position: left center, calc(100% - 20px) center;
+    background-repeat: no-repeat;
+    padding-left: 60px;
+    height: 60px;
+  }
+  
+  /* nav {
+      background-image: url('https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463');
+      background-position: right center;
+      
+  } */
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    margin-left: 150px;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    padding: 24px 30px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+  }
+  
+  nav ul li a:visited {
+    color: #51279b;
+  }
+  
+  nav ul li a:hover {
+    color: #8662c7;
+  }
