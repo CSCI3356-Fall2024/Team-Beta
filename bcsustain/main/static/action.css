@@ -136,3 +136,8 @@ nav {
     padding: 0px;
     margin: 0px;
   }
+
+  .pin-icon.pinned img {
+    filter: brightness(0.5); /* This dims the icon when pinned */
+    /* Add any other styling here */
+  }

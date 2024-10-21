@@ -381,6 +381,29 @@
     </main>
 
     <footer></footer>
+      <!-- JavaScript should be placed here -->
+  <script>
+    function togglePin(button) {
+      button.classList.toggle("pinned");
+      const img = button.querySelector('img');
+      if (button.classList.contains("pinned")) {
+        img.src = "{% static 'pinned-icon.png' %}";
+      } else {
+        img.src = "{% static 'pin.png' %}";
+      }
+      const isPinned = button.classList.contains("pinned");
+      localStorage.setItem("pinnedState", isPinned);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const pinState = localStorage.getItem("pinnedState");
+      const pinButton = document.querySelector(".pin-icon");
+      if (pinState === "true") {
+        pinButton.classList.add("pinned");
+        pinButton.querySelector('img').src = "{% static 'pinned-icon.png' %}";
+      }
+    });
+  </script>
   </body>
 </html>
 
