@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title Here</title>
+    <link rel="stylesheet" href="{% static 'supervisorrewards.css' %}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
+        <h1>Page Heading Here</h1>
+        <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1>Supervisor Landing Page</h1>
+        <form method="POST" action="{% url 'supervisor' %}">
+            {% csrf_token %}
+            <!-- Form Group: Example Text Input -->
+            <div class="form-group">
+                <label for="input-name">Input Label Here</label>
+                <input type="text" id="input-name" name="input_name" required>
+            </div>
+            <!-- Form Group: Example Date Input -->
+            <div class="form-group">
+                <label for="date-name">Date Label Here</label>
+                <input type="date" id="date-name" name="date_name" required>
+            </div>
+            <!-- Form Group: Example Textarea Input -->
+            <div class="form-group">
+                <label for="textarea-name">Textarea Label Here</label>
+                <textarea id="textarea-name" name="textarea_name" rows="4" required></textarea>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit">Submit Button Text Here</button>
+        </form>
+
+        <!-- Table Section for Displaying Data -->
+        <h2>Table Title Here</h2>
+        <table class="your-table-class">
+            <thead>
+                <tr>
+                    <th>Column 1</th>
+                    <th>Column 2</th>
+                    <th>Column 3</th>
+                    <th>Column 4</th>
+                    <th>Column 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Row, replace with dynamic data -->
+                <tr>
+                    <td>Data 1</td>
+                    <td>Data 2</td>
+                    <td>Data 3</td>
+                    <td>Data 4</td>
+                    <td>Data 5</td>
+                </tr>
+                <!-- Loop through your dynamic data here -->
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.column1 }}</td>
+                    <td>{{ item.column2 }}</td>
+                    <td>{{ item.column3 }}</td>
+                    <td>{{ item.column4 }}</td>
+                    <td>{{ item.column5 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
