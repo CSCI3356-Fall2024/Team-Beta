@@ -5,60 +5,100 @@ body {
   padding: 0;
 }
 
-nav {
-    background-color: #7FC242;
-    background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/16b2dd33-68e4-4364-ba0c-69b571fa78e1.image.png?v=1729461553838"),
-      url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463");
-    background-size: 200px, 30px;
-    background-position: left center, calc(100% - 20px) center;
-    background-repeat: no-repeat;
-    padding-left: 60px;
-    height: 60px;
-  }
+/* Header Section */
+/* Styling for the header element */
+header {
+    background-color: #7FC242; /* Green background color */
+    justify-content: space-between; /* Space elements equally across the header */
+    align-items: center; /* Aligns items vertically in the center */
+    text-align: center; /* Centers the text within each element */
 
-  /* Create a clickable area over the logo */
-.logo-link {
-    position: absolute;
-    left: 0; /* Align with left side of the nav */
-    top: 0;
-    width: 200px; /* Same size as the logo background */
-    height: 60px; /* Height of the nav */
-    z-index: 2; /* Ensure it's on top of the background image */
-    display: block; /* Make it block to cover the area */
 }
-  /* nav {
-      /* Three bars*/ /*
-      background-image: url('https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463');
-      background-position: right center;
 
-  } */
+/* Style for the main heading inside the header */
+.header h1 {
+    font-size: 3rem; /* Makes the heading text large (2.5 times the root font size) */
+    color: white; /* White text color for better contrast on the green background */
+    margin: 0; /* Remove any default margins around the heading */
+}
 
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    margin-left: 150px;
-  }
+/* Navbar Section */
+/* Styling for the navigation bar (navbar) */
+.navbar {
+    display: flex; /* Flexbox layout to arrange items horizontally */
+    justify-content: space-between; /* Ensures equal spacing between navbar items */
+    align-items: center; /* Vertically centers items */
+    background-color: #7FC242; /* Sets a green background color matching the header */
+    padding: 15px 30px; /* Adds 15px vertical and 30px horizontal padding inside the navbar */
+}
 
-  nav ul li {
-    display: inline-block;
-    padding: 24px 30px;
-  }
+/* Styling for the logo inside the navbar */
+.navbar .logo {
+    display: flex; /* Flexbox to align logo image and text in the same row */
+    align-items: center; /* Vertically centers the logo content */
+    margin-right: auto; /* Keeps the logo on the left */
+}
 
-  nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-  }
+.navbar .logo {
+    margin-right: auto; /* This pushes the logo (BC Sustain) to the left */
+}
 
-  nav ul li a:visited {
-    color: green;
-  }
+/* Ensures the logo image inside the navbar maintains proper size and aspect ratio */
+img[alt="BC Dining Logo"] {
+    width: 200px; /* Sets the width to 300px */
+    height: auto; /* Automatically adjusts height to maintain aspect ratio */
+}
 
-  nav ul li a:hover {
-    color: green;
-  }
+img[alt="Three bars"] {
+    width: 50px; /* Sets a fixed width for the "Feed your mind" image */
+    height: auto; /* Maintains the aspect ratio */
+}
+
+/* Center the links in the navbar */
+.navbar nav {
+    display: flex; /* Flexbox for links */
+    justify-content: center; /* Centers the navigation links */
+    flex: 1; /* Fills available space between the logo and other items */
+}
+
+/* Styling for the list of navigation links inside the navbar */
+.navbar nav ul {
+    list-style: none; /* Removes default bullet points from the list */
+    display: flex; /* Flexbox to arrange links horizontally */
+    gap: 20px; /* Adds 20px space between each list item */
+    margin: 0; /* Ensure no extra margin around the list */
+    padding: 0; /* Remove default padding */
+}
+
+/* Ensures each list item behaves like an inline block, making it horizontally aligned */
+.navbar nav ul li {
+    display: inline-block; /* Keeps links in line */
+    color: white; /* Sets the text color of the navigation items to white */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+}
+
+/* Styling for the links inside the navbar */
+.navbar nav ul li a {
+    text-decoration: none; /* Removes underline from the links */
+    color: white; /* White text color for the links */
+    font-weight: bold; /* Adds underline to the text for emphasis */
+}
+
+/* Button Styles */
+/* Styling for the "What's Open" button */
+.whats-open-btn {
+    background-color: #D5B48A; /* Light brown background for the button */
+    color: black; /* Black text color for contrast */
+    border: none; /* Removes default border */
+    padding: 10px 20px; /* Adds 10px vertical and 20px horizontal padding */
+    border-radius: 5px; /* Rounds the button's corners by 5px */
+    cursor: pointer; /* Changes cursor to pointer when hovering over the button */
+}
+
+/* Styling for the hover state of the button */
+.whats-open-btn:hover {
+    background-color: #b49d73; /* Changes button color when hovered for a visual effect */
+}
 
   /* Style for the events container */
   .events {
