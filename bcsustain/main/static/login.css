@@ -14,12 +14,12 @@ body {
     align-items: center;
 }
 img[alt="Profile Picture"] {
-    width: 80px;  
-    height: auto;  
+    width: 80px;
+    height: auto;
 }
 img[alt="Feed your mind"] {
-    width: 300px;  
-    height: auto;  
+    width: 300px;
+    height: auto;
 }
 
 .container {
@@ -83,4 +83,25 @@ button:hover {
 
 .google-signin button:hover {
     background-color: #f0f0f0;
+}
+
+footer {
+  background-color: #7FC242;
+  background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
+  background-size: 30px, 30px;
+  background-position: calc(100% - 20px) center;
+  background-repeat: no-repeat;
+  height: 70px;
+  padding: 0px;
+  margin: 0px;
+  display: flex;  /* Flexbox for centering */
+  justify-content: center;  /* Center content horizontally */
+  align-items: center;  /* Center content vertically */
+  color: white;  /* Text color for content */
+}
+
+footer p {
+  margin: 0;  /* Remove default margins */
+  padding: 0;  /* Remove default padding */
+  font-size: 1rem;  /* Adjust font size */
 }

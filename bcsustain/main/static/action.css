@@ -146,7 +146,18 @@ nav {
     height: 70px;
     padding: 0px;
     margin: 0px;
+    display: flex;  /* Flexbox for centering */
+    justify-content: center;  /* Center content horizontally */
+    align-items: center;  /* Center content vertically */
+    color: white;  /* Text color for content */
   }
+
+  footer p {
+    margin: 0;  /* Remove default margins */
+    padding: 0;  /* Remove default padding */
+    font-size: 1rem;  /* Adjust font size */
+  }
+
 
   .pin-icon.pinned img {
     filter: brightness(0.5); /* This dims the icon when pinned */

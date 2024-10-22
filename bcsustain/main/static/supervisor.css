@@ -140,15 +140,25 @@ tr.empty-row td {
 
 /* Footer Section */
 footer {
-    background-color: #7FC242; /* Sets a green background color for the footer */
-    text-align: center; /* Centers the footer content */
-    background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
-    background-size: 30px, 30px;
-    background-position: calc(100% - 20px) center;
-    background-repeat: no-repeat;
-    height: 70px;
-    padding: 0;
-    margin: 0;
+  background-color: #7FC242;
+  background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
+  background-size: 30px 30px;
+  background-position: calc(100% - 20px) center;
+  background-repeat: no-repeat;
+  height: 70px;
+  padding: 0;  /* Removes any padding to keep it minimal */
+  margin: 0;   /* Ensures no margin around the footer */
+  display: flex;  /* Flexbox for centering */
+  justify-content: center;  /* Centers any content horizontally */
+  align-items: center;  /* Centers content vertically */
+  color: white;  /* White text color for any footer content */
+  font-size: 1rem;  /* Standard font size */
+}
+
+footer p {
+  margin: 0;  /* Remove margin from paragraph */
+  padding: 0;  /* Remove padding from paragraph */
+  font-size: 1rem;  /* Adjust font size for better readability */
 }
 
 footer .footer-logo img {
