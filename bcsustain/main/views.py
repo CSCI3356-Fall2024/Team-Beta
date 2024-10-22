@@ -48,12 +48,10 @@ def supervisor(request):
     today = timezone.now().date()  # Get the current date
     active_campaigns = Campaign.objects.filter(start_date__lte=today, end_date__gte=today)  # or any condition for "active"
     past_campaigns = Campaign.objects.filter(end_date__lt=today)
-
     # Pass the list of active campaigns to the template
     context = {
         'active_campaigns': active_campaigns,
         'past_campaigns': past_campaigns,
-
     }
     return render(request, 'supervisorLandingPage.html', context)
 

@@ -10,7 +10,7 @@ body {
 }
 
 header {
-    background-color: #75B52B;
+    background-color: #7FC242;
     padding: 15px;
     color: white;
     display: flex;
@@ -24,8 +24,8 @@ header {
 }
 
 img[alt="BC Dining Logo"] {
-    width: 300px;  
-    height: auto;  
+    width: 300px;
+    height: auto;
 }
 
 .navbar nav ul {
@@ -140,8 +140,7 @@ main {
 }
 
 footer {
-    background-color: #75B52B;
+    background-color: #7FC242;
     padding: 20px;
     text-align: center;
 }
-

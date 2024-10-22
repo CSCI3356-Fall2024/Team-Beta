@@ -10,10 +10,10 @@
 <body>
     <header class="header">
         <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
-        <h1>BC Sustain - Supervisor Rewards</h1>
+        <h1>Supervisor Rewards</h1>
         <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
     </header>
-    
+
     <main class="container">
         <h1>Manage Rewards</h1>
         <form method="POST" action="{% url 'add_reward' %}">
@@ -40,7 +40,7 @@
             </div>
             <button type="submit">Add Reward</button>
         </form>
-        
+
         <h2>Current Rewards</h2>
         <table class="rewards-table">
             <thead>
