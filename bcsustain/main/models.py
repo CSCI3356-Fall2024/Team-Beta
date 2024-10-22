@@ -29,6 +29,12 @@ class Campaign(models.Model):
     end_date = models.DateField()
     location = models.CharField(max_length=255)
     description = models.TextField()
+    points = models.PositiveIntegerField()  # New field for points allocation
+    delivery_method = models.CharField(max_length=50, choices=[
+        ('QR Code', 'QR Code'),
+        ('Photo Validation', 'Photo Validation'),
+        ('Integration', 'Integration'),
+    ])
     is_active = models.BooleanField(default=True)  # Field to mark campaigns as active/inactive
 
     def __str__(self):
