@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "main",
 ]
 #jacob added this line below
-# AUTH_USER_MODEL = 'main.CustomUser'
+AUTH_USER_MODEL = 'main.CustomUser'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
