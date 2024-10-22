@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Supervisors</title>
+</head>
+<body>
+<h2>Manage Supervisors</h2>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Supervisor Status</th>
+        <th>Action</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.is_supervisor }}</td>
+        <td>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <select name="is_supervisor">
+                    <option value="True" {% if user.is_supervisor %}selected{% endif %}>Yes</option>
+                    <option value="False" {% if not user.is_supervisor %}selected{% endif %}>No</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
