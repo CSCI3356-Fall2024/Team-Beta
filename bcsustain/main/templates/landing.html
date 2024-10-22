@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BC Sustain Landing</title>
-    <link rel="stylesheet" href="{% static 'landing.css' %}">
-</head>
-<body>
-  <header>
-    {%include 'navbar.html'%}
-  </header>
+  {% extends 'base.html' %}
+
+  {% load static %} <!-- Load the static template tag at the top -->
+
+
+  {% block content %}
     <main>
         <section class="leaderboard">
             <h2>Championship</h2>
@@ -45,8 +38,4 @@
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    {% endblock %}

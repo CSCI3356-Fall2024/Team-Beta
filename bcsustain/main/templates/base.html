@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
   {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BC Sustain Landing</title>
-    <link rel="stylesheet" href="{% static 'base.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}BC Sustain Landing{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'base.css' %}">
 </head>
 <body>
-    {%include 'navbar.html'%}
-    {%block content%}
-    <!-- replace me -->
+  <header>
+    {% include 'navbar.html' %}
+  </header>
 
-    {%endblock%}
-        <footer>
-            <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-        </footer>
-      </body>
+  {% block content %}
+  <!-- Default content or placeholder -->
+  {% endblock %}
+
+  {% block footer %}
+  <footer>
+      <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+  </footer>
+  {% endblock %}
+</body>
 </html>
