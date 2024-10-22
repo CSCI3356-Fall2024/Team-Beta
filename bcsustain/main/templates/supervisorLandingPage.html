@@ -10,28 +10,7 @@
 <body>
     <!-- Header Section -->
     <header>
-        <div class="navbar">
-            <div class="logo">
-                <!-- If you want a clickable logo, wrap the image in an anchor tag -->
-                <a href="{% url 'landing' %}" class="logo-link">
-                  <img src="https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/16b2dd33-68e4-4364-ba0c-69b571fa78e1.image.png?v=1729461553838"
-                    alt="Profile Picture"
-                    class="profile-picture">
-                  </a>
-                <!-- Optional: add a site name or tagline here -->
-            </div>
-            <nav id="topbar">
-                <ul>
-                    <li><a href="{% url 'rewards' %}">Rewards</a></li>
-                    <li><a href="{% url 'action' %}">Action</a></li>
-                    <li class="active">Supervisor</li>
-                    <li><a href="{% url 'supervisorrewards' %}">Supervisor Rewards</a></li>
-                </ul>
-            </nav>
-            <!-- Image aligned to the right -->
-            <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image">
-            <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind" class="nav-right-image">
-        </div>
+      {%include 'navbar.html'%}
     </header>
 
 
@@ -43,15 +22,16 @@
         <!-- Active Campaigns Table -->
         <h2>Active Campaigns</h2>
         <table class="your-table-class">
-            <thead>
-                <tr>
-                    <th>Campaign Name</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
+          <thead>
+              <tr>
+                  <th scope="col">Campaign Name</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Description</th>
+              </tr>
+          </thead>
+
             <tbody>
                 <!-- Loop through active campaigns -->
                 {% for campaign in active_campaigns %}

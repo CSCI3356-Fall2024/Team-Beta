@@ -1,205 +1,86 @@
-/* Global Styles */
+/* General styles */
 body {
-    font-family: Arial, sans-serif; /* Sets the font for the entire page */
-    background-color: #f4f4f4; /* Light gray background */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
-    color: #333; /* Sets default text color to dark gray */
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
 }
 
-/* Heading Styles */
-h2 {
-    color: #75B52B; /* Sets the text color to green */
-    margin-bottom: 10px; /* Adds a 10px space below the heading */
-    margin-top: 40px; /* Adds 40px space above h2 headings */
-    font-size: 1.8rem; /* Increases the font size of h2 headings */
-}
-
-/* Header Section */
 .header {
-    background-color: #7FC242; /* Sets a green background color */
-    padding: 20px; /* Adds padding inside the header */
-    display: flex; /* Flexbox for horizontal layout */
-    justify-content: space-between; /* Spreads items across the header */
-    align-items: center; /* Vertically aligns items in the center */
-    text-align: center; /* Centers text within the header */
-}
-
-.header img {
-    height: 100px; /* Sets height for images inside the header */
-    width: auto; /* Maintains the aspect ratio of images */
+    background-color: #7FC242;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
 }
 
 .header h1 {
-    font-size: 2.5rem; /* Sets a large font size for the main heading */
-    color: white; /* White text color */
-    margin: 0; /* Removes default margin */
+    font-size: 24px;
+    margin: 0;
 }
 
-.header img[alt="Profile Picture"] {
-    width: 80px; /* Sets a fixed width for the profile picture */
-    height: auto; /* Maintains aspect ratio for the profile picture */
-    border-radius: 50%; /* Makes the profile picture circular */
-    margin-right: 20px;
-}
-
-.header img[alt="Feed your mind"] {
-    width: 300px; /* Sets a fixed width for the "Feed your mind" image */
-    height: auto; /* Maintains the aspect ratio */
-}
-
-.header img[alt="Three bars"] {
-    width: 50px; /* Sets a fixed width for the "Feed your mind" image */
-    height: auto; /* Maintains the aspect ratio */
-}
-
-/* Navbar */
-.navbar {
-    display: flex; /* Uses flexbox for horizontal layout */
-    justify-content: space-between; /* Spaces items across the navbar */
-    align-items: center; /* Aligns items vertically in the center */
-    background-color: #7FC242; /* Sets a green background color */
-    padding: 15px 30px; /* Adds padding inside the navbar */
-}
-
-.navbar .logo img {
-    width: 250px; /* Sets a fixed width for the logo image */
-    height: 50px; /* Sets a fixed height for the logo image */
-    margin-right: 10px; /* Adds space between the logo and text */
-}
-
-.navbar nav ul {
-    list-style: none; /* Removes bullets from the list */
-    display: flex; /* Aligns list items horizontally */
-    gap: 20px; /* Adds space between navigation items */
-}
-
-.navbar nav ul li {
-    color: white; /* Sets the text color of the navigation items to white */
-    cursor: pointer; /* Changes cursor to pointer on hover */
-}
-
-.navbar nav ul li.active {
-    font-weight: bold; /* Makes the active navigation item bold */
-}
-
-.navbar nav ul li:hover {
-    text-decoration: underline; /* Underlines navigation items on hover */
-}
-
-.navbar .nav-right-image {
-    height: 60px; /* Sets the height for the image */
-    margin-left: 20px; /* Adds space between the navbar and the image */
-}
-
-/* Main Content */
-.container {
-    padding: 20px; /* Adds padding inside the container */
-    max-width: 1200px; /* Limits the container width to 1200px */
-    margin: 0 auto; /* Centers the container on the page */
-}
-
-/* Table Styles */
-table {
-    width: 100%; /* Makes the table take the full width of its container */
-    border-collapse: collapse; /* Collapses table borders for cleaner look */
-    margin-bottom: 20px; /* Adds space below the table */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow around the table */
-}
-
-th, td {
-    padding: 12px; /* Adds padding inside table cells */
-    border-bottom: 1px solid #ddd; /* Adds a light border below each row */
-    text-align: left; /* Left-aligns the content in table cells */
-}
-
-th {
-    background-color: #f2f2f2; /* Light gray background for table headers */
-    font-weight: bold; /* Makes table header text bold */
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Alternates background color for even rows */
-}
-
-tbody tr:hover {
-    background-color: #f1f1f1; /* Changes background color on hover */
-}
-
-td {
-    vertical-align: top; /* Aligns text to the top in table cells */
-}
-
-tr.empty-row td {
-    text-align: center; /* Centers text for empty rows */
-    color: #999; /* Sets a light gray color for empty row text */
-    font-style: italic; /* Italicizes the empty row text */
-}
-
-/* Footer Section */
-footer {
-  background-color: #7FC242;
-  background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
-  background-size: 30px 30px;
-  background-position: calc(100% - 20px) center;
-  background-repeat: no-repeat;
-  height: 70px;
-  padding: 0;  /* Removes any padding to keep it minimal */
-  margin: 0;   /* Ensures no margin around the footer */
-  display: flex;  /* Flexbox for centering */
-  justify-content: center;  /* Centers any content horizontally */
-  align-items: center;  /* Centers content vertically */
-  color: white;  /* White text color for any footer content */
-  font-size: 1rem;  /* Standard font size */
-}
-
-footer p {
-  margin: 0;  /* Remove margin from paragraph */
-  padding: 0;  /* Remove padding from paragraph */
-  font-size: 1rem;  /* Adjust font size for better readability */
-}
-
-footer .footer-logo img {
-    width: 50px; /* Sets a fixed width for the footer logo */
+img[alt="Profile Picture"] {
+    width: 60px;
+    height: auto;
+    border-radius: 50%;
 }
 
 img[alt="Feed your mind"] {
-    width: auto; /* Automatically sets the width */
-    height: auto; /* Automatically sets the height */
+    width: 200px;
+    height: auto;
 }
 
-/* Responsive Design for Screens Smaller Than 768px */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column; /* Stacks items vertically in the header */
-        text-align: center; /* Centers the text in the header */
-    }
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .header img {
-        margin-bottom: 15px; /* Adds space below images in the header */
-    }
+h1, h2 {
+    font-size: 20px;
+    text-align: center;
+    color: #5b882c;
+    margin-bottom: 15px;
+}
 
-    table, th, td {
-        display: block; /* Makes table rows stack vertically */
-        width: 100%; /* Ensures table cells take full width */
-    }
+section {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
 
-    th {
-        display: none; /* Hides table headers */
-    }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
 
-    td {
-        position: relative; /* Positions table cells for responsive design */
-        padding-left: 50%; /* Adds space to the left side of table cells */
-        text-align: right; /* Right-aligns the text in table cells */
-        border-bottom: 1px solid #eee; /* Light border below each row */
-    }
+th {
+    background-color: #7FC242;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
 
-    td::before {
-        content: attr(data-label); /* Adds a label to each table cell in mobile view */
-        position: absolute; /* Positions the label absolutely within the cell */
-        left: 10px; /* Moves the label to the left */
-        font-weight: bold; /* Makes the label bold */
-        text-align: left; /* Left-aligns the label text */
-    }
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+tr:hover {
+    background-color: #e2e2e2;
 }

@@ -1,23 +1,31 @@
 
 <head>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Sustain Landing</title>
+    <link rel="stylesheet" href="{% static 'landing.css' %}">
 </head>
-<header data-bs-theme="dark">
-    <nav id="topbar">
-      <ul>
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Base</a></li>
-        <li><a href="#">Groups</a></li>
-        <li><a href="#">Landing Page</a></li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">QR Code</a></li>
-        <li><a href="#">Rewards</a></li>
-        <li><a href="#">Signup</a></li>
-        <li><a href="#">Supervisor</a></li>
-        <li><a href="#">Supervisor Rewards</a></li>
-      </ul>
-    </nav>
+<body>
+  <header>
+      <div class="navbar">
+          <div class="logo">
+              <!-- Logo with a link to the landing page -->
+              <a href="{% url 'landing' %}" class="logo-link">
+                  <img src="{% static 'bc_feed_your_mind.png' %}"
+                  alt="BC Dining Logo"
+                  class="BC-Dining-Logo">
+              </a>
+          </div>
+          <nav id="topbar">
+              <ul>
+                  <li><a href="{% url 'rewards' %}">Rewards</a></li>
+                  <li><a href="{% url 'action' %}">Action</a></li>
+                  <li><a href="{% url 'supervisor' %}">Supervisor</a></li>
+                  <li><a href="{% url 'supervisorrewards' %}">Supervisor Rewards</a></li>
+              </ul>
+          </nav>
+          <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image">
+      </div>
   </header>
-</body>
 </html>
