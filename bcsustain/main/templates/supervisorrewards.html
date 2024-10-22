@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="{% static 'supervisorrewards.css' %}">
 </head>
 <body>
-    <header class="header">
-        <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
-        <h1>Supervisor Rewards</h1>
-        <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
+    <header>
+        {%include 'navbar.html'%}
     </header>
 
     <main class="container">

@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="{% static 'signup.css' %}">
 </head>
 <body>
-    <div class="header">
-        <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
-        <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind">
-    </div>
+  <header>
+    {%include 'navbar.html'%}
+  </header>
     <div class="container">
         <h1>Sign Up</h1>
         <form method="POST" action="{% url 'signup' %}">
