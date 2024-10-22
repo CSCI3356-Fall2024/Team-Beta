@@ -9,7 +9,8 @@ body {
   
   nav {
       background-color: #7FC242;
-      background-image: url("{% static 'images/logo_left.png' %}"), url("{% static 'images/logo_right.png' %}");
+      background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/16b2dd33-68e4-4364-ba0c-69b571fa78e1.image.png?v=1729461553838"),
+        url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463");
       background-size: 200px, 30px;
       background-position: left center, calc(100% - 20px) center;
       background-repeat: no-repeat;

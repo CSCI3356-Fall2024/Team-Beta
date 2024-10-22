@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <title>Manage Supervisors</title>
-    <link rel="stylesheet" href="{% 'manage_supervisors.css' %}">
+    <link rel="stylesheet" href="{% static 'manage_supervisors.css' %}">
     <style>
         table {
             width: 100%;
@@ -41,10 +42,9 @@
 
 <!-- Header with static logo and navigation -->
 <nav>
-    <a href="{% url 'home' %}" class="logo-link"></a>
     <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'manage_supervisors' %}">Manage Supervisors</a></li>
+        <li><a href=#>Home</a></li>
+        <li><a href=#>Supervisor Setting</a></li>
     </ul>
 </nav>
 
