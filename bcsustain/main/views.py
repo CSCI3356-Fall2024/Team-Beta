@@ -61,7 +61,6 @@ def supervisor(request):
 def landing(request):
     return render(request, 'landing.html')
 
-<<<<<<< Updated upstream
 # Check if the user is a superuser
 def is_superuser(user):
     return user.is_superuser
@@ -81,7 +80,7 @@ def manage_supervisors(request):
             return redirect('manage_supervisors')
 
     return render(request, 'manage_supervisors.html', {'users': users})
-=======
+
 def profile_setup(request):
     return render(request, 'profile_setup.html')
->>>>>>> Stashed changes
+
