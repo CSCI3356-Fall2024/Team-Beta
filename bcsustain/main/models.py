@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings  # Import settings to use AUTH_USER_MODEL
+
 # Create your models here.
 
 class CustomUser(AbstractUser):
     is_supervisor = models.BooleanField(default=False)
-    
+
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='customuser_set',
@@ -37,7 +39,7 @@ class Campaign(models.Model):
         return self.name
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     school = models.CharField(max_length=255)
     graduation_year = models.IntegerField()
     major1 = models.CharField(max_length=255)
