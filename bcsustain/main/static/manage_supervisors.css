@@ -1,0 +1,71 @@
+/* File: static/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav {
+      background-color: #7FC242;
+      background-image: url("{% static 'images/logo_left.png' %}"), url("{% static 'images/logo_right.png' %}");
+      background-size: 200px, 30px;
+      background-position: left center, calc(100% - 20px) center;
+      background-repeat: no-repeat;
+      padding-left: 60px;
+      height: 60px;
+  }
+  
+  .logo-link {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 60px;
+      z-index: 2;
+      display: block;
+  }
+  
+  nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      margin-left: 150px;
+  }
+  
+  nav ul li {
+      display: inline-block;
+      padding: 24px 30px;
+  }
+  
+  nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+  }
+  
+  nav ul li a:hover {
+      color: green;
+  }
+  
+  footer {
+      background-color: #7FC242;
+      background-image: url("{% static 'images/footer_logo.png' %}");
+      background-size: 30px, 30px;
+      background-position: calc(100% - 20px) center;
+      background-repeat: no-repeat;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+  }
+  
+  footer p {
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+  }
+  
