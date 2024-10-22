@@ -10,75 +10,79 @@
 <body>
     <!-- Header Section -->
     <header>
-      {%include 'navbar.html'%}
+        {% include 'navbar.html' %}
     </header>
-
-
 
     <!-- Main Content -->
     <main class="container">
         <h1>Campaigns</h1>
 
-        <!-- Active Campaigns Table -->
-        <h2>Active Campaigns</h2>
-        <table class="your-table-class">
-          <thead>
-              <tr>
-                  <th scope="col">Campaign Name</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">End Date</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">Description</th>
-              </tr>
-          </thead>
+        <!-- Flex container to hold both Active and Past Campaigns evenly -->
+        <div class="campaign-tables-container">
+            <!-- Active Campaigns Table -->
+            <div class="campaign-table">
+                <h2>Active Campaigns</h2>
+                <table class="your-table-class">
+                    <thead>
+                        <tr>
+                            <th scope="col">Campaign Name</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through active campaigns -->
+                        {% for campaign in active_campaigns %}
+                        <tr>
+                            <td>{{ campaign.name }}</td>
+                            <td>{{ campaign.start_date }}</td>
+                            <td>{{ campaign.end_date }}</td>
+                            <td>{{ campaign.location }}</td>
+                            <td>{{ campaign.description }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">No active campaigns available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-            <tbody>
-                <!-- Loop through active campaigns -->
-                {% for campaign in active_campaigns %}
-                <tr>
-                    <td>{{ campaign.name }}</td>
-                    <td>{{ campaign.start_date }}</td>
-                    <td>{{ campaign.end_date }}</td>
-                    <td>{{ campaign.location }}</td> <!-- Location added here -->
-                    <td>{{ campaign.description }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">No active campaigns available.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <!-- Past Campaigns Table -->
-        <h2>Past Campaigns</h2>
-        <table class="your-table-class">
-            <thead>
-                <tr>
-                    <th>Campaign Name</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Loop through past campaigns -->
-                {% for campaign in past_campaigns %}
-                <tr>
-                    <td>{{ campaign.name }}</td>
-                    <td>{{ campaign.start_date }}</td>
-                    <td>{{ campaign.end_date }}</td>
-                    <td>{{ campaign.location }}</td> <!-- Location added here -->
-                    <td>{{ campaign.description }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">No past campaigns available.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <!-- Past Campaigns Table -->
+            <div class="campaign-table">
+                <h2>Past Campaigns</h2>
+                <table class="your-table-class">
+                    <thead>
+                        <tr>
+                            <th>Campaign Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through past campaigns -->
+                        {% for campaign in past_campaigns %}
+                        <tr>
+                            <td>{{ campaign.name }}</td>
+                            <td>{{ campaign.start_date }}</td>
+                            <td>{{ campaign.end_date }}</td>
+                            <td>{{ campaign.location }}</td>
+                            <td>{{ campaign.description }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">No past campaigns available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
 
     <footer>
