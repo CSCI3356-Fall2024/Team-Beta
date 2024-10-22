@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import get_user_model
+from .forms import SupervisorForm
 from .models import Campaign
 from django.utils import timezone
 
@@ -57,3 +60,23 @@ def supervisor(request):
 
 def landing(request):
     return render(request, 'landing.html')
+
+# Check if the user is a superuser
+def is_superuser(user):
+    return user.is_superuser
+
+@user_passes_test(lambda u: u.is_superuser)
+def manage_supervisors(request):
+    User = get_user_model()
+    users = User.objects.all()
+
+    if request.method == 'POST':
+        form = SupervisorForm(request.POST)
+        if form.is_valid():
+            user_id = request.POST.get('user_id')
+            user = User.objects.get(id=user_id)
+            user.is_supervisor = form.cleaned_data['is_supervisor']
+            user.save()
+            return redirect('manage_supervisors')
+
+    return render(request, 'manage_supervisors.html', {'users': users})
