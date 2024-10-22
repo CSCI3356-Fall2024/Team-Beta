@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponse
+from .models import Campaign
+from django.utils import timezone
 
 def signup(request):
     if request.method == 'POST':
@@ -43,7 +45,17 @@ def base(request):
     return render(request, 'base.html')
 
 def supervisor(request):
-    return render(request, 'supervisorLandingPage.html')
+    today = timezone.now().date()  # Get the current date
+    active_campaigns = Campaign.objects.filter(start_date__lte=today, end_date__gte=today)  # or any condition for "active"
+    past_campaigns = Campaign.objects.filter(end_date__lt=today)
+
+    # Pass the list of active campaigns to the template
+    context = {
+        'active_campaigns': active_campaigns,
+        'past_campaigns': past_campaigns,
+
+    }
+    return render(request, 'supervisorLandingPage.html', context)
 
 def landing(request):
     return render(request, 'landing.html')
