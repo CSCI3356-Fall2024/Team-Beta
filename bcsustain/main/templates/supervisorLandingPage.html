@@ -8,17 +8,16 @@
     <link rel="stylesheet" href="{% static 'supervisor.css' %}">
 </head>
 <body>
-    <!-- Header Section -->
     <header>
         {% include 'navbar.html' %}
     </header>
+    {% block content %}
 
     <!-- Main Content -->
-    <main class="container">
+    <div class="container">
         <h1>Campaigns</h1>
 
         <!-- Flex container to hold both Active and Past Campaigns evenly -->
-        <div class="campaign-tables-container">
             <!-- Active Campaigns Table -->
             <div class="campaign-table">
                 <h2>Active Campaigns</h2>
@@ -82,8 +81,9 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-    </main>
+    </div>
+    {% endblock %}
+
 
     <footer>
         <p>&copy; 2024 Your Company Name. All rights reserved.</p>
