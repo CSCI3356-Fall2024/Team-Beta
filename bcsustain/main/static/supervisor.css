@@ -7,10 +7,12 @@ body {
     color: #333; /* Sets default text color to dark gray */
 }
 
-/* Heading Styles for h2 ("Active campaigns" or "Past Campaigns") */
+/* Heading Styles */
 h2 {
     color: #75B52B; /* Sets the text color to green */
     margin-bottom: 10px; /* Adds a 10px space below the heading */
+    margin-top: 40px; /* Adds 40px space above h2 headings */
+    font-size: 1.8rem; /* Increases the font size of h2 headings */
 }
 
 /* Header Section */
@@ -38,6 +40,7 @@ h2 {
     width: 80px; /* Sets a fixed width for the profile picture */
     height: auto; /* Maintains aspect ratio for the profile picture */
     border-radius: 50%; /* Makes the profile picture circular */
+    margin-right: 20px;
 }
 
 .header img[alt="Feed your mind"] {
@@ -45,16 +48,57 @@ h2 {
     height: auto; /* Maintains the aspect ratio */
 }
 
+.header img[alt="Three bars"] {
+    width: 50px; /* Sets a fixed width for the "Feed your mind" image */
+    height: auto; /* Maintains the aspect ratio */
+}
+
+/* Navbar */
+.navbar {
+    display: flex; /* Uses flexbox for horizontal layout */
+    justify-content: space-between; /* Spaces items across the navbar */
+    align-items: center; /* Aligns items vertically in the center */
+    background-color: #7FC242; /* Sets a green background color */
+    padding: 15px 30px; /* Adds padding inside the navbar */
+}
+
+.navbar .logo img {
+    width: 250px; /* Sets a fixed width for the logo image */
+    height: 50px; /* Sets a fixed height for the logo image */
+    margin-right: 10px; /* Adds space between the logo and text */
+}
+
+.navbar nav ul {
+    list-style: none; /* Removes bullets from the list */
+    display: flex; /* Aligns list items horizontally */
+    gap: 20px; /* Adds space between navigation items */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+}
+
+.navbar nav ul li {
+    color: white; /* Sets the text color of the navigation items to white */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+}
+
+.navbar nav ul li.active {
+    font-weight: bold; /* Makes the active navigation item bold */
+}
+
+.navbar nav ul li:hover {
+    text-decoration: underline; /* Underlines navigation items on hover */
+}
+
+.navbar .nav-right-image {
+    height: 60px; /* Sets the height for the image */
+    margin-left: 20px; /* Adds space between the navbar and the image */
+}
+
 /* Main Content */
 .container {
     padding: 20px; /* Adds padding inside the container */
     max-width: 1200px; /* Limits the container width to 1200px */
     margin: 0 auto; /* Centers the container on the page */
-}
-
-h2 {
-    margin-top: 40px; /* Adds 40px space above h2 headings */
-    font-size: 1.8rem; /* Increases the font size of h2 headings */
 }
 
 /* Table Styles */
@@ -88,11 +132,32 @@ td {
     vertical-align: top; /* Aligns text to the top in table cells */
 }
 
-/* Empty Table Row */
 tr.empty-row td {
     text-align: center; /* Centers text for empty rows */
     color: #999; /* Sets a light gray color for empty row text */
     font-style: italic; /* Italicizes the empty row text */
+}
+
+/* Footer Section */
+footer {
+    background-color: #75B52B; /* Sets a green background color for the footer */
+    text-align: center; /* Centers the footer content */
+    background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
+    background-size: 30px, 30px;
+    background-position: calc(100% - 20px) center;
+    background-repeat: no-repeat;
+    height: 70px;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-logo img {
+    width: 50px; /* Sets a fixed width for the footer logo */
+}
+
+img[alt="Feed your mind"] {
+    width: auto; /* Automatically sets the width */
+    height: auto; /* Automatically sets the height */
 }
 
 /* Responsive Design for Screens Smaller Than 768px */
@@ -129,78 +194,4 @@ tr.empty-row td {
         font-weight: bold; /* Makes the label bold */
         text-align: left; /* Left-aligns the label text */
     }
-}
-
-/* Navbar */
-.navbar {
-    display: flex; /* Uses flexbox for horizontal layout */
-    justify-content: space-between; /* Spaces items across the navbar */
-    align-items: center; /* Aligns items vertically in the center */
-    background-color: #7FC242; /* Sets a green background color */
-    padding: 15px 30px; /* Adds padding inside the navbar */
-}
-
-.navbar .logo {
-    display: flex; /* Uses flexbox for logo section */
-    align-items: center; /* Vertically centers logo and text */
-}
-
-.navbar .logo img {
-    width: 50px; /* Sets a fixed width for the logo image */
-    height: 50px; /* Sets a fixed height for the logo image */
-    border-radius: 50%; /* Makes the logo circular */
-    margin-right: 10px; /* Adds space between the logo and text */
-}
-
-.navbar .logo span {
-    font-size: auto; /* Sets font size for the logo text */
-    color: white; /* Sets text color to white */
-}
-
-.navbar nav ul {
-    list-style: none; /* Removes bullets from the list */
-    display: flex; /* Aligns list items horizontally */
-    gap: 20px; /* Adds space between navigation items */
-    margin: 0; /* Removes default margin */
-    padding: 20px; /* Removes default padding */
-}
-
-.navbar nav ul li {
-    color: white; /* Sets the text color of the navigation items to white */
-    cursor: pointer; /* Changes cursor to pointer on hover */
-    font-size: auto; /* Sets font size for navigation items */
-
-}
-
-.navbar nav ul li.active {
-    font-weight: bold; /* Makes the active navigation item bold */
-    text-decoration: none; /* Underlines the active navigation item */
-}
-
-/* Hover effect for navigation items */
-.navbar nav ul li:hover {
-    text-decoration: underline; /* Underlines navigation items on hover */
-}
-
-/* Image on the right of the navbar */
-.navbar .nav-right-image {
-    width: auto; /* Automatically sets the width */
-    height: 60px; /* Sets the height for the image */
-    margin-left: 20px; /* Adds space between the navbar and the image */
-}
-
-/* Footer Section */
-footer {
-    background-color: #75B52B; /* Sets a green background color for the footer */
-    padding: 20px; /* Adds padding inside the footer */
-    text-align: center; /* Centers the footer content */
-}
-
-footer .footer-logo img {
-    width: 50px; /* Sets a fixed width for the footer logo */
-}
-
-img[alt="Feed your mind"] {
-    width: auto; /* Automatically sets the width */
-    height: auto; /* Automatically sets the height */
 }
