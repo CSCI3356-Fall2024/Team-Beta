@@ -20,6 +20,7 @@ header {
     font-size: 3rem; /* Makes the heading text large (2.5 times the root font size) */
     color: white; /* White text color for better contrast on the green background */
     margin: 0; /* Remove any default margins around the heading */
+    padding-left: 20px; /* Adds 20px padding on the left side */
 }
 
 /* Navbar Section */
@@ -95,6 +96,14 @@ img[alt="Three bars"] {
     background-color: #b49d73; /* Changes button color when hovered for a visual effect */
 }
 
+/* Style for the paragraph under h1 (Centered Text) */
+.lead {
+  text-align: left;     /* Centers the text */
+  margin: 20px;         /* Centers the element */
+  max-width: 800px;       /* Defines max width for readability */
+  padding: 0;        /* Adds padding above and below the text */
+}
+
   /* Style for the events container */
   .events {
     width: 300px;
@@ -142,6 +151,8 @@ img[alt="Three bars"] {
     white-space: nowrap; /* Prevent cards from wrapping to a new line */
     padding: 20px 0; /* Add some padding at the top and bottom of the container */
     scroll-behavior: smooth; /* Optional: smooth scrolling effect */
+    margin-left: 20px;  /* Center the container by auto margin on the left */
+    margin-right: auto; /* Ensure it's centered with equal margins */
   }
 
   /* Ensure event cards maintain their size */
@@ -177,6 +188,7 @@ img[alt="Three bars"] {
 
   h1 {
     color: green;
+    padding: 20px;
   }
 
   footer {
