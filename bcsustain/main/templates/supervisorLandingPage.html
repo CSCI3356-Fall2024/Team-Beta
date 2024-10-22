@@ -13,16 +13,18 @@
         <div class="navbar">
             <div class="logo">
                 <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture">
-                <span>Supervisor Page</span>
+
+                <span></span>
             </div>
             <nav>
                 <ul>
-                    <li>Campaigns</li>
-                    <li>Rewards</li>
-                    <li>Groups</li>
-                    <li class="active">Action</li>
+                    <li><a href="{% url 'rewards' %}">Rewards</a></li>
+                    <li><a href="{% url 'action' %}">Action</a></li>
+                    <li class="active">Supervisor</li>
+                    <li><a href="{% url 'supervisorrewards' %}">Supervisor Rewards</a></li>
                 </ul>
             </nav>
+            <img src="{% static 'bc_feed_your_mind.png' %}" alt="Feed your mind" class="nav-right-image">
         </div>
     </header>
 
@@ -91,5 +93,11 @@
             </tbody>
         </table>
     </main>
+
+    <footer>
+        <div class="footer-logo">
+            <img src="footer-logo.png" alt="Footer Logo">
+        </div>
+    </footer>
 </body>
 </html>
