@@ -106,3 +106,26 @@ def manage_supervisors(request):
 def profile_setup(request):
     return render(request, 'profile_setup.html')
 
+def campaign_form(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        points = request.POST.get('points')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        location = request.POST.get('location')
+        description = request.POST.get('description')
+        delivery_method = request.POST.get('delivery_method')
+        add_to_news = request.POST.get('add_to_news') == 'on'
+
+        # Save the campaign to the database
+        Campaign.objects.create(
+            name=name,
+            start_date=start_date,
+            end_date=end_date,
+            location=location,
+            description=description,
+            is_active=True  # Mark campaign as active upon creation
+        )
+
+        return redirect('supervisor')  # Redirect to the supervisor page
+    return render(request, 'campaign_form.html')

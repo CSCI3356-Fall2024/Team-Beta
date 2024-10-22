@@ -1,0 +1,97 @@
+/* General Styling for Block Content */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #5b882c;  /* Green color for the title */
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Fields */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-control:focus {
+    border-color: #7FC242;  /* Green border on focus */
+    box-shadow: 0 0 5px rgba(127, 194, 66, 0.5); /* Slight shadow on focus */
+    outline: none;
+}
+
+/* Date Picker Icons */
+#startDate, #endDate {
+    position: relative;
+    z-index: 1;
+}
+
+input[type="date"] {
+    padding-right: 10px;
+}
+
+/* Checkbox Styling */
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Button Styling */
+button[type="submit"] {
+    background-color: #7FC242;  /* Matching green color for submit button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #5b882c;  /* Darker green on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+}
