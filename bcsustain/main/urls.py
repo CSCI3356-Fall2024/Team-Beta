@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signup, login, rewards, supervisorrewards, add_reward, action, base, supervisor, landing
+from .views import signup, login, rewards, supervisorrewards, add_reward, action, base, supervisor, landing, manage_supervisors
 
 urlpatterns = [
     path('signup/', signup, name='signup'),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('action/', action, name = 'action'),
     path('supervisor/', supervisor, name = 'supervisor'),
     path('base/', base, name = 'base'),
-    path('landing/', landing, name = 'landing')
+    path('landing/', landing, name = 'landing'),
+    path('manage-supervisors/', manage_supervisors, name='manage_supervisors')
 ]

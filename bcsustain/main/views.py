@@ -80,3 +80,22 @@ def manage_supervisors(request):
             return redirect('manage_supervisors')
 
     return render(request, 'manage_supervisors.html', {'users': users})
+
+# def manage_supervisors(request):
+#     return render(request, 'manage_supervisors.html')
+
+# @user_passes_test(is_superuser)
+# def manage_supervisors(request):
+#     User = get_user_model()
+#     users = User.objects.all()
+
+#     if request.method == 'POST':
+#         form = SupervisorForm(request.POST)
+#         if form.is_valid():
+#             user_id = request.POST.get('user_id')
+#             user = User.objects.get(id=user_id)
+#             user.is_supervisor = form.cleaned_data['is_supervisor']
+#             user.save()
+#             return redirect('manage_supervisors')
+
+#     return render(request, 'manage_supervisors.html', {'users': users})
