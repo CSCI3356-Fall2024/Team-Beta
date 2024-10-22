@@ -72,8 +72,6 @@ h2 {
     list-style: none; /* Removes bullets from the list */
     display: flex; /* Aligns list items horizontally */
     gap: 20px; /* Adds space between navigation items */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
 }
 
 .navbar nav ul li {

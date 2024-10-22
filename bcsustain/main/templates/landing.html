@@ -8,25 +8,28 @@
     <link rel="stylesheet" href="{% static 'landing.css' %}">
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <div class="logo">
-                <img src="{% static 'bc_feed_your_mind.png' %}" alt="BC Dining Logo">
-                <a id = 'whats-open' href="https://www.bc.edu/bc-web/offices/auxiliary-services/sites/dining/locations/whats-open.html"><button class="whats-open-btn">What's Open</button></a>
-                
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="../landing"><h1><span>BC Sustain</span></h1></a></li>
-                    <li><a href="../rewards">Rewards</a></li>
-                    <li><a href="#">Groups</a></li>
-                    <li><a href="#">QR Code</a></li>
-                    <li><a href="../action">Action</a></li>
-                </ul>
-            </nav>
-            
-        </div>
-    </header>
+  <header>
+      <div class="navbar">
+          <div class="logo">
+              <!-- Logo with a link to the landing page -->
+              <a href="{% url 'landing' %}" class="logo-link">
+                  <img src="{% static 'bc_feed_your_mind.png' %}"
+                  alt="BC Dining Logo"
+                  class="BC-Dining-Logo">
+              </a>
+          </div>
+          <nav id="topbar">
+              <ul>
+                  <li><a href="{% url 'rewards' %}">Rewards</a></li>
+                  <li><a href="{% url 'action' %}">Action</a></li>
+                  <li><a href="{% url 'supervisor' %">Supervisor</a></li>
+                  <li><a href="{% url 'supervisorrewards' %">Supervisor Rewards</a></li>
+              </ul>
+          </nav>
+          <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image">
+      </div>
+  </header>
+
 
     <main>
         <section class="leaderboard">
