@@ -9,6 +9,16 @@ nav {
     height: 60px;
   }
   
+  /* Create a clickable area over the logo */
+.logo-link {
+    position: absolute;
+    left: 0; /* Align with left side of the nav */
+    top: 0;
+    width: 200px; /* Same size as the logo background */
+    height: 60px; /* Height of the nav */
+    z-index: 2; /* Ensure it's on top of the background image */
+    display: block; /* Make it block to cover the area */
+}
   /* nav {
       background-image: url('https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463');
       background-position: right center;
@@ -35,11 +45,11 @@ nav {
   }
   
   nav ul li a:visited {
-    color: #51279b;
+    color: green;
   }
   
   nav ul li a:hover {
-    color: #8662c7;
+    color: green;
   }
   
   /* Style for the events container */
