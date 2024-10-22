@@ -99,3 +99,8 @@ def manage_supervisors(request):
 #             return redirect('manage_supervisors')
 
 #     return render(request, 'manage_supervisors.html', {'users': users})
+
+
+def profile_setup(request):
+    return render(request, 'profile_setup.html')
+

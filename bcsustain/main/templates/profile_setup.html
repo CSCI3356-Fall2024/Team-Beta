@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Setup - BC Sustain</title>
+    <link rel="stylesheet" href="{% static 'profile_setup.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'bc_feed_your_mind.png' %}" alt="BC Dining Logo">
+                <span>BC Sustain</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Rewards</a></li>
+                    <li><a href="#">Groups</a></li>
+                    <li><a href="#">QR Code</a></li>
+                    <li><a href="#">Action</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Profile Setup</h1>
+        <div class="profile-picture">
+            <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture" id="profile-pic">
+            <button class="edit-pic-button" title="Edit">✏️</button>
+            <input type="file" id="profile-pic-input" name="profile_picture" accept="image/*" style="display: none;">
+        </div>
+        
+        <form method="POST" action="{% url 'profile_setup' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="school">School</label>
+                <input type="text" id="school" name="school" required placeholder="e.g., Boston College">
+            </div>
+            <div class="form-group">
+                <label for="graduation-year">Year of Graduation</label>
+                <input type="number" id="graduation-year" name="graduation_year" required min="2024" max="2030" placeholder="e.g., 2025">
+            </div>
+            <div class="form-group">
+                <label for="major1">Primary Major</label>
+                <input type="text" id="major1" name="major1" required placeholder="e.g., Computer Science">
+            </div>
+            <div class="form-group">
+                <label for="major2">Secondary Major (Optional)</label>
+                <input type="text" id="major2" name="major2" placeholder="e.g., Finance">
+            </div>
+            <button type="submit">Save Profile</button>
+        </form>
+    </main>
+    
+    <footer>
+        <div class="footer-logo">
+            <img src="{% static 'footer-logo.png' %}" alt="Footer Logo">
+        </div>
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelector('.edit-pic-button').addEventListener('click', () => {
+            document.getElementById('profile-pic-input').click();
+        });
+        document.getElementById('profile-pic-input').addEventListener('change', (event) => {
+            const [file] = event.target.files;
+            if (file) {
+                document.getElementById('profile-pic').src = URL.createObjectURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
