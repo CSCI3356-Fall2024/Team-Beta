@@ -8,7 +8,7 @@ nav {
     padding-left: 60px;
     height: 60px;
   }
-  
+
   /* Create a clickable area over the logo */
 .logo-link {
     position: absolute;
@@ -20,11 +20,12 @@ nav {
     display: block; /* Make it block to cover the area */
 }
   /* nav {
+      /* Three bars*/ /*
       background-image: url('https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463');
       background-position: right center;
-      
+
   } */
-  
+
   nav ul {
     list-style-type: none;
     padding: 0;
@@ -32,26 +33,26 @@ nav {
     display: flex;
     margin-left: 150px;
   }
-  
+
   nav ul li {
     display: inline-block;
     padding: 24px 30px;
   }
-  
+
   nav ul li a {
     text-decoration: none;
     color: white;
     font-weight: 600;
   }
-  
+
   nav ul li a:visited {
     color: green;
   }
-  
+
   nav ul li a:hover {
     color: green;
   }
-  
+
   /* Style for the events container */
   .events {
     width: 300px;
@@ -60,14 +61,14 @@ nav {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Style for the image section */
   .events-image img {
     width: 100%; /* Make the image fill the top half */
     height: 150px; /* Set the height of the image */
     object-fit: cover; /* Ensure the image covers the area without stretching */
   }
-  
+
   /* Style for the information section */
   .events-info {
     background-color: #32cd32; /* Green background for the bottom half */
@@ -75,22 +76,22 @@ nav {
     color: black; /* Text color for contrast */
     text-align: center;
   }
-  
+
   .events-info .name {
     margin: 0;
     font-size: 1.5em;
   }
-  
+
   .events-info .points,
   .events-info .date {
     margin: 5px 0;
     font-size: 1em;
   }
-  
+
   .events-image {
     position: relative; /* Make the image container the reference for the pin icon */
   }
-  
+
   /* Add this to create a horizontally scrollable container for the events */
   .events-container {
     display: flex; /* Align event cards horizontally */
@@ -100,23 +101,23 @@ nav {
     padding: 20px 0; /* Add some padding at the top and bottom of the container */
     scroll-behavior: smooth; /* Optional: smooth scrolling effect */
   }
-  
+
   /* Ensure event cards maintain their size */
   .events {
     min-width: 300px; /* Ensure the cards do not shrink */
     flex-shrink: 0; /* Prevent shrinking when resizing the browser */
   }
-  
+
   /* Optional: Hide the scrollbar for a cleaner look */
   .events-container::-webkit-scrollbar {
     display: none; /* Hides scrollbar in Chrome, Safari */
   }
-  
+
   .events-container {
     scrollbar-width: none; /* Hides scrollbar in Firefox */
   }
-  
-  
+
+
   .pin-icon {
     position: absolute;
     top: 10px; /* 10px from the top */
@@ -126,16 +127,16 @@ nav {
     cursor: pointer;
     z-index: 1; /* Ensure it's on top of the image */
   }
-  
+
   .pin-icon img {
     width: 20px;
     height: 20px;
   }
-  
+
   h1 {
     color: green;
   }
-  
+
   footer {
     background-color: #32cd32;
     background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
