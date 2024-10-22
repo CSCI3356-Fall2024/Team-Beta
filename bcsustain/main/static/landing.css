@@ -36,6 +36,7 @@ img[alt="BC Dining Logo"] {
 
 .navbar nav ul li {
     color: white;
+    display: inline-block;
 }
 
 .navbar nav ul li a {

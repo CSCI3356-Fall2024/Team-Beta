@@ -60,6 +60,8 @@ def supervisor(request):
 
 def landing(request):
     return render(request, 'landing.html')
+def campaign_form(request):
+    return render(request, 'campaign_form.html')
 
 # Check if the user is a superuser
 def is_superuser(user):

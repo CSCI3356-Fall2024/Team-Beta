@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Supervisor Rewards</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Campaign Name -->
+        <div class="form-group">
+            <label for="campaign_name">Campaign Name</label>
+            <input type="text" class="form-control" id="campaign_name" name="campaign_name" placeholder="Enter campaign name" required>
+        </div>
+
+        <!-- Available Places -->
+        <div class="form-group">
+            <label for="places">Available Places</label>
+            <select class="form-control" id="places" name="places" multiple>
+                <!-- Assuming you'll loop over the places available from the view -->
+                {% for place in places %}
+                    <option value="{{ place.id }}">{{ place.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="form-group">
+            <label for="start_date">Start Date</label>
+            <input type="date" class="form-control" id="start_date" name="start_date" required>
+        </div>
+
+        <!-- End Date -->
+        <div class="form-group">
+            <label for="end_date">End Date</label>
+            <input type="date" class="form-control" id="end_date" name="end_date" required>
+        </div>
+
+        <!-- Points Allocation -->
+        <div class="form-group">
+            <label for="points">Points Allocation</label>
+            <input type="number" class="form-control" id="points" name="points" placeholder="Enter points students can earn" required>
+        </div>
+
+        <!-- Point Delivery Method -->
+        <div class="form-group">
+            <label for="delivery_method">Point Delivery Method</label>
+            <select class="form-control" id="delivery_method" name="delivery_method">
+                <option value="qr">QR Code</option>
+                <option value="photo">Photo Validation</option>
+                <option value="integration">System Integration</option>
+            </select>
+        </div>
+
+        <!-- Add to News -->
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="add_to_news" name="add_to_news">
+            <label class="form-check-label" for="add_to_news">Add to News</label>
+        </div>
+
+        <!-- Campaign Description -->
+        <div class="form-group">
+            <label for="description">Campaign Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Describe the campaign..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success">Add Campaign</button>
+    </form>
+
+    <!-- Current Campaigns List -->
+    <h3>Current Campaigns</h3>
+    <ul class="list-group">
+        <!-- Loop through existing campaigns and display them -->
+        {% for campaign in campaigns %}
+            <li class="list-group-item">
+                <strong>{{ campaign.name }}</strong> - {{ campaign.start_date }} to {{ campaign.end_date }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
