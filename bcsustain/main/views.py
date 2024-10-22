@@ -7,6 +7,22 @@ from django.contrib.auth import get_user_model
 from .forms import SupervisorForm
 from .models import Campaign
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from .forms import ProfileForm
+
+@login_required
+def profile_setup(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('landing')  # Redirect to landing page after saving profile
+    else:
+        form = ProfileForm()
+    return render(request, 'profile_setup.html', {'form': form})
+
 
 def signup(request):
     if request.method == 'POST':
@@ -105,6 +121,7 @@ def manage_supervisors(request):
 
 def profile_setup(request):
     return render(request, 'profile_setup.html')
+
 
 def campaign_form(request):
     if request.method == 'POST':
