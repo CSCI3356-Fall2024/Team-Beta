@@ -24,65 +24,60 @@ header {
 
 /* Navbar Section */
 /* Styling for the navigation bar (navbar) */
-.navbar {
-    display: flex; /* Flexbox layout to arrange items horizontally */
-    justify-content: space-between; /* Ensures equal spacing between navbar items */
-    align-items: center; /* Vertically centers items */
-    background-color: #7FC242; /* Sets a green background color matching the header */
-    padding: 15px 30px; /* Adds 15px vertical and 30px horizontal padding inside the navbar */
+nav {
+  display: flex;  /* Flexbox layout to arrange items horizontally */
+  justify-content: space-between;  /* Space out the logo, links, and menu icon */
+  align-items: center;  /* Vertically centers items */
+  background-color: #7FC242;  /* Green background */
+  padding: 15px 30px;  /* Padding for spacing */
 }
 
-/* Styling for the logo inside the navbar */
-.navbar .logo {
-    display: flex; /* Flexbox to align logo image and text in the same row */
-    align-items: center; /* Vertically centers the logo content */
-    margin-right: auto; /* Keeps the logo on the left */
+/* Logo styling, aligned to the left */
+nav .logo {
+  display: flex;  /* Flexbox to keep the logo in line */
+  align-items: center;  /* Center the logo vertically */
+  margin-right: auto;  /* Pushes the logo to the left */
 }
 
-.navbar .logo {
-    margin-right: auto; /* This pushes the logo (BC Sustain) to the left */
-}
-
-/* Ensures the logo image inside the navbar maintains proper size and aspect ratio */
+/* Logo image size */
 img[alt="BC Dining Logo"] {
-    width: 200px; /* Sets the width to 300px */
-    height: auto; /* Automatically adjusts height to maintain aspect ratio */
-}
-
-img[alt="Three bars"] {
-    width: 50px; /* Sets a fixed width for the "Feed your mind" image */
-    height: auto; /* Maintains the aspect ratio */
+  width: 200px;  /* Set the logo size */
+  height: auto;
 }
 
 /* Center the links in the navbar */
-.navbar nav {
-    display: flex; /* Flexbox for links */
-    justify-content: center; /* Centers the navigation links */
-    flex: 1; /* Fills available space between the logo and other items */
+nav ul {
+  list-style: none;  /* Remove bullet points */
+  display: flex;  /* Flexbox for links */
+  gap: 20px;  /* Space between the links */
+  justify-content: center;  /* Center the links */
+  flex-grow: 1;  /* Ensure the links take up remaining space */
+  margin: 0;  /* Reset default margins */
+  padding: 0;  /* Reset default padding */
+  text-align: center;  /* Center the text */
 }
 
-/* Styling for the list of navigation links inside the navbar */
-.navbar nav ul {
-    list-style: none; /* Removes default bullet points from the list */
-    display: flex; /* Flexbox to arrange links horizontally */
-    gap: 20px; /* Adds 20px space between each list item */
-    margin: 0; /* Ensure no extra margin around the list */
-    padding: 0; /* Remove default padding */
+/* Styling for each link */
+nav ul li {
+  display: inline-block;  /* Make each link inline */
+  color: white;  /* Text color */
+  cursor: pointer;  /* Pointer on hover */
 }
 
-/* Ensures each list item behaves like an inline block, making it horizontally aligned */
-.navbar nav ul li {
-    display: inline-block; /* Keeps links in line */
-    color: white; /* Sets the text color of the navigation items to white */
-    cursor: pointer; /* Changes cursor to pointer on hover */
+/* Remove link underlines and set color */
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
 }
 
-/* Styling for the links inside the navbar */
-.navbar nav ul li a {
-    text-decoration: none; /* Removes underline from the links */
-    color: white; /* White text color for the links */
-    font-weight: bold; /* Adds underline to the text for emphasis */
+/* Menu bars (three bars) positioned to the right */
+img[alt="Three bars"] {
+  width: 50px;  /* Set width */
+  height: auto;  /* Maintain aspect ratio */
+  margin-left: auto;  /* Push the bars to the far right */
 }
+
 
 /* Button Styles */
 /* Styling for the "What's Open" button */
