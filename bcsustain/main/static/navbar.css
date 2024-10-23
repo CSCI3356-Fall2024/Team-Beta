@@ -8,13 +8,7 @@ nav {
     padding-left: 60px;
     height: 60px;
   }
-  
-  /* nav {
-      background-image: url('https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/2e07f1ee-3a05-4cbf-8b5c-9642a61c086a.image.png?v=1729462033463');
-      background-position: right center;
-      
-  } */
-  
+
   nav ul {
     list-style-type: none;
     padding: 0;
@@ -22,22 +16,22 @@ nav {
     display: flex;
     margin-left: 150px;
   }
-  
+
   nav ul li {
     display: inline-block;
     padding: 24px 30px;
   }
-  
+
   nav ul li a {
     text-decoration: none;
     color: white;
     font-weight: 600;
   }
-  
+
   nav ul li a:visited {
     color: white;
   }
-  
+
   nav ul li a:hover {
     color: white;
   }

@@ -58,8 +58,51 @@ def add_reward(request):
         return redirect('supervisorrewards')
     else:
         return HttpResponse("Invalid request method", status=400)
+
+
 def action(request):
-    return render(request, 'action.html')
+
+    ongoing_tasks = [
+    {
+        'name': 'Green2Go Box',
+        'points': 12,
+        'time': 'Ongoing',
+        'image': 'green2go.png'
+    }
+    ]
+    events = [
+        {
+            'name': 'Sustainability Talk',
+            'points': 10,
+            'date': '01/01/2024',
+            'image': 'noimage.png'
+        },
+        {
+            'name': 'Climate Change Webinar',
+            'points': 20,
+            'date': '02/01/2024',
+            'image': 'noimage.png'
+        }
+        ]
+
+    volunteer_work = [
+        {
+            'name': 'Community Clean-Up',
+            'points': 15,
+            'date': '03/01/2024',
+            'image': 'noimage.png'
+        },
+        # Add more volunteer work as needed
+    ]
+
+    context = {
+        'ongoing_tasks': ongoing_tasks,
+        'events': events,
+        'volunteer_work': volunteer_work,
+    }
+    return render(request, 'action.html', context)
+
+
 def base(request):
     return render(request, 'base.html')
 

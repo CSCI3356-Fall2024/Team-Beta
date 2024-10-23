@@ -5,108 +5,38 @@ body {
   padding: 0;
 }
 
-/* Header Section */
-/* Styling for the header element */
-header {
-    background-color: #7FC242; /* Green background color */
-    justify-content: space-between; /* Space elements equally across the header */
-    align-items: center; /* Aligns items vertically in the center */
-    text-align: center; /* Centers the text within each element */
-
+/* Target only the main element in the action page */
+.action-page {
+    padding: 20px; /* Adds padding inside the main section */
+    display: block; /* Override the flexbox layout */
+    gap: 0; /* Remove any gaps (if flexbox is still active somewhere else) */
 }
 
-/* Style for the main heading inside the header */
-.header h1 {
-    font-size: 3rem; /* Makes the heading text large (2.5 times the root font size) */
-    color: white; /* White text color for better contrast on the green background */
-    margin: 0; /* Remove any default margins around the heading */
-    padding-left: 20px; /* Adds 20px padding on the left side */
+/* General styling for each section */
+section {
 }
 
-/* Navbar Section */
-/* Styling for the navigation bar (navbar) */
-nav {
-  display: flex;  /* Flexbox layout to arrange items horizontally */
-  justify-content: space-between;  /* Space out the logo, links, and menu icon */
-  align-items: center;  /* Vertically centers items */
-  background-color: #7FC242;  /* Green background */
-  padding: 15px 30px;  /* Padding for spacing */
+h1 {
+  color: green;
+  text-align: left; /* Center-align the section titles */
+  margin: 0;
+  padding: 20px 20px;
 }
 
-/* Logo styling, aligned to the left */
-nav .logo {
-  display: flex;  /* Flexbox to keep the logo in line */
-  align-items: center;  /* Center the logo vertically */
-  margin-right: auto;  /* Pushes the logo to the left */
-}
-
-/* Logo image size */
-img[alt="BC Dining Logo"] {
-  width: 200px;  /* Set the logo size */
-  height: auto;
-}
-
-/* Center the links in the navbar */
-nav ul {
-  list-style: none;  /* Remove bullet points */
-  display: flex;  /* Flexbox for links */
-  gap: 20px;  /* Space between the links */
-  justify-content: center;  /* Center the links */
-  flex-grow: 1;  /* Ensure the links take up remaining space */
-  margin: 0;  /* Reset default margins */
-  padding: 0;  /* Reset default padding */
-  text-align: center;  /* Center the text */
-}
-
-/* Styling for each link */
-nav ul li {
-  display: inline-block;  /* Make each link inline */
-  color: white;  /* Text color */
-  cursor: pointer;  /* Pointer on hover */
-}
-
-/* Remove link underlines and set color */
-nav ul li a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-}
-
-/* Menu bars (three bars) positioned to the right */
-img[alt="Three bars"] {
-  width: 50px;  /* Set width */
-  height: auto;  /* Maintain aspect ratio */
-  margin-left: auto;  /* Push the bars to the far right */
-}
-
-
-/* Button Styles */
-/* Styling for the "What's Open" button */
-.whats-open-btn {
-    background-color: #D5B48A; /* Light brown background for the button */
-    color: black; /* Black text color for contrast */
-    border: none; /* Removes default border */
-    padding: 10px 20px; /* Adds 10px vertical and 20px horizontal padding */
-    border-radius: 5px; /* Rounds the button's corners by 5px */
-    cursor: pointer; /* Changes cursor to pointer when hovering over the button */
-}
-
-/* Styling for the hover state of the button */
-.whats-open-btn:hover {
-    background-color: #b49d73; /* Changes button color when hovered for a visual effect */
-}
-
-/* Style for the paragraph under h1 (Centered Text) */
+/* "These tasks have no deadlines" */
 .lead {
   text-align: left;     /* Centers the text */
-  margin: 20px;         /* Centers the element */
+  margin-left: 20px;         /* Centers the element */
   max-width: 800px;       /* Defines max width for readability */
   padding: 0;        /* Adds padding above and below the text */
 }
 
   /* Style for the events container */
   .events {
+    padding: 0;
+    min-width: 300px; /* Set a fixed width for the event card */
     width: 300px;
+    flex-shrink: 0; /* Prevent cards from shrinking */
     border: 2px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
@@ -115,9 +45,9 @@ img[alt="Three bars"] {
 
   /* Style for the image section */
   .events-image img {
-    width: 100%; /* Make the image fill the top half */
-    height: 150px; /* Set the height of the image */
-    object-fit: cover; /* Ensure the image covers the area without stretching */
+      width: 100%; /* Ensure the image takes up full width of the container */
+      height: 150px; /* Maintain the aspect ratio */
+      object-fit: cover; /* Crop the image without stretching it */
   }
 
   /* Style for the information section */
@@ -143,33 +73,26 @@ img[alt="Three bars"] {
     position: relative; /* Make the image container the reference for the pin icon */
   }
 
+  .container {
+      margin: 0 0; /* Add some space between containers */
+      width: auto;
+  }
   /* Add this to create a horizontally scrollable container for the events */
   .events-container {
-    display: flex; /* Align event cards horizontally */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    gap: 20px; /* Add spacing between event cards */
-    white-space: nowrap; /* Prevent cards from wrapping to a new line */
-    padding: 20px 0; /* Add some padding at the top and bottom of the container */
-    scroll-behavior: smooth; /* Optional: smooth scrolling effect */
-    margin-left: 20px;  /* Center the container by auto margin on the left */
-    margin-right: auto; /* Ensure it's centered with equal margins */
-  }
+      display: inline-flex; /* Use flexbox for layout */
+      flex-wrap: nowrap;
+      padding: 20px 0; /* Add padding around the container */
+      margin-left: 20px; /* Remove left margin */
+      margin-right: 0; /* Remove right margin */
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 30px; /* Adds more space between the event cards */
 
-  /* Ensure event cards maintain their size */
-  .events {
-    min-width: 300px; /* Ensure the cards do not shrink */
-    flex-shrink: 0; /* Prevent shrinking when resizing the browser */
-  }
-
+    }
   /* Optional: Hide the scrollbar for a cleaner look */
   .events-container::-webkit-scrollbar {
     display: none; /* Hides scrollbar in Chrome, Safari */
   }
-
-  .events-container {
-    scrollbar-width: none; /* Hides scrollbar in Firefox */
-  }
-
 
   .pin-icon {
     position: absolute;
@@ -186,34 +109,16 @@ img[alt="Three bars"] {
     height: 20px;
   }
 
-  h1 {
-    color: green;
-    padding: 20px;
-  }
-
-  footer {
-    background-color: #7FC242;
-    background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
-    background-size: 30px, 30px;
-    background-position: calc(100% - 20px) center;
-    background-repeat: no-repeat;
-    height: 70px;
-    padding: 0px;
-    margin: 0px;
-    display: flex;  /* Flexbox for centering */
-    justify-content: center;  /* Center content horizontally */
-    align-items: center;  /* Center content vertically */
-    color: white;  /* Text color for content */
-  }
-
-  footer p {
-    margin: 0;  /* Remove default margins */
-    padding: 0;  /* Remove default padding */
-    font-size: 1rem;  /* Adjust font size */
-  }
-
-
   .pin-icon.pinned img {
     filter: brightness(0.5); /* This dims the icon when pinned */
     /* Add any other styling here */
   }
+
+  @media (max-width: 600px) {
+    .events-image img {
+        height: 100px; /* Reduce the image height for smaller screens */
+    }
+    .events {
+    width: 100%; /* Make events take full width on small screens */
+}
+}

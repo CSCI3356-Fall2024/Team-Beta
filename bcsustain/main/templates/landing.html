@@ -1,10 +1,9 @@
-  {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-  {% load static %} <!-- Load the static template tag at the top -->
+{% load static %} <!-- Load the static template tag at the top -->
 
-
-  {% block content %}
-    <main>
+{% block content %}
+    <main class="landing-page">
         <section class="leaderboard">
             <h2>Championship</h2>
             <ul class="leaderboard-list">
@@ -13,7 +12,6 @@
                 <li><span class="highlight-dot"></span> Max Verstappen - 95 pts</li>
                 <li><span class="highlight-dot"></span> Yuki Tsunoda - 90 pts</li>
                 <li><span class="highlight-dot"></span> Zhou Guanyu - 90 pts</li>
-                <!-- Add more leaderboard items here -->
             </ul>
         </section>
 
@@ -38,4 +36,4 @@
             </div>
         </section>
     </main>
-    {% endblock %}
+{% endblock %}

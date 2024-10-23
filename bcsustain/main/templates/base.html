@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="auto">
 <head>
   {% load static %}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}BC Sustain Landing{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'base.css' %}">
+  {% block styles %}
+  {% endblock %}
+
 </head>
 <body>
   <header>
     {% include 'navbar.html' %}
   </header>
-
-  {% block content %}
-  <!-- Default content or placeholder -->
-  {% endblock %}
+    {% block content %}
+    <!-- Default content or placeholder -->
+    {% endblock %}
 
   {% block footer %}
   <footer>

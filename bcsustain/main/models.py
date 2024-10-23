@@ -40,6 +40,7 @@ class Campaign(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_supervisor = models.BooleanField(default=False) #added by Jonathan
     school = models.CharField(max_length=255)
     graduation_year = models.IntegerField()
     major1 = models.CharField(max_length=255)

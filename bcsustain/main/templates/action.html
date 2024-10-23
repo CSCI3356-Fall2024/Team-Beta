@@ -1,424 +1,140 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
-  <head>
-    {% load static %}
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}
+    Action Page
+{% endblock %}
+
+{% block styles %}
     <link rel="stylesheet" href="{% static 'action.css' %}">
-  </head>
-  <body>
-    <header>
-      <nav id="topbar">
-        <div class="logo">
-          <!-- Logo with a link to the landing page -->
-          <a href="{% url 'landing' %}" class="logo-link">
-              <img src="{% static 'bc_feed_your_mind.png' %}"
-              alt="BC Dining Logo"
-              class="BC-Dining-Logo">
-          </a>
-        </div>
-        <a href="{% url 'landing' %}" class="logo-link"></a>
-        <ul>
-            <li><a href="{% url 'rewards' %}">Rewards</a></li>
-            <li><a href="{% url 'action' %}">Action</a></li>
-            <li><a href="{% url 'supervisor' %}">Supervisor</a></li>
-            <li><a href="{% url 'supervisorrewards' %}">Supervisor Rewards</a></li>
-            <li><a href="{% url 'campaign_form' %}">Campaign Form</a></li>
+{% endblock %}
 
-        </ul>
-        <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image">
-
-      </nav>
-
-    </header>
-
-    <main>
-      <section>
+{% block content %}
+<main class="action-page">
+    <!-- Daily Ongoing Tasks -->
+    <section>
         <h1>Daily Ongoing Tasks</h1>
         <p class="lead text-body-secondary">
-          These tasks have no deadlines and can be completed multiple times
-          throughout the school year!
+            These tasks have no deadlines and can be completed multiple times throughout the school year!
         </p>
-      </section>
-      <div class="events-container">
-        <section class="events">
-          <div class="events-image">
-            <img
-              src="{% static 'green2go.png' %}"
-              alt="Event Image"
-              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-            />
-            <!-- Pin Icon -->
-            <button class="pin-icon" onclick="togglePin(this)">
-              <img
-                src="{% static 'pin.png' %}"
-                alt="Pin Icon"
-              />
-            </button>
-          </div>
-          <div class="events-info">
-            <h2 class="name">Green2Go Box</h2>
-            <p class="points">Points: 12pts</p>
-            <p class="date">Time: Ongoing</p>
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                See Description
-              </button>
-            </div>
-          </div>
-        </section>
-        <!-- second event -->
-        <section class="events">
-          <div class="events-image">
-            <img
-              src="{% static 'green2go.png' %}"
-              alt="Event Image"
-              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-            />
-            <!-- Pin Icon -->
-            <button class="pin-icon" onclick="togglePin(this)">
-              <img
-                src="{% static 'pin.png' %}"
-                alt="Pin Icon"
-              />
-            </button>
-          </div>
-          <div class="events-info">
-            <h2 class="name">Green2Go Box</h2>
-            <p class="points">Points: 12pts</p>
-            <p class="date">Time: Ongoing</p>
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                See Description
-              </button>
-            </div>
-          </div>
-        </section>
-        <!-- third event -->
-        <section class="events">
-          <div class="events-image">
-            <img
-              src="{% static 'noimage.png' %}"
-              alt="Event Image"
-              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-            />
-            <!-- Pin Icon -->
-            <button class="pin-icon" onclick="togglePin(this)">
-              <img
-                src="{% static 'pin.png' %}"
-                alt="Pin Icon"
-              />
-            </button>
-          </div>
-          <div class="events-info">
-            <h2 class="name">Green2Go Box</h2>
-            <p class="points">Points: 12pts</p>
-            <p class="date">Time: Ongoing</p>
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                See Description
-              </button>
-            </div>
-          </div>
-        </section>
-        <!-- fourth event -->
-        <section class="events">
-          <div class="events-image">
-            <img
-              src="{% static 'noimage.png' %}"
-              alt="Event Image"
-              onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-            />
-            <!-- Pin Icon -->
-            <button class="pin-icon" onclick="togglePin(this)">
-              <img
-                src="{% static 'pin.png' %}"
-                alt="Pin Icon"
-              />
-            </button>
-          </div>
-          <div class="events-info">
-            <h2 class="name">Green2Go Box</h2>
-            <p class="points">Points: 12pts</p>
-            <p class="date">Time: Ongoing</p>
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                See Description
-              </button>
-            </div>
-          </div>
-        </section>
-      </div>
+    </section>
+    <div class="events-container">
+        {% for task in ongoing_tasks %}
+            <section class="events">
+                <div class="events-image">
+                    <img src="{% static task.image %}" alt="Event Image"
+                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
+                    <button class="pin-icon" onclick="togglePin(this)">
+                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
+                    </button>
+                </div>
+                <div class="events-info">
+                    <h2 class="name">{{ task.name }}</h2>
+                    <p class="points">Points: {{ task.points }}pts</p>
+                    <p class="date">Time: {{ task.time }}</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
 
-<!-- Second section -->
-<section>
-    <h1>Events and Speakers</h1>
-    <p class="lead text-body-secondary">
-      We invite students to come to these informational events about sustainability!
-    </p>
-  </section>
-  <div class="events-container">
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
+    <!-- Events and Speakers -->
+    <section>
+        <h1>Events and Speakers</h1>
+        <p class="lead text-body-secondary">
+            We invite students to come to these informational events about sustainability!
+        </p>
     </section>
-    <!-- second event -->
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- third event -->
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- fourth event -->
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
-    </section>
-  </div>
-<!-- Third section -->
-<section>
-    <h1>Volunteer Work</h1>
-    <p class="lead text-body-secondary">
-      Here are some opportunities for students to volunteer!
-    </p>
-  </section>
-  <div class="events-container">
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- second event -->
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- third event -->
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- fourth event -->
-    <section class="events">
-      <div class="events-image">
-        <img
-          src="{% static 'noimage.png' %}"
-          alt="Event Image"
-          onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';"
-        />
-        <!-- Pin Icon -->
-        <button class="pin-icon" onclick="togglePin(this)">
-          <img
-            src="{% static 'pin.png' %}"
-            alt="Pin Icon"
-          />
-        </button>
-      </div>
-      <div class="events-info">
-        <h2 class="name">Event name</h2>
-        <p class="points">Points: __pts</p>
-        <p class="date">Time: mm/dd/yy</p>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            See Description
-          </button>
-        </div>
-      </div>
-    </section>
-  </div>
-<!-- Fourth section -->
-<section>
-    <h1>Team and Individual Challenges</h1>
-    <p class="lead text-body-secondary">
-      There are currently no challenges available!
-    </p>
-  </section>
-  <!-- end of all sections -->
-      </div>
-    </main>
+    <div class="events-container">
+        {% for event in events %}
+            <section class="events">
+                <div class="events-image">
+                    <img src="{% static event.image %}" alt="Event Image"
+                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
+                    <button class="pin-icon" onclick="togglePin(this)">
+                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
+                    </button>
+                </div>
+                <div class="events-info">
+                    <h2 class="name">{{ event.name }}</h2>
+                    <p class="points">Points: {{ event.points }}pts</p>
+                    <p class="date">Time: {{ event.date }}</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
 
+    <!-- Volunteer Work -->
+    <section>
+        <h1>Volunteer Work</h1>
+        <p class="lead text-body-secondary">
+            Here are some opportunities for students to volunteer!
+        </p>
+    </section>
+    <div class="events-container">
+        {% for volunteer in volunteer_work %}
+            <section class="events">
+                <div class="events-image">
+                    <img src="{% static volunteer.image %}" alt="Event Image"
+                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
+                    <button class="pin-icon" onclick="togglePin(this)">
+                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
+                    </button>
+                </div>
+                <div class="events-info">
+                    <h2 class="name">{{ volunteer.name }}</h2>
+                    <p class="points">Points: {{ volunteer.points }}pts</p>
+                    <p class="date">Time: {{ volunteer.date }}</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+
+    <!-- Team and Individual Challenges -->
+    <section>
+        <h1>Team and Individual Challenges</h1>
+        <p class="lead text-body-secondary">
+            There are currently no challenges available!
+        </p>
+    </section>
+</main>
+{% endblock %}
+
+{% block footer %}
     <footer>
         <p>&copy; 2024 BC Sustain. All rights reserved.</p>
     </footer>
-      <!-- JavaScript should be placed here -->
-  <script>
-    function togglePin(button) {
-      button.classList.toggle("pinned");
-      const img = button.querySelector('img');
-      if (button.classList.contains("pinned")) {
-        img.src = "{% static 'pinned-icon.png' %}";
-      } else {
-        img.src = "{% static 'pin.png' %}";
-      }
-      const isPinned = button.classList.contains("pinned");
-      localStorage.setItem("pinnedState", isPinned);
-    }
+{% endblock %}
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const pinState = localStorage.getItem("pinnedState");
-      const pinButton = document.querySelector(".pin-icon");
-      if (pinState === "true") {
-        pinButton.classList.add("pinned");
-        pinButton.querySelector('img').src = "{% static 'pinned-icon.png' %}";
-      }
-    });
-  </script>
-  </body>
-</html>
+{% block scripts %}
+    <script>
+        function togglePin(button) {
+            button.classList.toggle("pinned");
+            const img = button.querySelector('img');
+            if (button.classList.contains("pinned")) {
+                img.src = "{% static 'pinned-icon.png' %}";
+            } else {
+                img.src = "{% static 'pin.png' %}";
+            }
+            const isPinned = button.classList.contains("pinned");
+            localStorage.setItem("pinnedState", isPinned);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const pinState = localStorage.getItem("pinnedState");
+            const pinButton = document.querySelector(".pin-icon");
+            if (pinState === "true") {
+                pinButton.classList.add("pinned");
+                pinButton.querySelector('img').src = "{% static 'pinned-icon.png' %}";
+            }
+        });
+    </script>
+{% endblock %}
