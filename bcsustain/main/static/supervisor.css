@@ -6,35 +6,25 @@ body {
     padding: 0;
 }
 
-.header {
-    background-color: #7FC242;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-}
-
 .container {
-    max-width: 1200px;  /* Increased width for more space */
+    max-width: 1100px;  /* Increased width for more space */
+    width: auto;
     margin: 30px auto;
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
     flex-direction: column;
     align-items: center;  /* Center align the content horizontally */
-    height:60vh;
+    height:auto;
 }
 
 /* Ensure that the h1 header is centered */
-.container h1 {
-    font-size: 24px;
+h1 {
+    font-size: 36px;
     text-align: center;
     color: #5b882c;
-    margin-bottom: 15px;
+    margin: 25px;
     width: 100%;  /* Ensure the h1 takes full width */
     display: block;
 }
@@ -50,7 +40,7 @@ h2 {
 .campaign-tables-container {
     display: flex;
     justify-content: space-between;
-    gap: 30px;  /* Space between the two tables */
+    gap: 20px;  /* Space between the two tables */
     width: 100%;  /* Ensure the tables take up full width */
     margin-top: 20px;
 }

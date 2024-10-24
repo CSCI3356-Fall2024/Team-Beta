@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supervisor Rewards</title>
-    <link rel="stylesheet" href="{% static 'supervisorrewards.css' %}">
-</head>
-<body>
-    <header>
-        {%include 'navbar.html'%}
-    </header>
+{% extends 'base.html' %}
+{% load static %}
 
-    <main class="container">
-        <h1>Manage Rewards</h1>
+{% block title %}
+    Supervisor Rewards Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'supervisorrewards.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="container">
+        <h2>Manage Rewards</h2>
         <form method="POST" action="{% url 'add_reward' %}">
             {% csrf_token %}
             <div class="form-group">
@@ -38,7 +36,9 @@
             </div>
             <button type="submit">Add Reward</button>
         </form>
+      </section>
 
+      <section class="container">
         <h2>Current Rewards</h2>
         <table class="rewards-table">
             <thead>
@@ -71,9 +71,5 @@
                 {% endfor %}
             </tbody>
         </table>
-    </main>
-  <footer>
-      <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+    </section>
+{% endblock %}

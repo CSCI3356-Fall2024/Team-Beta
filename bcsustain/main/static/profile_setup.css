@@ -9,46 +9,6 @@ body {
     background-color: #f4f4f4;
 }
 
-header {
-    background-color: #7FC242;
-    padding: 15px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar .logo {
-    display: flex;
-    align-items: center;
-}
-
-img[alt="BC Dining Logo"] {
-    width: 300px;
-    height: auto;
-}
-
-.navbar nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.navbar nav ul li {
-    color: white;
-}
-
-.navbar nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-}
-
-
-
-.whats-open-btn:hover {
-    background-color: #c4a679;
-}
 
 .container {
     max-width: 600px;
@@ -138,21 +98,4 @@ button {
 
 button:hover {
     background-color: #4e7320;
-}
-
-footer {
-    background-color: #7FC242;
-    padding: 10px 20px;
-    text-align: center;
-    color: white;
-}
-
-.footer-logo img {
-    height: 40px;
-    margin-bottom: 10px;
-}
-
-footer p {
-    margin: 0;
-    font-size: 0.9em;
 }

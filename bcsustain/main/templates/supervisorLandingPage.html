@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campaign Management</title>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Supervisor Page
+{% endblock %}
+
+{% block styles %}
     <link rel="stylesheet" href="{% static 'supervisor.css' %}">
-</head>
-<body>
-    <header>
-        {% include 'navbar.html' %}
-    </header>
-    {% block content %}
+{% endblock %}
 
-    <!-- Main Content -->
-    <div class="container">
-        <h1>Campaigns</h1>
-
-        <!-- Flex container to hold both Active and Past Campaigns evenly -->
-            <!-- Active Campaigns Table -->
+{% block content %}
+<h1>Campaigns</h1>
+    <section class="container">
             <div class="campaign-table">
                 <h2>Active Campaigns</h2>
                 <table class="your-table-class">
@@ -49,8 +42,10 @@
                     </tbody>
                 </table>
             </div>
+          </section>
 
             <!-- Past Campaigns Table -->
+          <section class="container">
             <div class="campaign-table">
                 <h2>Past Campaigns</h2>
                 <table class="your-table-class">
@@ -81,12 +76,5 @@
                     </tbody>
                 </table>
             </div>
-    </div>
-    {% endblock %}
-
-
-    <footer>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    </section>
+  {% endblock %}

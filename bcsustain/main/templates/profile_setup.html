@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Setup - BC Sustain</title>
-    <link rel="stylesheet" href="{% static 'profile_setup.css' %}">
-</head>
-<body>
-    <header>
-        <div class="navbar">
-            <div class="logo">
-                <img src="{% static 'bc_feed_your_mind.png' %}" alt="BC Dining Logo">
-                <span>BC Sustain</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Rewards</a></li>
-                    <li><a href="#">Groups</a></li>
-                    <li><a href="#">QR Code</a></li>
-                    <li><a href="#">Action</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}
+    Landing Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'profile_setup.css' %}">
+{% endblock %}
+
+{% block content %}
     <main class="container">
         <h1>Profile Setup</h1>
         <div class="profile-picture">
@@ -32,7 +17,7 @@
             <button class="edit-pic-button" title="Edit">✏️</button>
             <input type="file" id="profile-pic-input" name="profile_picture" accept="image/*" style="display: none;">
         </div>
-        
+
         <form method="POST" action="{% url 'profile_setup' %}">
             {% csrf_token %}
             <div class="form-group">
@@ -54,13 +39,7 @@
             <button type="submit">Save Profile</button>
         </form>
     </main>
-    
-    <footer>
-        <div class="footer-logo">
-            <img src="{% static 'footer_leaf.png' %}" alt="Footer Logo">
-        </div>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-    </footer>
+  {% endblock %}
 
     <script>
         document.querySelector('.edit-pic-button').addEventListener('click', () => {
@@ -73,5 +52,3 @@
             }
         });
     </script>
-</body>
-</html>

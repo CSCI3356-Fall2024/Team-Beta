@@ -6,10 +6,8 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
-img[alt="Profile Icon"] {
-    width: 80px;
-    height: auto;
-}
+
+
 footer {
   background-color: #7FC242;
   background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");

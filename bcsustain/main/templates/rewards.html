@@ -1,55 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BC Sustain Rewards</title>
-    <link rel="stylesheet" href="{% static 'rewards.css' %}">
-</head>
-<body>
-    <header>
-      {%include 'navbar.html'%}
-    </header>
-    <div class="container">
-        <h1>Rewards</h1>
-        <div class="rewards-container">
-            <div class="points">
-                <h2>Points</h2>
-                <p class="all-time-score">All-time Score: 74 PTS</p>
-                <ul>
-                    <li><span>09/27/24</span> Volunteer <span class="points-value">20 pts</span></li>
-                    <li><span>09/27/24</span> Conference <span class="points-value">18 pts</span></li>
-                    <li><span>09/27/24</span> Green2go Return <span class="points-value">12 pts</span></li>
-                    <li><span>09/25/24</span> Dining Coupon <span class="points-value negative">-3 pts</span></li>
-                    <li><span>09/24/24</span> Go Karting <span class="points-value negative">-4 pts</span></li>
-                    <li><span>09/22/24</span> Phone Case <span class="points-value negative">-3 pts</span></li>
-                    <li><span>09/17/24</span> Panel Guest <span class="points-value negative">-4 pts</span></li>
-                    <li><span>09/07/24</span> Green2go Return <span class="points-value">12 pts</span></li>
-                    <li><span>08/27/24</span> Green2go Return <span class="points-value">12 pts</span></li>
-                </ul>
-            </div>
-            <div class="redeem">
-                <h2>Redeem</h2>
-                <p class="balance">Balance: 60 PTS</p>
-                <ul>
-                    <li>Gold Pass <span class="points-value">20 pts</span></li>
-                    <li>5k Ticket <span class="points-value">18 pts</span></li>
-                    <li>Merch <span class="points-value">12 pts</span></li>
-                    <li>Skip-day <span class="points-value">10 pts</span></li>
-                    <li>Go Karting <span class="points-value">4 pts</span></li>
-                    <li>Resume <span class="points-value">4 pts</span></li>
-                    <li>Panel Guest <span class="points-value">4 pts</span></li>
-                    <li>Dining Coupon <span class="points-value">3 pts</span></li>
-                    <li>Phone Case <span class="points-value">3 pts</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+{% extends 'base.html' %}
+{% load static %}
 
-  <!-- Footer Section -->
-  <footer>
-      <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+{% block title %}
+    Rewards Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'rewards.css' %}">
+{% endblock %}
+
+{% block content %}
+  <main class="container">
+    <h1>Rewards</h1>
+    <section class="rewards-container">
+        <div class="points">
+            <h2>Points</h2>
+            <p class="all-time-score">All-time Score: 74 PTS</p>
+            <ul>
+                <li><span>09/27/24</span> Volunteer <span class="points-value">20 pts</span></li>
+                <li><span>09/27/24</span> Conference <span class="points-value">18 pts</span></li>
+                <li><span>09/27/24</span> Green2go Return <span class="points-value">12 pts</span></li>
+                <li><span>09/25/24</span> Dining Coupon <span class="points-value negative">-3 pts</span></li>
+                <li><span>09/24/24</span> Go Karting <span class="points-value negative">-4 pts</span></li>
+                <li><span>09/22/24</span> Phone Case <span class="points-value negative">-3 pts</span></li>
+                <li><span>09/17/24</span> Panel Guest <span class="points-value negative">-4 pts</span></li>
+                <li><span>09/07/24</span> Green2go Return <span class="points-value">12 pts</span></li>
+                <li><span>08/27/24</span> Green2go Return <span class="points-value">12 pts</span></li>
+            </ul>
+        </div>
+        <div class="redeem">
+            <h2>Redeem</h2>
+            <p class="balance">Balance: 60 PTS</p>
+            <ul>
+                <li>Gold Pass <span class="points-value">20 pts</span></li>
+                <li>5k Ticket <span class="points-value">18 pts</span></li>
+                <li>Merch <span class="points-value">12 pts</span></li>
+                <li>Skip-day <span class="points-value">10 pts</span></li>
+                <li>Go Karting <span class="points-value">4 pts</span></li>
+                <li>Resume <span class="points-value">4 pts</span></li>
+                <li>Panel Guest <span class="points-value">4 pts</span></li>
+                <li>Dining Coupon <span class="points-value">3 pts</span></li>
+                <li>Phone Case <span class="points-value">3 pts</span></li>
+            </ul>
+        </div>
+    </section>
+</main>
+{% endblock %}

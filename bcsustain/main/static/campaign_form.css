@@ -1,24 +1,25 @@
 /* General Styling for Block Content */
 .container {
-    max-width: 800px;
-    margin: 50px auto;
+    max-width: 800px; /* Limit width of the container */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    margin: 20px auto; /* Centers the container horizontally */
     padding: 30px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Heading Styling */
 h1 {
     color: #5b882c;  /* Green color for the "CREATE A CAMPAIGN" */
     font-size: 28px;
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: center; /* Centers the heading text */
+    margin: 20px 0; /* Add spacing around the heading */
 }
 
 /* Form Fields */
 .form-group {
-  margin-bottom: 20px;
-
+    margin-bottom: 20px; /* Space between each form group */
 }
 
 .form-group label {
@@ -64,6 +65,10 @@ input[type="date"] {
 }
 
 /* Button Styling */
+.form {
+    text-align: center; /* Center align the entire form content */
+}
+
 button[type="submit"] {
     background-color: #7FC242;  /* Matching green color for submit button */
     color: white;
@@ -73,6 +78,7 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: inline-block; /* Ensure the button takes up only the required space */
 }
 
 button[type="submit"]:hover {

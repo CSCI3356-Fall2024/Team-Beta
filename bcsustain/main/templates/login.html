@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block styles %}
     <link rel="stylesheet" href="{% static 'login.css' %}">
-</head>
-<body>
-  <header>
-    {%include 'navbar.html'%}
-  </header>
-    <div class="container">
-        <h1>Login</h1>
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            <div>
-                <label for="email">Email (@bc.edu)</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-        <a href="#">Forgot password?</a>
-        <div class="google-signin">
-            <a href="{% url 'social:begin' 'google-oauth2' %}">
-                <button>Sign in with Google</button>
-            </a>
+{% endblock %}
+
+{% block content %}
+  <main class="container">
+    <h1>Login</h1>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div>
+            <label for="email">Email Address (@bc.edu)</label>
+            <input type="email" id="email" name="email" required>
         </div>
-        <a href="{% url 'signup' %}">Create Account</a>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <a href="#">Forgot password?</a>
+    <div class="google-signin">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">
+            <button>Sign in with Google</button>
+        </a>
     </div>
-    <!-- Footer Section -->
-  <footer>
-      <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+    <a href="{% url 'signup' %}">Create Account</a>
+  </main>
+{% endblock %}

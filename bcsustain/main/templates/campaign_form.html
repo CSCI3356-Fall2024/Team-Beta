@@ -1,71 +1,78 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Landing Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'campaign_form.css' %}">
+{% endblock %}
 
 {% block content %}
-<head>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'campaign_form.css' %}">
-</head>
-<div class="container">
-    <h1 class="text-center mt-4 mb-4">Create a Campaign</h1>
-    <form method="POST">
-        {% csrf_token %}
-        
-        <!-- Campaign Name -->
-        <div class="form-group">
-            <label for="campaignName">Campaign Name</label>
-            <input type="text" class="form-control" id="campaignName" name="name" placeholder="Enter campaign name" required>
-        </div>
+<h1 class="text-center mt-4 mb-4">Create a Campaign</h1>
+  <div class="container">
+      <form method="POST">
+          {% csrf_token %}
+          <!-- Campaign Name -->
+          <div class="form-group">
+              <label for="campaignName">Campaign Name</label>
+              <input type="text" class="form-control" id="campaignName" name="name" placeholder="Enter campaign name" required>
+          </div>
 
-        <!-- Available Quantity / Points Allocation -->
-        <div class="form-group">
-            <label for="availableQuantity">Points Allocation</label>
-            <input type="number" class="form-control" id="availableQuantity" name="points" placeholder="Enter points" required>
-        </div>
+          <!-- Points Allocation -->
+          <div class="form-group">
+              <label for="availableQuantity">Points Allocation</label>
+              <input type="number" class="form-control" id="availableQuantity" name="points" placeholder="Enter points" required>
+          </div>
 
-        <!-- Start Date -->
-        <div class="form-group">
-            <label for="startDate">Start Date</label>
-            <input type="date" class="form-control" id="startDate" name="start_date" required>
-        </div>
+          <!-- Start Date -->
+          <div class="form-group">
+              <label for="startDate">Start Date</label>
+              <input type="date" class="form-control" id="startDate" name="start_date" required>
+          </div>
 
-        <!-- End Date -->
-        <div class="form-group">
-            <label for="endDate">End Date</label>
-            <input type="date" class="form-control" id="endDate" name="end_date" required>
-        </div>
+          <!-- End Date -->
+          <div class="form-group">
+              <label for="endDate">End Date</label>
+              <input type="date" class="form-control" id="endDate" name="end_date" required>
+          </div>
 
-        <!-- Campaign Location (Places) -->
-        <div class="form-group">
-            <label for="location">Location</label>
-            <select class="form-control" id="location" name="location">
-                <option value="Green to Go">Green to Go</option>
-                <option value="Other Location">Other Location</option>
-            </select>
-        </div>
+          <!-- Location -->
+          <div class="form-group">
+              <label for="location">Location</label>
+              <select class="form-control" id="location" name="location">
+                  <option value="Green to Go">Green to Go</option>
+                  <option value="Other Location">Other Location</option>
+              </select>
+          </div>
 
-        <!-- Campaign Description -->
-        <div class="form-group">
-            <label for="description">Campaign Description</label>
-            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter campaign description" required></textarea>
-        </div>
+          <!-- Description -->
+          <div class="form-group">
+              <label for="description">Campaign Description</label>
+              <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter campaign description" required></textarea>
+          </div>
 
-        <!-- Point Delivery Method -->
-        <div class="form-group">
-            <label for="deliveryMethod">Point Delivery Method</label>
-            <select class="form-control" id="deliveryMethod" name="delivery_method">
-                <option value="QR Code">QR Code</option>
-                <option value="Photo Validation">Photo Validation</option>
-                <option value="Integration">Integration</option>
-            </select>
-        </div>
+          <!-- Point Delivery Method -->
+          <div class="form-group">
+              <label for="deliveryMethod">Point Delivery Method</label>
+              <select class="form-control" id="deliveryMethod" name="delivery_method">
+                  <option value="QR Code">QR Code</option>
+                  <option value="Photo Validation">Photo Validation</option>
+                  <option value="Integration">Integration</option>
+              </select>
+          </div>
 
-        <!-- Add to News (Boolean Field) -->
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="addToNews" name="add_to_news">
-            <label class="form-check-label" for="addToNews">Add to News</label>
-        </div>
+          <!-- Add to News -->
+          <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="addToNews" name="add_to_news">
+              <label class="form-check-label" for="addToNews">Add to News</label>
+          </div>
 
-        <button type="submit" class="btn btn-primary">Create Campaign</button>
-    </form>
-</div>
+          <!-- Centered Button -->
+          <div class="text-center">
+              <button type="submit" class="btn btn-primary">Create Campaign</button>
+          </div>
+      </form>
+  </div>
 {% endblock %}

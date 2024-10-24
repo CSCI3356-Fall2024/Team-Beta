@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% load static %} <!-- Load the static template tag at the top -->
+{% block title %}
+    Landing Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'landing.css' %}">
+{% endblock %}
 
 {% block content %}
     <main class="landing-page">
