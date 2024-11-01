@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     "social_django",
     "main",
 ]
-#jacob added this line below
-AUTH_USER_MODEL = 'main.CustomUser'
+#jacob added this line below      AUTH_USER_MODEL = 'main.CustomUser'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',

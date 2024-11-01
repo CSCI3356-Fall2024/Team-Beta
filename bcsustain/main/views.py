@@ -9,6 +9,8 @@ from .models import Campaign
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
+from django.contrib.auth.models import User
+from .models import Profile
 
 @login_required
 def profile_setup(request):
@@ -128,7 +130,6 @@ def is_superuser(user):
 
 @user_passes_test(lambda u: u.is_superuser)
 def manage_supervisors(request):
-    User = get_user_model()
     users = User.objects.all()
 
     if request.method == 'POST':
@@ -136,16 +137,13 @@ def manage_supervisors(request):
         if form.is_valid():
             user_id = request.POST.get('user_id')
             user = User.objects.get(id=user_id)
-            user.is_supervisor = form.cleaned_data['is_supervisor']
-            user.save()
+            user.profile.is_supervisor = form.cleaned_data['is_supervisor']
+            user.profile.save()
             return redirect('manage_supervisors')
 
     return render(request, 'manage_supervisors.html', {'users': users})
 
-# def manage_supervisors(request):
-#     return render(request, 'manage_supervisors.html')
-
-# @user_passes_test(is_superuser)
+# @user_passes_test(lambda u: u.is_superuser)
 # def manage_supervisors(request):
 #     User = get_user_model()
 #     users = User.objects.all()
@@ -160,6 +158,7 @@ def manage_supervisors(request):
 #             return redirect('manage_supervisors')
 
 #     return render(request, 'manage_supervisors.html', {'users': users})
+
 
 
 def profile_setup(request):
