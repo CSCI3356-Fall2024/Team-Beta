@@ -2,6 +2,7 @@ from django.urls import path
 from .views import signup, login, rewards, supervisorrewards, add_reward, action, base, supervisor, landing, campaign_form, profile_setup, manage_supervisors
 
 urlpatterns = [
+    path('',login, name='land'),
     path('signup/', signup, name='signup'),
     path('login/', login, name='login'),
     path('rewards/', rewards, name='rewards'),

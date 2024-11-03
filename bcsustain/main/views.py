@@ -129,71 +129,76 @@ def is_superuser(user):
     return user.is_superuser
 
 @user_passes_test(lambda u: u.is_superuser)
+# def manage_supervisors(request):
+#     # Ensure all users have a profile
+#     for user in User.objects.all():
+#         Profile.objects.get_or_create(user=user)
+
+#     # Retrieve all users with profiles to display in the template
+#     users = User.objects.all()
+
+#     if request.method == 'POST':
+#         print("POST request received")  # Debugging
+#         form = SupervisorForm(request.POST)
+#         form.save()
+#         if form.is_valid():
+#             print("Form is valid")  # Debugging
+#             user_id = request.POST.get('user_id')
+#             print(f"User ID received: {user_id}")  # Debugging
+
+#             # Check that `user_id` is correctly retrieved
+#             if not user_id:
+#                 print("No user_id found in POST data.")
+#                 return redirect('manage_supervisors')
+
+#             # Fetch the user based on the user_id
+#             try:
+#                 user = User.objects.get(id=user_id)
+#                 print(f"User found: {user.username}")  # Debugging
+
+#                 # Convert 'is_supervisor' to a boolean (adjusted conversion to handle different inputs)
+#                 is_supervisor_value = request.POST.get('is_supervisor') == 'True'
+#                 print(f"Supervisor status to update: {is_supervisor_value}")  # Debugging
+
+#                 # Update and save the profile
+#                 user.profile.is_supervisor = is_supervisor_value
+#                 user.profile.save()
+#                 print(f"Successfully updated {user.username}'s supervisor status to {user.profile.is_supervisor}")  # Debugging
+#             except User.DoesNotExist:
+#                 print("User does not exist")  # Debugging
+
+#             return redirect('manage_supervisors')
+#         else:
+#             print("Form is not valid")  # Debugging
+
+#     return render(request, 'manage_supervisors.html', {'users': users})
+
+@user_passes_test(lambda u: u.is_superuser)
 def manage_supervisors(request):
     # Ensure all users have a profile
     for user in User.objects.all():
-        Profile.objects.get_or_create(user=user)
+        if not hasattr(user, 'profile'):
+            Profile.objects.create(user=user)  # Only create if profile does not exist
 
     # Retrieve users with profiles to display in the template
     users = User.objects.all()
 
     if request.method == 'POST':
         form = SupervisorForm(request.POST)
+        form.save()
         if form.is_valid():
             user_id = request.POST.get('user_id')
-            print(f"User ID received: {user_id}")  # Debugging statement
-
-            # Fetch the user based on the user_id
             try:
                 user = User.objects.get(id=user_id)
-                # Convert 'is_supervisor' to boolean if needed
                 is_supervisor_value = request.POST.get('is_supervisor') == 'True'
-                print(f"New supervisor status: {is_supervisor_value}")  # Debugging statement
-
-                # Update and save the profile
                 user.profile.is_supervisor = is_supervisor_value
                 user.profile.save()
-                print(f"Updated {user.username}'s supervisor status to {user.profile.is_supervisor}")  # Debugging statement
             except User.DoesNotExist:
-                print("User does not exist")  # Debugging statement
+                print("User does not exist")
 
             return redirect('manage_supervisors')
-        else:
-            print("Form is not valid")  # Debugging statement
 
     return render(request, 'manage_supervisors.html', {'users': users})
-
-
-# def manage_supervisors(request):
-#     users = User.objects.all()
-
-#     if request.method == 'POST':
-#         form = SupervisorForm(request.POST)
-#         if form.is_valid():
-#             user_id = request.POST.get('user_id')
-#             user = User.objects.get(id=user_id)
-#             user.profile.is_supervisor = form.cleaned_data['is_supervisor']
-#             user.profile.save()
-#             return redirect('manage_supervisors')
-
-#     return render(request, 'manage_supervisors.html', {'users': users})
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def manage_supervisors(request):
-#     User = get_user_model()
-#     users = User.objects.all()
-
-#     if request.method == 'POST':
-#         form = SupervisorForm(request.POST)
-#         if form.is_valid():
-#             user_id = request.POST.get('user_id')
-#             user = User.objects.get(id=user_id)
-#             user.is_supervisor = form.cleaned_data['is_supervisor']
-#             user.save()
-#             return redirect('manage_supervisors')
-
-#     return render(request, 'manage_supervisors.html', {'users': users})
-
 
 
 def profile_setup(request):
