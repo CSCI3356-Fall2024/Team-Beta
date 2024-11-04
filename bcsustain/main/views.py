@@ -167,14 +167,20 @@ def supervisor(request):
     }
     return render(request, 'supervisorLandingPage.html', context)
 
-@login_required
+#@login_required
 def landing(request):
-    # Check if the user’s profile is complete
-    profile = getattr(request.user, 'profile', None)
-    if not profile or not profile.is_complete():
-        # Redirect to profile setup if incomplete
-        return redirect('profile_setup')
-    
+    # Check if the user is authenticated and their profile is complete
+    if request.user.is_authenticated:
+        profile = getattr(request.user, 'profile', None)
+        if profile and not profile.is_complete():
+            # Redirect to profile setup if incomplete
+            return redirect('profile_setup')
+
+        # Determine the user's role (Supervisor or Student) if logged in
+        role = "Supervisor" if profile and profile.is_supervisor else "Student"
+    else:
+        role = "Not Logged in. For Testing"  # Not logged in
+
     # Get active campaigns for today
     today = timezone.now().date()
     active_campaigns = Campaign.objects.filter(
@@ -182,9 +188,6 @@ def landing(request):
         end_date__gte=today,
         add_to_news=True
     )
-
-    # Determine the user's role (Supervisor or Student)
-    role = "Supervisor" if profile.is_supervisor else "Student"
 
     # Pass the active campaigns and role to the template
     return render(request, 'landing.html', {

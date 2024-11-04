@@ -2,12 +2,12 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BC Sustain Landing</title>
+    <title>BC Sustain Supervisor</title>
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
 </head>
 <body>
-  <header>
-    <div class="navbar {% if is_supervisor %}supervisor-navbar{% else %}regular-navbar{% endif %}">
+  <header class="{% if user.profile.is_supervisor %}supervisor{% endif %}">
+    <div class="navbar supervisor-navbar">
           <div class="logo">
               <!-- Logo with a link to the landing page -->
               <a href="{% url 'landing' %}" class="logo-link">
@@ -18,11 +18,12 @@
           </div>
           <nav id="topbar">
               <ul>
-                  <li><a href="{% url 'rewards' %}">Rewards</a></li>
+                  <li><a href="{% url 'supervisor' %}">Supervisor Dashboard</a></li>
+                  <li><a href="{% url 'supervisorrewards' %}">Supervisor Rewards</a></li>
                   <li><a href="{% url 'action' %}">Action</a></li>
-                  <li><a href="{% url 'supervisor' %}">Supervisor</a></li>
+                  <li><a href="{% url 'campaign_form' %}">Campaign Form</a></li>
+                  <li><a href="{% url 'manage_supervisors' %}">Manage Supervisors</a></li>
                   <li><a href="{% url 'logout' %}">Logout</a></li>
-
               </ul>
           </nav>
           <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image">

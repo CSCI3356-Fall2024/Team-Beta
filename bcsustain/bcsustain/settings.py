@@ -129,6 +129,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "598151765783-hlmof392vhfsdorjsbva5dvt1qg0ikkb.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://localhost:8000/complete/google-oauth2/"
 SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['bc.edu']
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'landing'
@@ -141,7 +142,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.user.get_username',
     'social_core.pipeline.user.create_user',
-    'main.pipeline.ensure_profile_completion',  # Custom step for profile completion
+    'main.pipeline.ensure_profile_completion',  #profile completion pipeline
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
