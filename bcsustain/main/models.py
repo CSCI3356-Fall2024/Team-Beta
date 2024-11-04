@@ -49,17 +49,20 @@ class Campaign(models.Model):
     def __str__(self):
         return self.name
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     is_supervisor = models.BooleanField(default=False) #added by Jonathan
-#     school = models.CharField(max_length=255)
-#     graduation_year = models.IntegerField()
-#     major1 = models.CharField(max_length=255)
-#     major2 = models.CharField(max_length=255, blank=True, null=True)
-#     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+class Profile(models.Model):
+     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+     is_supervisor = models.BooleanField(default=False)  # added by Jonathan
+     school = models.CharField(max_length=255)
+     graduation_year = models.IntegerField()
+     major1 = models.CharField(max_length=255)
+     major2 = models.CharField(max_length=255, blank=True, null=True)
+     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 
-#     def __str__(self):
-#         return f"{self.user.username}'s Profile"
+     def __str__(self):
+         return f"{self.user.username}'s Profile"
+
+     def is_complete(self):
+         return bool(self.school and self.graduation_year and self.major1)
 
 
 class Profile(models.Model):
