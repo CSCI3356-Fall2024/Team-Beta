@@ -53,7 +53,7 @@ class Profile(models.Model):
      user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
      is_supervisor = models.BooleanField(default=False)  # added by Jonathan
      school = models.CharField(max_length=255)
-     graduation_year = models.IntegerField()
+     graduation_year = models.IntegerField(blank=True, null=True)
      major1 = models.CharField(max_length=255)
      major2 = models.CharField(max_length=255, blank=True, null=True)
      profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
