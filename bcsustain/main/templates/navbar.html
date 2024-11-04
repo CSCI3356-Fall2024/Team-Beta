@@ -21,16 +21,8 @@
                   <li><a href="{% url 'rewards' %}">Rewards</a></li>
                   <li><a href="{% url 'action' %}">Action</a></li>
                   <li><a href="{% url 'supervisor' %}">Supervisor</a></li>
-<<<<<<< Updated upstream
                   <li><a href="{% url 'logout' %}">Logout</a></li>
 
-=======
-                  {% if is_supervisor %}
-                    <li><a href="{% url 'supervisorrewards' %}">Supervisor Rewards</a></li>
-                    <li><a href="{% url 'campaign_form' %}">Campaign Form</a></li>
-                  {% else %}
-                  {% endif %}
->>>>>>> Stashed changes
               </ul>
           </nav>
           <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image">
