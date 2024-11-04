@@ -20,26 +20,25 @@ from django.apps import apps
 #         verbose_name="groups",
 #     )
 
-# class Campaign(models.Model):
-#     name = models.CharField(max_length=255)
-#     start_date = models.DateField()
-#     end_date = models.DateField()
-#     location = models.CharField(max_length=255)
-#     description = models.TextField()
-#     points = models.PositiveIntegerField(default=0)  # Integer field with a default value
-#     delivery_method = models.CharField(
-#         max_length=50,
-#         choices=[
-#             ('QR Code', 'QR Code'),
-#             ('Photo Validation', 'Photo Validation'),
-#             ('Integration', 'Integration'),
-#         ],
-#         default='QR Code'  # String field with default value 'QR Code'
-#     )
-#     is_active = models.BooleanField(default=True)
+class Campaign(models.Model):
+    name = models.CharField(max_length=100)
+    points = models.IntegerField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    location = models.CharField(max_length=50)
+    description = models.TextField()
+    delivery_method = models.CharField(
+        max_length=20,
+        choices=[
+            ('QR Code', 'QR Code'),
+            ('Photo Validation', 'Photo Validation'),
+            ('Integration', 'Integration')
+        ]
+    )
+    add_to_news = models.BooleanField(default=False)
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
 # class Profile(models.Model):
 #     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
