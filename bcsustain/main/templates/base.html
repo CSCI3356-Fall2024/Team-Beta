@@ -12,8 +12,20 @@
 </head>
 <body>
   <header>
-    {% include 'navbar.html' %}
+    {% if user.is_authenticated %}
+      {% if user.profile.is_supervisor %}
+        {% include 'supervisor_navbar.html' %}  <!-- Include supervisor-specific navbar -->
+      {% else %}
+        {% include 'navbar.html' %}  <!-- Include regular navbar for non-supervisors -->
+      {% endif %}
+    {% else %}
+      {% include 'navbar.html' %}  <!-- Optionally include a public navbar for unauthenticated users -->
+    {% endif %}
+<<<<<<< Updated upstream
   </header>
+=======
+    </header>
+>>>>>>> Stashed changes
     {% block content %}
     <!-- Default content or placeholder -->
     {% endblock %}
