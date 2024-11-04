@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import get_user_model
 from .forms import SupervisorForm
-from .models import Campaign
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
@@ -14,6 +13,10 @@ from .models import Profile
 from django.contrib.auth import logout as auth_logout
 from .forms import CampaignForm
 from django.utils import timezone
+from django.contrib.auth.decorators import user_passes_test
+from .models import Campaign
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 
 @login_required
 def profile_setup(request):
@@ -130,7 +133,7 @@ def landing(request):
     today = timezone.now().date()
     active_campaigns = Campaign.objects.filter(
         start_date__lte=today,
-        end_date__gte=today,
+        end_date__gte=today, #for active campaigns
         add_to_news=True
     )
     return render(request, 'landing.html', {'active_campaigns': active_campaigns})
@@ -257,3 +260,11 @@ def campaign_form(request):
     else:
         form = CampaignForm()
     return render(request, 'campaign_form.html', {'form': form})
+
+@user_passes_test(lambda u: u.is_superuser)
+def delete_campaign(request, campaign_id):
+    campaign = get_object_or_404(Campaign, id=campaign_id)
+    if request.method == 'POST':
+        campaign.delete()
+        return redirect('supervisor')  # Redirect back to the supervisor page
+    return render(request, 'confirm_delete.html', {'campaign': campaign})

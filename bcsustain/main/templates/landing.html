@@ -27,7 +27,7 @@
         <div class="event-cards">
             {% for campaign in active_campaigns %}
                 <div class="event-card">
-                    <img src="{% static 'default_campaign.png' %}" alt="Campaign Image">
+                    <img src="{{ campaign.get_image_url }}" alt="Campaign Image">
                     <h3>{{ campaign.name }}</h3>
                     <p>{{ campaign.points }} PTS | {{ campaign.location }}</p>
                     <p>{{ campaign.description }}</p>

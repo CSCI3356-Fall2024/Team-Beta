@@ -33,6 +33,9 @@
                             <td>{{ campaign.end_date }}</td>
                             <td>{{ campaign.location }}</td>
                             <td>{{ campaign.description }}</td>
+                            <td>
+                                <a href="{% url 'delete_campaign' campaign.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
                         </tr>
                         {% empty %}
                         <tr>

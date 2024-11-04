@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signup, login, rewards, supervisorrewards, add_reward, action, base, supervisor, landing, campaign_form, profile_setup, manage_supervisors
+from .views import signup, login, rewards, supervisorrewards, add_reward, action, base, supervisor, landing, campaign_form, profile_setup, manage_supervisors, confirm_delete
 
 urlpatterns = [
     path('',login, name='land'),
@@ -14,5 +14,7 @@ urlpatterns = [
     path('landing/', landing, name = 'landing'),
     path('campaign_form/', campaign_form, name = 'campaign_form'),
     path('profile_setup/', profile_setup, name = 'profile_setup'),
-    path('manage-supervisors/', manage_supervisors, name='manage_supervisors')
+    path('manage-supervisors/', manage_supervisors, name='manage_supervisors'),
+    path('confirm_delete/', confirm_delete, name='confirm_delete'),
+
 ]

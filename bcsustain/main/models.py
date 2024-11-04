@@ -38,6 +38,13 @@ class Campaign(models.Model):
     )
     add_to_news = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='campaign_images/', blank=True, null=True)
+
+    def get_image_url(self):
+        # If no image is uploaded, use the default image
+        if self.image:
+            return self.image.url
+        return '/static/green2go.png'  # Path to the default image in the static folder
 
     def __str__(self):
         return self.name
