@@ -53,6 +53,8 @@ def login(request):
             user = form.get_user()
             auth_login(request, user)
             return redirect('dashboard')  # Redirect to dashboard after login
+        else:
+            return render(request, 'login.html', {'form': form, 'error': 'Invalid username or password'})
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -275,7 +277,7 @@ def campaign_form(request):
         form = CampaignForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('campaign_form')  
+            return redirect('campaign_form')
     else:
         form = CampaignForm()
     return render(request, 'campaign_form.html', {'form': form})
