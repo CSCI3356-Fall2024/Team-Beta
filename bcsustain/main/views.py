@@ -261,10 +261,8 @@ def campaign_form(request):
         form = CampaignForm()
     return render(request, 'campaign_form.html', {'form': form})
 
-@user_passes_test(lambda u: u.is_superuser)
+#@login_required
 def delete_campaign(request, campaign_id):
     campaign = get_object_or_404(Campaign, id=campaign_id)
-    if request.method == 'POST':
-        campaign.delete()
-        return redirect('supervisor')  # Redirect back to the supervisor page
-    return render(request, 'confirm_delete.html', {'campaign': campaign})
+    campaign.delete()
+    return redirect('supervisor')

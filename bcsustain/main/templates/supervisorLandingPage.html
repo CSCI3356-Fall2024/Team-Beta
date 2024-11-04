@@ -34,7 +34,7 @@
                             <td>{{ campaign.location }}</td>
                             <td>{{ campaign.description }}</td>
                             <td>
-                                <a href="{% url 'delete_campaign' campaign.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="{% url 'delete_campaign' campaign.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this campaign?');">Delete</a>
                             </td>
                         </tr>
                         {% empty %}
