@@ -13,6 +13,7 @@ body {
 /* Header Section */
 header {
     background-color: #7FC242;
+    display: flex;  /* Ensure flex is applied for header */
     justify-content: space-between;
     align-items: center;
     text-align: center;
@@ -76,6 +77,19 @@ img[alt="Three bars"] {
 
 .navbar nav ul li a:hover {
     color: #ffcc00;  /* Optional hover effect for better UX */
+}
+
+/* Supervisor Navbar Styles */
+.supervisor-navbar {
+    background-color: #c23939; /* Change background color for supervisor mode */
+}
+
+.supervisor-navbar nav ul li {
+    color: yellow; /* Change text color for supervisor links */
+}
+
+.supervisor-navbar nav ul li a:hover {
+    color: #ffcc00; /* Maintain hover effect for supervisor mode */
 }
 
 /* Mobile Responsiveness */
