@@ -174,9 +174,12 @@ def is_superuser(user):
 #     return render(request, 'manage_supervisors.html', {'users': users})
 
 @user_passes_test(lambda u: u.is_superuser)
+
 def manage_supervisors(request):
-    # Ensure all users have a profile
+    # Ensure all users have a profile, linked to a User
     for user in User.objects.all():
+        Profile.objects.get_or_create(user=user)
+        # testing
         if not hasattr(user, 'profile'):
             Profile.objects.create(user=user)  # Only create if profile does not exist
 
@@ -185,21 +188,23 @@ def manage_supervisors(request):
 
     if request.method == 'POST':
         form = SupervisorForm(request.POST)
-        form.save()
         if form.is_valid():
             user_id = request.POST.get('user_id')
-            try:
-                user = User.objects.get(id=user_id)
-                is_supervisor_value = request.POST.get('is_supervisor') == 'True'
-                user.profile.is_supervisor = is_supervisor_value
-                user.profile.save()
-            except User.DoesNotExist:
-                print("User does not exist")
+            if user_id:  # Ensure user_id exists in POST data
+                try:
+                    user = User.objects.get(id=user_id)
+                    profile, created = Profile.objects.get_or_create(user=user)
+
+                    # Update the supervisor status
+                    is_supervisor_value = request.POST.get('is_supervisor') == 'True'
+                    profile.is_supervisor = is_supervisor_value
+                    profile.save()
+                except User.DoesNotExist:
+                    print("User does not exist")
 
             return redirect('manage_supervisors')
 
     return render(request, 'manage_supervisors.html', {'users': users})
-
 
 def profile_setup(request):
     return render(request, 'profile_setup.html')
