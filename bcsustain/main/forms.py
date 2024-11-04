@@ -20,8 +20,4 @@ class ProfileForm(forms.ModelForm):
 class CampaignForm(forms.ModelForm):
     class Meta:
         model = Campaign
-        fields = ['name', 'start_date', 'end_date', 'location', 'description', 'points', 'delivery_method', 'is_active']
-        widgets = {
-            'start_date': forms.DateInput(attrs={'type': 'date'}),
-            'end_date': forms.DateInput(attrs={'type': 'date'}),
-        }
+        fields = ['name', 'points', 'start_date', 'end_date', 'location', 'description', 'delivery_method', 'add_to_news']

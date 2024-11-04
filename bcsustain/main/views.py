@@ -12,6 +12,7 @@ from .forms import ProfileForm
 from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib.auth import logout as auth_logout
+from .forms import CampaignForm
 
 @login_required
 def profile_setup(request):
@@ -238,3 +239,13 @@ def campaign_form(request):
 
         return redirect('supervisor')  # Redirect to the supervisor page
     return render(request, 'campaign_form.html')
+
+def create_campaign(request):
+    if request.method == 'POST':
+        form = CampaignForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('campaign_form')  # Redirect to the campaign form page after saving the campaign
+    else:
+        form = CampaignForm()
+    return render(request, 'campaign_form.html', {'form': form})

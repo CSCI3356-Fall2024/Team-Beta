@@ -21,21 +21,23 @@ from django.apps import apps
 #     )
 
 class Campaign(models.Model):
-    name = models.CharField(max_length=100)
-    points = models.IntegerField()
+    name = models.CharField(max_length=255)
     start_date = models.DateField()
     end_date = models.DateField()
-    location = models.CharField(max_length=50)
+    location = models.CharField(max_length=255)
     description = models.TextField()
+    points = models.PositiveIntegerField(default=0)
     delivery_method = models.CharField(
-        max_length=20,
+        max_length=50,
         choices=[
             ('QR Code', 'QR Code'),
             ('Photo Validation', 'Photo Validation'),
-            ('Integration', 'Integration')
-        ]
+            ('Integration', 'Integration'),
+        ],
+        default='QR Code'
     )
     add_to_news = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -52,26 +54,6 @@ class Campaign(models.Model):
 #     def __str__(self):
 #         return f"{self.user.username}'s Profile"
 
-class Campaign(models.Model):
-    name = models.CharField(max_length=255)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    location = models.CharField(max_length=255)
-    description = models.TextField()
-    points = models.PositiveIntegerField(default=0)
-    delivery_method = models.CharField(
-        max_length=50,
-        choices=[
-            ('QR Code', 'QR Code'),
-            ('Photo Validation', 'Photo Validation'),
-            ('Integration', 'Integration'),
-        ],
-        default='QR Code'
-    )
-    is_active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.name
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
