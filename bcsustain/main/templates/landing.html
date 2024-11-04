@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block content %}
+<h1>Welcome, {{ request.user.username }}</h1>
+    <p>Your role is: {{ role }}</p>
 <main class="landing-page">
     <section class="leaderboard">
         <h2>Championship</h2>
@@ -23,7 +25,7 @@
     </section>
 
     <section class="events">
-        <h2>Events</h2>
+        <h2>Active Campaigns</h2>
         <div class="event-cards">
             {% for campaign in active_campaigns %}
                 <div class="event-card">
