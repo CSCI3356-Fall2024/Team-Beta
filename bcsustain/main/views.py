@@ -130,13 +130,10 @@ def landing(request):
     today = timezone.now().date()
     active_campaigns = Campaign.objects.filter(
         start_date__lte=today,
-        end_date__gte=today, ##for campaigns that are active
+        end_date__gte=today,
         add_to_news=True
     )
-    context = {
-        'active_campaigns': active_campaigns,
-    }
-    return render(request, 'landing.html', context)
+    return render(request, 'landing.html', {'active_campaigns': active_campaigns})
 
 def campaign_form(request):
     return render(request, 'campaign_form.html')
