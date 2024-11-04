@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
 from django.contrib.auth.models import User
 from .models import Profile
+from django.contrib.auth import logout as auth_logout
 
 @login_required
 def profile_setup(request):
@@ -24,6 +25,10 @@ def profile_setup(request):
     else:
         form = ProfileForm()
     return render(request, 'profile_setup.html', {'form': form})
+
+def logout(request):
+    auth_logout(request)
+    return redirect('login')  # Redirect to the login page after logout
 
 
 def signup(request):
