@@ -84,6 +84,10 @@ img[alt="Three bars"] {
     background-color: #c23939; /* Change background color for supervisor mode */
 }
 
+.supervisor {
+    background-color: #c23939; /* Change background color for supervisor mode */
+}
+
 .supervisor-navbar nav ul li {
     color: yellow; /* Change text color for supervisor links */
 }

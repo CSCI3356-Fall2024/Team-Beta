@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
 </head>
 <body>
-  <header>
+  <header class="{% if user.profile.is_supervisor %}supervisor{% endif %}">
     <div class="navbar supervisor-navbar">
           <div class="logo">
               <!-- Logo with a link to the landing page -->
