@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib.auth import logout as auth_logout
 from .forms import CampaignForm
+from django.utils import timezone
 
 @login_required
 def profile_setup(request):
@@ -126,7 +127,17 @@ def supervisor(request):
     return render(request, 'supervisorLandingPage.html', context)
 
 def landing(request):
-    return render(request, 'landing.html')
+    today = timezone.now().date()
+    active_campaigns = Campaign.objects.filter(
+        start_date__lte=today,
+        end_date__gte=today, ##for campaigns that are active
+        add_to_news=True
+    )
+    context = {
+        'active_campaigns': active_campaigns,
+    }
+    return render(request, 'landing.html', context)
+
 def campaign_form(request):
     return render(request, 'campaign_form.html')
 
@@ -216,36 +227,36 @@ def profile_setup(request):
     return render(request, 'profile_setup.html')
 
 
+# def campaign_form(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         points = request.POST.get('points')
+#         start_date = request.POST.get('start_date')
+#         end_date = request.POST.get('end_date')
+#         location = request.POST.get('location')
+#         description = request.POST.get('description')
+#         delivery_method = request.POST.get('delivery_method')
+#         add_to_news = request.POST.get('add_to_news') == 'on'
+
+#         # Save the campaign to the database
+#         Campaign.objects.create(
+#             name=name,
+#             start_date=start_date,
+#             end_date=end_date,
+#             location=location,
+#             description=description,
+#             is_active=True  # Mark campaign as active upon creation
+#         )
+
+#         return redirect('supervisor')  # Redirect to the supervisor page
+#     return render(request, 'campaign_form.html')
+
 def campaign_form(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        points = request.POST.get('points')
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
-        location = request.POST.get('location')
-        description = request.POST.get('description')
-        delivery_method = request.POST.get('delivery_method')
-        add_to_news = request.POST.get('add_to_news') == 'on'
-
-        # Save the campaign to the database
-        Campaign.objects.create(
-            name=name,
-            start_date=start_date,
-            end_date=end_date,
-            location=location,
-            description=description,
-            is_active=True  # Mark campaign as active upon creation
-        )
-
-        return redirect('supervisor')  # Redirect to the supervisor page
-    return render(request, 'campaign_form.html')
-
-def create_campaign(request):
     if request.method == 'POST':
         form = CampaignForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('campaign_form')  # Redirect to the campaign form page after saving the campaign
+            return redirect('campaign_form')  
     else:
         form = CampaignForm()
     return render(request, 'campaign_form.html', {'form': form})
