@@ -1,54 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <title>Manage Supervisors</title>
-    <link rel="stylesheet" href="{% static 'manage_supervisors.css' %}">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #7FC242;
-            color: white;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        select {
-            padding: 5px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-<nav>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Supervisor Setting</a></li>
-    </ul>
-</nav>
+{% block title %}
+    Manage Supervisors
+{% endblock %}
 
-<h2>Manage Supervisors</h2>
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'manage_supervisor.css' %}">
+{% endblock %}
 
+{% block content %}
 <table>
     <tr>
         <th>Username</th>
@@ -60,7 +21,7 @@
         <td>{{ user.username }}</td>
         <td>{{ user.profile.is_supervisor }}</td>
         <td>
-            <form method="POST"  action= "{% url 'manage_supervisors' %}" onsubmit="return confirm('Are you sure you want to update this supervisor status?');">
+            <form method="POST" action="{% url 'manage_supervisors' %}" onsubmit="return confirm('Are you sure you want to update this supervisor status?');">
                 {% csrf_token %}
                 <input type="hidden" name="user_id" value="{{ user.id }}">
                 <select name="is_supervisor">
@@ -73,10 +34,4 @@
     </tr>
     {% endfor %}
 </table>
-
-<footer>
-    <p>&copy; 2024 Your Company</p>
-</footer>
-
-</body>
-</html>
+{% endblock %}

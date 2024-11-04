@@ -1,0 +1,33 @@
+/* In static/css/manage_supervisors.css */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #7FC242;
+    color: white;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+select {
+    padding: 5px;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
