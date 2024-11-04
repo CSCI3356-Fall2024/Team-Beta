@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import user_passes_test
 from .models import Campaign
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
+from django.contrib.auth import login
+from django.contrib import messages
 
 @login_required
 def profile_setup(request):
@@ -36,14 +38,50 @@ def logout(request):
     return redirect('login')  # Redirect to the login page after logout
 
 
+# def signup(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('login')
+#     else:
+#         form = UserCreationForm()
+#     return render(request, 'signup.html', {'form': form})
+
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password_confirm = request.POST.get('password_confirm')
+
+        # Check if email ends with @bc.edu
+        if not email.endswith('@bc.edu'):
+            messages.error(request, "Please use a valid @bc.edu email address.")
+            return render(request, 'signup.html', {'form': form})
+
+        # Check if passwords match
+        if password != password_confirm:
+            messages.error(request, "Passwords do not match.")
+            return render(request, 'signup.html', {'form': form})
+
+        # Check if email already exists
+        if User.objects.filter(username=email).exists():
+            messages.error(request, "An account with this email already exists.")
+            return render(request, 'signup.html', {'form': form})
+
+        # If the form is valid, create and log in the user
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = User.objects.create_user(username=email, email=email, password=password)
+            user.save()
+            auth_login(request, user)
+            return redirect('landing')  # Redirect to a landing page or dashboard
+        else:
+            # If form is not valid, render form with errors
+            return render(request, 'signup.html', {'form': form})
     else:
-        form = UserCreationForm()
+        form = UserCreationForm()  # Initialize a blank form if it's a GET request
+
     return render(request, 'signup.html', {'form': form})
 
 def login(request):
