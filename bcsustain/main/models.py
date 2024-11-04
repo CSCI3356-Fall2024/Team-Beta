@@ -65,18 +65,6 @@ class Profile(models.Model):
          return bool(self.school and self.graduation_year and self.major1)
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    is_supervisor = models.BooleanField(default=False)
-    school = models.CharField(max_length=255)
-    graduation_year = models.IntegerField(blank=True, null=True)
-    major1 = models.CharField(max_length=255)
-    major2 = models.CharField(max_length=255, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.user.username}'s Profile"
-
 # Signal to create a Profile for each new User
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):

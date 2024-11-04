@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import signup, login, rewards, supervisorrewards, add_reward, action, base, supervisor, landing, campaign_form, profile_setup, manage_supervisors, delete_campaign
 from django.contrib.auth.views import LogoutView
 
@@ -18,4 +18,5 @@ urlpatterns = [
     path('profile_setup/', profile_setup, name = 'profile_setup'),
     path('manage-supervisors/', manage_supervisors, name='manage_supervisors'),
     path('campaign/delete/<int:campaign_id>/', delete_campaign, name='delete_campaign'),
+    path('auth/', include('social_django.urls', namespace='social')),
 ]
