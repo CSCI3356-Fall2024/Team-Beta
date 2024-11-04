@@ -127,8 +127,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "598151765783-hlmof392vhfsdorjsbva5dvt1qg0ikkb.apps.googleusercontent.com"
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
-# SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://localhost:8000/complete/google-oauth2/"
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://127.0.0.1:8000/complete/google-oauth2/" #jacob test
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://localhost:8000/complete/google-oauth2/"
+# SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://127.0.0.1:8000/complete/google-oauth2/" #jacob test
 SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['bc.edu']
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
 
