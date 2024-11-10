@@ -18,5 +18,5 @@ urlpatterns = [
     path('profile_setup/', profile_setup, name = 'profile_setup'),
     path('manage-supervisors/', manage_supervisors, name='manage_supervisors'),
     path('campaign/delete/<int:campaign_id>/', delete_campaign, name='delete_campaign'),
-    path('auth/', include('social_django.urls', namespace='social')),
+    path('auth/', include('social_django.urls', namespace='social2')),
 ]
