@@ -23,6 +23,7 @@ from django.contrib import messages
 @login_required
 def profile_setup(request):
     try:
+        # Retrieve the user's profile or create one if it doesn't exist
         profile = request.user.profile
     except Profile.DoesNotExist:
         profile = Profile.objects.create(user=request.user)
@@ -30,13 +31,14 @@ def profile_setup(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()
-            return redirect('landing')
+            form.save()  # Save the form data to the profile
+            return redirect('landing')  # Redirect to the landing page after saving
+        else:
+            print(form.errors)  # Debugging: Print form errors if it fails
     else:
-        form = ProfileForm(instance=profile)
+        form = ProfileForm(instance=profile)  # Prepopulate the form with existing data
 
     return render(request, 'profile_setup.html', {'form': form})
-
 
 def logout(request):
     auth_logout(request)

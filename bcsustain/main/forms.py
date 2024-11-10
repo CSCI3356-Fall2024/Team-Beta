@@ -16,9 +16,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['school', 'graduation_year', 'major1', 'major2', 'profile_picture']
-        widgets = {
-            'graduation_year': forms.NumberInput(attrs={'min': 2024, 'max': 2030}),
-        }
+
 
 class CampaignForm(forms.ModelForm):
     class Meta:

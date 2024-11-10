@@ -50,19 +50,19 @@ class Campaign(models.Model):
         return self.name
 
 class Profile(models.Model):
-     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-     is_supervisor = models.BooleanField(default=False)  # added by Jonathan
-     school = models.CharField(max_length=255)
-     graduation_year = models.IntegerField(blank=True, null=True)
-     major1 = models.CharField(max_length=255)
-     major2 = models.CharField(max_length=255, blank=True, null=True)
-     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_supervisor = models.BooleanField(default=False)
+    school = models.CharField(max_length=255, blank=True, null=True)
+    graduation_year = models.IntegerField(blank=True, null=True)
+    major1 = models.CharField(max_length=255, blank=True, null=True)
+    major2 = models.CharField(max_length=255, blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 
-     def __str__(self):
-         return f"{self.user.username}'s Profile"
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
 
-     def is_complete(self):
-         return bool(self.school and self.graduation_year and self.major1)
+    def is_complete(self):
+        return bool(self.school and self.graduation_year and self.major1)
 
 
 # Signal to create a Profile for each new User
