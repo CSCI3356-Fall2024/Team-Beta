@@ -22,16 +22,21 @@ from django.contrib import messages
 
 @login_required
 def profile_setup(request):
+    try:
+        profile = request.user.profile
+    except Profile.DoesNotExist:
+        profile = Profile.objects.create(user=request.user)
+
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('landing')  # Redirect to landing page after saving profile
+            form.save()
+            return redirect('landing')
     else:
-        form = ProfileForm()
+        form = ProfileForm(instance=profile)
+
     return render(request, 'profile_setup.html', {'form': form})
+
 
 def logout(request):
     auth_logout(request)
@@ -55,32 +60,29 @@ def signup(request):
         password = request.POST.get('password')
         password_confirm = request.POST.get('password_confirm')
 
-        # Check if email ends with @bc.edu
         if not email.endswith('@bc.edu'):
             messages.error(request, "Please use a valid @bc.edu email address.")
             return render(request, 'signup.html', {'form': form})
 
-        # Check if passwords match
         if password != password_confirm:
             messages.error(request, "Passwords do not match.")
             return render(request, 'signup.html', {'form': form})
 
-        # Check if email already exists
         if User.objects.filter(username=email).exists():
             messages.error(request, "An account with this email already exists.")
             return render(request, 'signup.html', {'form': form})
 
-        # If the form is valid, create and log in the user
         if form.is_valid():
             user = User.objects.create_user(username=email, email=email, password=password)
             user.save()
+
+            # Create an associated Profile
+            Profile.objects.create(user=user)
+
             auth_login(request, user)
-            return redirect('landing')  # Redirect to a landing page or dashboard
-        else:
-            # If form is not valid, render form with errors
-            return render(request, 'signup.html', {'form': form})
+            return redirect('landing')
     else:
-        form = UserCreationForm()  # Initialize a blank form if it's a GET request
+        form = UserCreationForm()
 
     return render(request, 'signup.html', {'form': form})
 
