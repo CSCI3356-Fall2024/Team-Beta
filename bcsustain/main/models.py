@@ -49,38 +49,59 @@ class Campaign(models.Model):
     def __str__(self):
         return self.name
 
+
+#commenting out previous profile code to make the new profile homogenous with Samary's code - Almany
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     is_supervisor = models.BooleanField(default=False)
+#     school = models.CharField(max_length=255, blank=True, null=True)
+#     graduation_year = models.IntegerField(blank=True, null=True)
+#     major1 = models.CharField(max_length=255, blank=True, null=True)
+#     major2 = models.CharField(max_length=255, blank=True, null=True)
+#     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+
+#     def __str__(self):
+#         return f"{self.user.username}'s Profile"
+
+#     def is_complete(self):
+#         return bool(self.school and self.graduation_year and self.major1)
+
+
+# # Signal to create a Profile for each new User
+
+
+# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+
+# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
+
+#New profile model based from Samary
+#I recognize that further changes may be required later on, especially to relevant HTML and CSS pages - Almany
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    is_supervisor = models.BooleanField(default=False)
-    school = models.CharField(max_length=255, blank=True, null=True)
-    graduation_year = models.IntegerField(blank=True, null=True)
-    major1 = models.CharField(max_length=255, blank=True, null=True)
-    major2 = models.CharField(max_length=255, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    #User is now an object
+    #Casacade allows for anything related to the user to be deleted. We want deleted data to be balanced. - Almany
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'profile')
+    #Name and email from google is saved here - Almany
+    google_username = models.CHarField(max_length=100, null = True, blank = True)
+    google_email = models.EmailField(unique= True, null = True, blank = True)
+    graduation_year = models.PostitiveIntegerField(null=True, blank = True)
 
     def __str__(self):
-        return f"{self.user.username}'s Profile"
+         return f"{self.user.username}'s Profile"
 
-    def is_complete(self):
-        return bool(self.school and self.graduation_year and self.major1)
-
-
-# Signal to create a Profile for each new User
-from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_user_profile(sender, instance, created, **kwargs):
+@receiver(post_save,sender=User)
+def create_or_update_user_profile(sender, instance, creaeted, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+    else:
+        instance.profile.save() #if the user already exists, the profile is saved
 
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
-
-
-
+#Will code below be relevant? - Almany
 #delete probably
 def get_profile(user):
     Profile = apps.get_model('main', 'Profile')  # Dynamically get the Profile model
