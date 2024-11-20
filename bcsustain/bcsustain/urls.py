@@ -18,8 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path('', include('social_django.urls', namespace='social')),
+    path('admin/', admin.site.urls),  # Admin panel
+    path('accounts/', include('allauth.urls')),  # Allauth URLs
+    path('', include('main.urls')),  # Your app URLs
 ]
+
 
