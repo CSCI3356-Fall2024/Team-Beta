@@ -13,7 +13,7 @@ from datetime import datetime
 class SupervisorForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['is_supervisor']
+        fields = ['google_username', 'google_email', 'graduation_year']
 
 # class ProfileForm(forms.ModelForm):
 #     class Meta:
@@ -21,16 +21,16 @@ class SupervisorForm(forms.ModelForm):
 #         fields = ['school', 'graduation_year', 'major1', 'major2', 'profile_picture']
 
 class ProfileForm(forms.ModelForm):
-    current_year = datetime.now().current_year
+    current_year = datetime.now().year
     YEAR_CHOICES=[('', 'Select Year')] + [(year,year) for year in range(current_year, current_year +10)]
     graduation_year = forms.ChoiceField(
         choices = YEAR_CHOICES,
-        initital = current_year+1,
+        initial = current_year+1,
         widget=forms.Select(attrs={'class':'form-select'})
     )
     class Meta:
         model = Profile
-        fields = ['name', 'graduation_year']
+        fields = ['google_username', 'google_email', 'graduation_year']
 
 class CampaignForm(forms.ModelForm):
     class Meta:

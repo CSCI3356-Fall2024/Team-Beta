@@ -18,4 +18,4 @@ class CampaignAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'graduation_year', 'is_supervisor')
+    list_display = ('user', 'google_username', 'graduation_year')  # Removed 'is_supervisor' to fix

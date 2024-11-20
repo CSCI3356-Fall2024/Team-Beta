@@ -87,9 +87,9 @@ class Profile(models.Model):
     #Casacade allows for anything related to the user to be deleted. We want deleted data to be balanced. - Almany
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'profile')
     #Name and email from google is saved here - Almany
-    google_username = models.CHarField(max_length=100, null = True, blank = True)
+    google_username = models.CharField(max_length=100, null = True, blank = True)
     google_email = models.EmailField(unique= True, null = True, blank = True)
-    graduation_year = models.PostitiveIntegerField(null=True, blank = True)
+    graduation_year = models.PositiveIntegerField(null=True, blank = True)
 
     def __str__(self):
          return f"{self.user.username}'s Profile"
