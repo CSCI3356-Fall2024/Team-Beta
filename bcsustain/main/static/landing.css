@@ -39,7 +39,7 @@ body {
 /* Leaderboard Section */
 .leaderboard {
 
-    max-width: 25%;
+    min-width: 25%;
     min-height: 400px;
     background-color: white;
     padding: 20px;
