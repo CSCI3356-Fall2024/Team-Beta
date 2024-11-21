@@ -13,7 +13,6 @@ body {
 /* Header Section */
 header {
     background-color: #7FC242;
-    display: flex;  /* Ensure flex is applied for header */
     justify-content: space-between;
     align-items: center;
     text-align: center;
