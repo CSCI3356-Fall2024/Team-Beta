@@ -97,6 +97,7 @@ img[alt="Three bars"] {
     img[alt="Three bars"] {
         width: 25px;  /* Adjust icon size for mobile */
         height: auto;
+        margin-right:0;
     }
 
     .navbar nav ul {
