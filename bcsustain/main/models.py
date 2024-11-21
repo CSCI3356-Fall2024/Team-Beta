@@ -95,14 +95,14 @@ class Profile(models.Model):
          return f"{self.user.username}'s Profile"
     
     def is_complete(self):
-        return self.google_username and self.google_email and self.graduation_year is not None
+        return bool(self.google_username and self.google_email and self.graduation_year)
 
 @receiver(post_save,sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
-    else:
-        instance.profile.save() #if the user already exists, the profile is saved
+        Profile.objects.get_or_create(user=instance)
+    #else:
+        #instance.profile.save() #if the user already exists, the profile is saved
 
 #Will code below be relevant? - Almany
 #delete probably

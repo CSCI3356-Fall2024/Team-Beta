@@ -19,6 +19,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib import messages
+from allauth.socialaccount.models import SocialAccount
 
 @login_required
 def profile_setup(request):
@@ -175,17 +176,21 @@ def supervisor(request):
 
 #@login_required
 def landing(request):
-    # Check if the user is authenticated and their profile is complete
-    if request.user.is_authenticated:
-        profile = getattr(request.user, 'profile', None)
-        if profile and not profile.is_complete():
-            # Redirect to profile setup if incomplete
-            return redirect('profile_setup')
+    # If the user is not authenticated, redirect them to the login page
+    if not request.user.is_authenticated:
+        return redirect('login')
 
-        # Determine the user's role (Supervisor or Student) if logged in
-        role = "Supervisor" if profile and profile.is_supervisor else "Student"
-    else:
-        role = "Not Logged in. For Testing"  # Not logged in
+    # Get the user's profile if it exists
+    profile = getattr(request.user, 'profile', None)
+
+    # Check if the user logged in with Google and if their profile is incomplete
+    google_account = SocialAccount.objects.filter(user=request.user, provider='google').exists()
+
+    if google_account and profile and not profile.is_complete():
+        return redirect('profile_setup')
+
+    # Determine the user's role (Supervisor or Student) if logged in
+    role = "Supervisor" if profile and getattr(profile, 'is_supervisor', False) else "Student"
 
     # Get active campaigns for today
     today = timezone.now().date()
