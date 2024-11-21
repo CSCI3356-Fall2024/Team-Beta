@@ -382,6 +382,6 @@ def redeem_reward(request, reward_id):
     return redirect('rewards')
 
 def rewards(request):
-    rewards = Reward.objects.filter(is_active=True)
-    redeemed_rewards = RedeemedReward.objects.filter(user=request.user)
+    redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
+    rewards = Reward.objects.filter(available=True)  # or however you're querying rewards
     return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})

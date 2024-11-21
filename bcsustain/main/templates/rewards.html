@@ -17,6 +17,9 @@
             <h2>Points</h2>
             <p class="all-time-score">All-time Score: 74 PTS</p>
             <ul>
+                {% for redeemed in redeemed_rewards %}
+                <li><span>{{ redeemed.redeemed_at|date:"F j, Y, g:i a" }}</span> {{ redeemed.reward.name }}<span class="points-value">{{ redeemed.points_spent }} pts</span>
+                {% endfor %}
                 <li><span>09/27/24</span> Volunteer <span class="points-value">20 pts</span></li>
                 <li><span>09/27/24</span> Conference <span class="points-value">18 pts</span></li>
                 <li><span>09/27/24</span> Green2go Return <span class="points-value">12 pts</span></li>
@@ -70,6 +73,7 @@
         </td>
     </tr>
     {% endfor %}
+
 </table>
 
     </section>
