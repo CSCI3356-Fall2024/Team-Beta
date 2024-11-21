@@ -23,6 +23,7 @@ from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth import logout
 from .forms import RewardForm
 from .models import RedeemedReward, Reward
+from django.contrib.auth import authenticate
 
 @login_required
 def profile_setup(request):
@@ -91,6 +92,18 @@ def signup(request):
         form = UserCreationForm()
 
     return render(request, 'signup.html', {'form': form})
+
+#def custom_login(request):   OMER ADDED THIS. JUST LEAVE IT FOR NOW. TRYING TO MAKE OUR LOGIN NOT GO TO THE DJANGO DEFAULT
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('landing')  # Redirect to the landing page after successful login
+        else:
+            return render(request, 'login.html', {'error': 'Invalid email or password'})  # Display error message
+    return render(request, 'login.html')  # Render the login template for GET requests
 
 def login(request):
     if request.method == 'POST':
