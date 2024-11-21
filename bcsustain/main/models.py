@@ -90,9 +90,10 @@ class Profile(models.Model):
     google_username = models.CharField(max_length=100, null = True, blank = True)
     google_email = models.EmailField(unique= True, null = True, blank = True)
     graduation_year = models.PositiveIntegerField(null=True, blank = True)
+    points = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-         return f"{self.user.username}'s Profile"
+        return f"{self.user.username}'s Profile - {self.points} points"
     
     def is_complete(self):
         return bool(self.google_username and self.google_email and self.graduation_year)
@@ -113,3 +114,22 @@ def get_profile(user):
 
 # Attach this property to User
 User.add_to_class('profile', property(get_profile))
+
+#Jacob added this
+class Reward(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    points_required = models.PositiveIntegerField()
+    available = models.BooleanField(default=True)
+    expiration_date = models.DateField(null=True, blank=True)  # Add this line
+
+    def is_available(self):
+        from django.utils.timezone import now
+        if not self.available:
+            return False
+        if self.expiration_date and self.expiration_date < now().date():
+            return False
+        return True
+
+    def __str__(self):
+        return self.name

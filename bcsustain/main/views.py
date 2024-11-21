@@ -21,6 +21,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth import logout
+from .forms import RewardForm
 
 @login_required
 def profile_setup(request):
@@ -111,11 +112,18 @@ def supervisorrewards(request):
 
 def add_reward(request):
     if request.method == 'POST':
-        # Logic for adding the reward (e.g., save to database)
-        # For now, you can simply redirect back to the supervisor rewards page after processing.
-        return redirect('supervisorrewards')
+        form = RewardForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Reward added successfully!")
+            #return redirect('supervisorrewards')  # Redirect to the supervisor rewards page
+            return redirect('rewards')
+        else:
+            messages.error(request, "There was an error adding the reward. Please check the form.")
     else:
-        return HttpResponse("Invalid request method", status=400)
+        form = RewardForm()
+    
+    return render(request, 'add_reward.html', {'form': form})
 
 
 def action(request):
@@ -335,3 +343,39 @@ def delete_campaign(request, campaign_id):
     campaign = get_object_or_404(Campaign, id=campaign_id)
     campaign.delete()
     return redirect('supervisor')
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Reward, Profile
+
+
+
+# Jacob Added this
+@login_required
+def rewards(request):
+    rewards = Reward.objects.filter(available=True)  # Query available rewards
+    return render(request, 'rewards.html', {'rewards': rewards})
+
+@login_required
+def redeem_reward(request, reward_id):
+    reward = get_object_or_404(Reward, id=reward_id)
+    user_profile = Profile.objects.get(user=request.user)
+
+    # Check if the reward is available
+    if not reward.is_available():
+        messages.error(request, "This reward is not available or has expired.")
+        return redirect('rewards_list')
+
+    # Check if the user has enough points
+    if user_profile.points < reward.points_required:
+        messages.error(request, "You do not have enough points to redeem this reward.")
+        return redirect('rewards_list')
+
+    # Deduct points and save
+    user_profile.points -= reward.points_required
+    user_profile.save()
+
+    # Success message
+    messages.success(request, f"You successfully redeemed {reward.name}!")
+    return redirect('rewards_list')

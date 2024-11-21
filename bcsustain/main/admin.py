@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 #from .models import CustomUser
-from .models import Campaign, Profile 
+from .models import Campaign, Profile, Reward
 
 """
 # Register your models here.
@@ -19,3 +19,7 @@ class CampaignAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'google_username', 'graduation_year')  # Removed 'is_supervisor' to fix
+
+@admin.register(Reward)
+class RewardAdmin(admin.ModelAdmin):
+    list_display = ('name', 'points_required', 'available')
