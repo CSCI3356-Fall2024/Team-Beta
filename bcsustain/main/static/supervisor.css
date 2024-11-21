@@ -24,7 +24,7 @@ h1 {
     font-size: 36px;
     text-align: center;
     color: #5b882c;
-    margin: 25px;
+    margin: 25px 0;
     width: 100%;  /* Ensure the h1 takes full width */
     display: block;
 }

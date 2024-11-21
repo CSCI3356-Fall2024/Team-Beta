@@ -27,9 +27,8 @@
     {% endblock %}
 
   {% block footer %}
-  <footer>
-      <p>&copy; 2024 BC Sustain. All rights reserved.</p>
-  </footer>
+  <link rel="stylesheet" href="{% static 'footer.css' %}">
+    {% include 'footer.html' %}
   {% endblock %}
 </body>
 </html>
