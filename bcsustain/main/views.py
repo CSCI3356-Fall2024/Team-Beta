@@ -22,6 +22,7 @@ from django.contrib import messages
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth import logout
 from .forms import RewardForm
+from .models import RedeemedReward, Reward
 
 @login_required
 def profile_setup(request):
@@ -365,12 +366,12 @@ def redeem_reward(request, reward_id):
     # Check if the reward is available
     if not reward.is_available():
         messages.error(request, "This reward is not available or has expired.")
-        return redirect('rewards_list')
+        return redirect('rewards')
 
     # Check if the user has enough points
     if user_profile.points < reward.points_required:
         messages.error(request, "You do not have enough points to redeem this reward.")
-        return redirect('rewards_list')
+        return redirect('rewards')
 
     # Deduct points and save
     user_profile.points -= reward.points_required
@@ -378,4 +379,9 @@ def redeem_reward(request, reward_id):
 
     # Success message
     messages.success(request, f"You successfully redeemed {reward.name}!")
-    return redirect('rewards_list')
+    return redirect('rewards')
+
+def rewards(request):
+    rewards = Reward.objects.filter(is_active=True)
+    redeemed_rewards = RedeemedReward.objects.filter(user=request.user)
+    return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})
