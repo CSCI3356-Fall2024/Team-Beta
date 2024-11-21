@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import (
     signup, login, rewards, supervisorrewards, add_reward, action, base, 
     supervisor, landing, campaign_form, profile_setup, manage_supervisors, 
-    delete_campaign, logout_view, redeem_reward
+    delete_campaign, logout_view, redeem_reward,
 )
 from django.contrib.auth.views import LogoutView
 from django.contrib import admin

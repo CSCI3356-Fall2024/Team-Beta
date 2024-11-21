@@ -122,14 +122,19 @@ class Reward(models.Model):
     points_required = models.PositiveIntegerField()
     available = models.BooleanField(default=True)
     expiration_date = models.DateField(null=True, blank=True)  # Add this line
-
+    is_active = models.BooleanField(default=True)  # Ensure this field exists
     def is_available(self):
-        from django.utils.timezone import now
-        if not self.available:
-            return False
-        if self.expiration_date and self.expiration_date < now().date():
-            return False
-        return True
+        from django.utils import timezone
+        return self.is_active and (self.expiration_date is None or self.expiration_date >= timezone.now().date())
+
 
     def __str__(self):
         return self.name
+    
+class RedeemedReward(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='redeemed_rewards')
+    reward = models.ForeignKey(Reward, on_delete=models.CASCADE, related_name='redemptions')
+    redeemed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} redeemed {self.reward.name} on {self.redeemed_at}"
