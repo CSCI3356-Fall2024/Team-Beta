@@ -32,6 +32,9 @@
             <h2>Redeem</h2>
             <p class="balance">Balance: 60 PTS</p>
             <ul>
+                {% for reward in rewards %}
+                <li>{{ reward.name }}<span class="points-value">{{ reward.points_required }} pts</span></li>
+                {% endfor %}
                 <li>Gold Pass <span class="points-value">20 pts</span></li>
                 <li>5k Ticket <span class="points-value">18 pts</span></li>
                 <li>Merch <span class="points-value">12 pts</span></li>
@@ -43,6 +46,32 @@
                 <li>Phone Case <span class="points-value">3 pts</span></li>
             </ul>
         </div>
+    </section>
+    <section>
+        <h1>Testing!!!</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Points Required</th>
+        <th>Action</th>
+    </tr>
+    {% for reward in rewards %}
+    <tr>
+        <td>{{ reward.name }}</td>
+        <td>{{ reward.description }}</td>
+        <td>{{ reward.points_required }}</td>
+        <td>{{ reward.expiration_date }}</td>
+        <td>
+            <form method="POST" action="{% url 'redeem_reward' reward.id %}">
+                {% csrf_token %}
+                <button type="submit">Redeem</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
     </section>
 </main>
 {% endblock %}

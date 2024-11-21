@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import (
     signup, login, rewards, supervisorrewards, add_reward, action, base, 
     supervisor, landing, campaign_form, profile_setup, manage_supervisors, 
-    delete_campaign, logout_view
+    delete_campaign, logout_view, redeem_reward
 )
 from django.contrib.auth.views import LogoutView
 from django.contrib import admin
@@ -13,6 +13,7 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('logout/', logout_view, name='logout'),
     path('rewards/', rewards, name='rewards'),
+    path('rewards/redeem/<int:reward_id>/', redeem_reward, name='redeem_reward'),
     path('supervisorrewards/', supervisorrewards, name='supervisorrewards'),
     path('add_reward/', add_reward, name='add_reward'),
     path('action/', action, name='action'),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('auth/', include('allauth.urls')), 
     path('admin/', admin.site.urls), # Django Admin
     path('accounts/', include('allauth.urls')),# Allauth URLs
+    path('rewards/add/', add_reward, name='add_reward'),
 ]
