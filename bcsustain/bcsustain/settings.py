@@ -30,7 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-SITE_ID = 1  # This corresponds to the professor's setup
+SITE_ID = 2  # This corresponds to the professor's setup
 
 INSTALLED_APPS = [
     "django.contrib.admin",
