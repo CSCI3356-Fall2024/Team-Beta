@@ -28,20 +28,21 @@ from django.contrib.auth import authenticate
 @login_required
 def profile_setup(request):
     try:
-        # Retrieve the user's profile or create one if it doesn't exist
-        profile = request.user.profile
+        # Retrieve or create the user's profile
+        profile, created = Profile.objects.get_or_create(user=request.user)
     except Profile.DoesNotExist:
         profile = Profile.objects.create(user=request.user)
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        form = ProfileForm(request.POST, instance=profile)  # Bind POST data to form
         if form.is_valid():
             form.save()  # Save the form data to the profile
-            return redirect('landing')  # Redirect to the landing page after saving
+            messages.success(request, "Profile updated successfully!")  # Add success message
+            return redirect('landing')  # Redirect to the landing page
         else:
-            print(form.errors)  # Debugging: Print form errors if it fails
+            messages.error(request, "There was an error updating your profile.")  # Add error message
     else:
-        form = ProfileForm(instance=profile)  # Prepopulate the form with existing data
+        form = ProfileForm(instance=profile)  # Prepopulate the form with existing profile data
 
     return render(request, 'profile_setup.html', {'form': form})
 
