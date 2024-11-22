@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block title %}
+    Add Rewards Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'add_reward.css' %}">
+{% endblock %}
+<!-- <head>
+    <link rel="stylesheet" href="{% static 'add_reward.css' %}">
+</head> -->
 {% block content %}
-<h1>Add a New Reward</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add Reward</button>
-</form>
+<div>
+    <h1>Add a New Reward</h1>
+</div>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Reward</button>
+    </form>
+</div>
+
 {% endblock %}
 
