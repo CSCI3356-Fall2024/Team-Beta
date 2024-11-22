@@ -13,7 +13,6 @@ from .models import Profile
 from django.contrib.auth import logout as auth_logout
 from .forms import CampaignForm
 from django.utils import timezone
-from django.contrib.auth.decorators import user_passes_test
 from .models import Campaign
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
@@ -399,3 +398,16 @@ def rewards(request):
     redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
     rewards = Reward.objects.filter(available=True)  # or however you're querying rewards
     return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})
+
+# @user_passes_test(lambda u: u.is_superuser)  # Restrict access to superusers
+def delete_rewards(request):
+    rewards = Reward.objects.all()
+
+    if request.method == 'POST':
+        reward_id = request.POST.get('reward_id')
+        reward = get_object_or_404(Reward, id=reward_id)
+        reward.delete()
+        messages.success(request, f"Reward '{reward.name}' has been deleted.")
+        return redirect('delete_rewards')  # Refresh the manage rewards page
+
+    return render(request, 'delete_rewards.html', {'rewards': rewards})
