@@ -94,7 +94,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile - {self.points} points"
-    
+
     def is_complete(self):
         return bool(self.google_username and self.google_email and self.graduation_year)
 
@@ -130,7 +130,7 @@ class Reward(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 class RedeemedReward(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='redeemed_rewards')
     reward = models.ForeignKey(Reward, on_delete=models.CASCADE, related_name='redemptions')
@@ -139,3 +139,9 @@ class RedeemedReward(models.Model):
 
     def __str__(self):
         return f"{self.user.username} redeemed {self.reward.name} on {self.redeemed_at}"
+
+
+
+
+
+        
