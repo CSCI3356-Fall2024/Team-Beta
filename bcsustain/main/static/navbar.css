@@ -37,7 +37,6 @@ img[alt="Three bars"] {
 }
 
 img[alt="Profile Pic"] {
-    width: 50px; /* Set a fixed width */
     height: 50px; /* Set a fixed height */
     object-fit: cover; /* Ensures the image scales correctly within the bounds */
     padding-left: 20px;
