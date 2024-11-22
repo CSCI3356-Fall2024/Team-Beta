@@ -36,6 +36,16 @@ img[alt="Three bars"] {
     height: auto;
 }
 
+img[alt="Profile Pic"] {
+    width: 50px; /* Set a fixed width */
+    height: 50px; /* Set a fixed height */
+    border-radius: 50%; /* Makes it circular */
+    object-fit: cover; /* Ensures the image scales correctly within the bounds */
+    padding-left: 20px;
+}
+
+
+
 /* Navbar navigation */
 .navbar nav {
     display: flex;
