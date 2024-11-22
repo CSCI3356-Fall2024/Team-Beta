@@ -10,8 +10,11 @@
 {% endblock %}
 
 {% block content %}
-<h1>Welcome, {{ request.user.username }}</h1>
-    <p>Your role is: {{ role }}</p>
+<div id="landing-welcome">
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <p>Your role is: <span>{{ role }}</span></p>
+</div>
+
 <main class="landing-page">
     <section class="leaderboard">
         <h2>Championship</h2>
@@ -41,4 +44,3 @@
     </section>
 </main>
 {% endblock %}
-
