@@ -91,6 +91,7 @@ class Profile(models.Model):
     google_email = models.EmailField(unique= True, null = True, blank = True)
     graduation_year = models.PositiveIntegerField(null=True, blank = True)
     points = models.PositiveIntegerField(default=0)
+    is_supervisor = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username}'s Profile - {self.points} points"
