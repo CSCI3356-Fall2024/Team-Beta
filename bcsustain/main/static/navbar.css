@@ -43,6 +43,20 @@ img[alt="Profile Pic"] {
     padding-left: 20px;
 }
 
+.profile-link {
+    display: inline-block; /* Ensures the link wraps only around the image */
+    text-decoration: none; /* Removes any default underline styling */
+}
+
+.profile-link img {
+    transition: transform 0.2s ease; /* Optional: Adds a hover effect */
+}
+
+.profile-link img:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+
 
 
 /* Navbar navigation */
