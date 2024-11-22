@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block title %}
+    Add Rewards Page
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'add_reward.css' %}">
+{% endblock %}
+<!-- <head>
+    <link rel="stylesheet" href="{% static 'add_reward.css' %}">
+</head> -->
 {% block content %}
 <h1>Add a New Reward</h1>
 <form method="POST">
