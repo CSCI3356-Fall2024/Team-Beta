@@ -10,21 +10,22 @@
 {% endblock %}
 
 {% block content %}
-
-<header class="welcome-header">
+<div id="landing-welcome">
     <h1>Welcome, {{ request.user.username }}</h1>
-    <p>Your role is: {{ role }}</p>
-</header>
+    <p>Your role is: <span>{{ role }}</span></p>
+</div>
 
 <main class="landing-page">
     <section class="leaderboard">
-        <h2>Championship</h2>
+        <h2>Leaderboard</h2>
         <ul class="leaderboard-list">
-            <li><span class="highlight-dot"></span> Lewis Hamilton - 104 pts</li>
-            <li><span class="highlight-dot"></span> Michele Mouton - 100 pts</li>
-            <li><span class="highlight-dot"></span> Max Verstappen - 95 pts</li>
-            <li><span class="highlight-dot"></span> Yuki Tsunoda - 90 pts</li>
-            <li><span class="highlight-dot"></span> Zhou Guanyu - 90 pts</li>
+            {% for profile in leaderboard %}
+                <li>
+                    <span class="highlight-dot"></span> {{ profile.user.username }} - {{ profile.points }} pts
+                </li>
+            {% empty %}
+                <li>No leaderboard data available</li>
+            {% endfor %}
         </ul>
     </section>
 

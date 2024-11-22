@@ -89,3 +89,72 @@ h2 {
 .negative {
     color: red;
 }
+
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures compact borders */
+    margin-top: 30px;
+    background-color: #fff; /* White background for table */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for table */
+}
+
+table th, table td {
+    text-align: left; /* Align content to the left */
+    padding: 15px; /* Padding for cell content */
+    border-bottom: 1px solid #ddd; /* Separator for rows */
+    font-size: 16px;
+}
+
+table th {
+    background-color: #5b882c; /* Green header */
+    color: white; /* White text for header */
+    text-transform: uppercase; /* Capitalized text for headers */
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light background for alternate rows */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+table td {
+    color: #333; /* Text color for cells */
+}
+
+/* Button Styling for Table */
+button {
+    background-color: #5b882c; /* Green button */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4e7320; /* Darker green on hover */
+}
+
+/* Alert Messages */
+.alert {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.alert.alert-success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+}
+
+.alert.alert-error {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+}
