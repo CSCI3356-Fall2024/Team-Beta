@@ -25,6 +25,8 @@ from .models import RedeemedReward, Reward
 from django.contrib.auth import authenticate
 from .models import Event
 
+
+
 @login_required
 def profile_setup(request):
     try:
@@ -214,13 +216,17 @@ def landing(request):
         end_date__gte=today,
         add_to_news=True
     )
+    #leaderboard - Almany
+    leaderboard = Profile.objects.order_by('-points')[:5]
+
 
     # Pass the active campaigns and role to the template
     return render(request, 'landing.html', {
         'active_campaigns': active_campaigns,
         'role': role,
+        'leaderboard': leaderboard,
     })
-
+      
 def campaign_form(request):
     return render(request, 'campaign_form.html')
 
