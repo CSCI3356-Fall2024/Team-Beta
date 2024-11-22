@@ -77,19 +77,18 @@
         </p>
     </section>
     <div class="events-container">
-        {% for volunteer in volunteer_work %}
+        {% for event in events %}
             <section class="events">
                 <div class="events-image">
-                    <img src="{% static volunteer.image %}" alt="Event Image"
-                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
+                    <img src="{% static 'noimage.png' %}" alt="Event Image" />
                     <button class="pin-icon" onclick="togglePin(this)">
                         <img src="{% static 'pin.png' %}" alt="Pin Icon" />
                     </button>
                 </div>
                 <div class="events-info">
-                    <h2 class="name">{{ volunteer.name }}</h2>
-                    <p class="points">Points: {{ volunteer.points }}pts</p>
-                    <p class="date">Time: {{ volunteer.date }}</p>
+                    <h2 class="name">{{ event.name }}</h2>
+                    <p class="points">Points: {{ event.points }}pts</p>
+                    <p class="date">Time: {{ event.date }}</p>
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
                     </div>
