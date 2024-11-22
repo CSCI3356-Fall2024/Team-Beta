@@ -13,7 +13,6 @@ from .models import Profile
 from django.contrib.auth import logout as auth_logout
 from .forms import CampaignForm
 from django.utils import timezone
-from django.contrib.auth.decorators import user_passes_test
 from .models import Campaign
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
@@ -23,25 +22,29 @@ from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth import logout
 from .forms import RewardForm
 from .models import RedeemedReward, Reward
+from django.contrib.auth import authenticate
 
 @login_required
 def profile_setup(request):
     try:
-        # Retrieve the user's profile or create one if it doesn't exist
         profile = request.user.profile
     except Profile.DoesNotExist:
+        print("Profile does not exist. Creating one...")
         profile = Profile.objects.create(user=request.user)
 
     if request.method == 'POST':
+        print("POST request received.")
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()  # Save the form data to the profile
-            return redirect('landing')  # Redirect to the landing page after saving
+            print("Form is valid. Saving profile...")
+            form.save() 
+            return redirect('landing') #redirect to landing
         else:
-            print(form.errors)  # Debugging: Print form errors if it fails
+            print(f"Form errors: {form.errors}")  # Debugging omer
     else:
-        form = ProfileForm(instance=profile)  # Prepopulate the form with existing data
+        form = ProfileForm(instance=profile) 
 
+    print("Rendering profile setup page.")
     return render(request, 'profile_setup.html', {'form': form})
 
 def logout_view(request):
@@ -91,6 +94,18 @@ def signup(request):
         form = UserCreationForm()
 
     return render(request, 'signup.html', {'form': form})
+
+#def custom_login(request):   OMER ADDED THIS. JUST LEAVE IT FOR NOW. TRYING TO MAKE OUR LOGIN NOT GO TO THE DJANGO DEFAULT
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('landing')  # Redirect to the landing page after successful login
+        else:
+            return render(request, 'login.html', {'error': 'Invalid email or password'})  # Display error message
+    return render(request, 'login.html')  # Render the login template for GET requests
 
 def login(request):
     if request.method == 'POST':
@@ -301,8 +316,6 @@ def manage_supervisors(request):
 
     return render(request, 'manage_supervisors.html', {'users': users})
 
-def profile_setup(request):
-    return render(request, 'profile_setup.html')
 
 
 # def campaign_form(request):
@@ -385,3 +398,16 @@ def rewards(request):
     redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
     rewards = Reward.objects.filter(available=True)  # or however you're querying rewards
     return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})
+
+# @user_passes_test(lambda u: u.is_superuser)  # Restrict access to superusers
+def delete_rewards(request):
+    rewards = Reward.objects.all()
+
+    if request.method == 'POST':
+        reward_id = request.POST.get('reward_id')
+        reward = get_object_or_404(Reward, id=reward_id)
+        reward.delete()
+        messages.success(request, f"Reward '{reward.name}' has been deleted.")
+        return redirect('delete_rewards')  # Refresh the manage rewards page
+
+    return render(request, 'delete_rewards.html', {'rewards': rewards})

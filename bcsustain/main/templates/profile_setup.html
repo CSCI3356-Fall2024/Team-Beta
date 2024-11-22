@@ -18,8 +18,9 @@
             <input type="file" id="profile-pic-input" name="profile_picture" accept="image/*" style="display: none;">
         </div>
 
-        <form method="POST" action="{% url 'profile_setup' %}">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'profile_setup' %}">
             {% csrf_token %}
+            {{ form.as_p }} <!-- Django form rendering -->
             <div class="form-group">
                 <label for="school">School</label>
                 <input type="text" id="school" name="school" required placeholder="e.g., Boston College">
