@@ -390,11 +390,28 @@ def redeem_reward(request, reward_id):
     messages.success(request, f"You successfully redeemed {reward.name}!")
     return redirect('rewards')
 
+# def rewards(request):
+#     redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
+#     rewards = Reward.objects.filter(available=True)  # or however you're querying rewards
+#     return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})
 def rewards(request):
-    redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
-    rewards = Reward.objects.filter(available=True)  # or however you're querying rewards
-    return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})
+    # Get the current user's profile
+    user_profile = Profile.objects.get(user=request.user)
 
+    # Query available rewards
+    rewards = Reward.objects.filter(available=True)
+
+    # Query redeemed rewards for the current user
+    redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
+
+    # Pass points balance and all-time score to the template
+    context = {
+        'rewards': rewards,
+        'redeemed_rewards': redeemed_rewards,
+        'all_time_score': user_profile.points,  # Use Profile.points for all-time score
+        'balance': user_profile.points,  # Assuming this reflects the remaining balance
+    }
+    return render(request, 'rewards.html', context)
 # @user_passes_test(lambda u: u.is_superuser)  # Restrict access to superusers
 def delete_rewards(request):
     rewards = Reward.objects.all()
