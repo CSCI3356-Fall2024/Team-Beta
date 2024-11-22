@@ -28,21 +28,24 @@ from django.contrib.auth import authenticate
 @login_required
 def profile_setup(request):
     try:
-        # Retrieve the user's profile or create one if it doesn't exist
         profile = request.user.profile
     except Profile.DoesNotExist:
+        print("Profile does not exist. Creating one...")
         profile = Profile.objects.create(user=request.user)
 
     if request.method == 'POST':
+        print("POST request received.")
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()  # Save the form data to the profile
-            return redirect('landing')  # Redirect to the landing page after saving
+            print("Form is valid. Saving profile...")
+            form.save() 
+            return redirect('landing') #redirect to landing
         else:
-            print(form.errors)  # Debugging: Print form errors if it fails
+            print(f"Form errors: {form.errors}")  # Debugging omer
     else:
-        form = ProfileForm(instance=profile)  # Prepopulate the form with existing data
+        form = ProfileForm(instance=profile) 
 
+    print("Rendering profile setup page.")
     return render(request, 'profile_setup.html', {'form': form})
 
 def logout_view(request):
@@ -314,8 +317,6 @@ def manage_supervisors(request):
 
     return render(request, 'manage_supervisors.html', {'users': users})
 
-def profile_setup(request):
-    return render(request, 'profile_setup.html')
 
 
 # def campaign_form(request):
