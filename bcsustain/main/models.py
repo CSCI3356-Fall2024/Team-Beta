@@ -140,3 +140,13 @@ class RedeemedReward(models.Model):
 
     def __str__(self):
         return f"{self.user.username} redeemed {self.reward.name} on {self.redeemed_at}"
+
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    date = models.DateTimeField()
+    points = models.PositiveIntegerField(default=0)
+    description = models.TextField()
+    image = models.ImageField(upload_to='event_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name

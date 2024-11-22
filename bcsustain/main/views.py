@@ -23,6 +23,7 @@ from django.contrib.auth import logout
 from .forms import RewardForm
 from .models import RedeemedReward, Reward
 from django.contrib.auth import authenticate
+from .models import Event
 
 @login_required
 def profile_setup(request):
@@ -152,20 +153,9 @@ def action(request):
         'image': 'green2go.png'
     }
     ]
-    events = [
-        {
-            'name': 'Sustainability Talk',
-            'points': 10,
-            'date': '01/01/2024',
-            'image': 'noimage.png'
-        },
-        {
-            'name': 'Climate Change Webinar',
-            'points': 20,
-            'date': '02/01/2024',
-            'image': 'noimage.png'
-        }
-        ]
+
+    # Get all event objects
+    events = Event.objects.all()
 
     volunteer_work = [
         {
