@@ -1,7 +1,7 @@
 footer {
   background-color: #7FC242;
   background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
-  background-size: 30px 30px; /* Adjust the size of the background image */
+  background-size: 40px 40px; /* Adjust the size of the background image */
   background-position: calc(100% - 20px) center; /* Position the image on the far right */
   background-repeat: no-repeat; /* Ensure the image does not repeat */
   height: 70px;
