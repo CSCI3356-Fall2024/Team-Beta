@@ -15,7 +15,7 @@
     <section class="rewards-container">
         <div class="points">
             <h2>Points</h2>
-            <p class="all-time-score">All-time Score: 74 PTS</p>
+            <p class="all-time-score">All-time Score: {{ all_time_score }} PTS</p>
             <ul>
                 {% for redeemed in redeemed_rewards %}
                 <li><span>{{ redeemed.redeemed_at|date:"F j, Y, g:i a" }}</span> {{ redeemed.reward.name }}<span class="points-value">{{ redeemed.points_spent }} pts</span>
@@ -33,49 +33,40 @@
         </div>
         <div class="redeem">
             <h2>Redeem</h2>
-            <p class="balance">Balance: 60 PTS</p>
+            <p class="balance">Balance: {{ balance }} PTS</p>
             <ul>
                 {% for reward in rewards %}
                 <li>{{ reward.name }}<span class="points-value">{{ reward.points_required }} pts</span></li>
                 {% endfor %}
-                <li>Gold Pass <span class="points-value">20 pts</span></li>
-                <li>5k Ticket <span class="points-value">18 pts</span></li>
-                <li>Merch <span class="points-value">12 pts</span></li>
-                <li>Skip-day <span class="points-value">10 pts</span></li>
-                <li>Go Karting <span class="points-value">4 pts</span></li>
-                <li>Resume <span class="points-value">4 pts</span></li>
-                <li>Panel Guest <span class="points-value">4 pts</span></li>
-                <li>Dining Coupon <span class="points-value">3 pts</span></li>
-                <li>Phone Case <span class="points-value">3 pts</span></li>
+                
             </ul>
         </div>
     </section>
     <section>
-        <h1>Testing!!!</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Points Required</th>
-        <th>Action</th>
-    </tr>
-    {% for reward in rewards %}
-    <tr>
-        <td>{{ reward.name }}</td>
-        <td>{{ reward.description }}</td>
-        <td>{{ reward.points_required }}</td>
-        <td>{{ reward.expiration_date }}</td>
-        <td>
-            <form method="POST" action="{% url 'redeem_reward' reward.id %}">
-                {% csrf_token %}
-                <button type="submit">Redeem</button>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-
-</table>
-
+        <h1>Redeem</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Points Required</th>
+                <th>Expiration Date</th>
+                <th>Action</th>
+            </tr>
+            {% for reward in rewards %}
+            <tr>
+                <td>{{ reward.name }}</td>
+                <td>{{ reward.description }}</td>
+                <td>{{ reward.points_required }}</td>
+                <td>{{ reward.expiration_date }}</td>
+                <td>
+                    <form method="POST" action="{% url 'redeem_reward' reward.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Redeem</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </section>
     {% if messages %}
     <div class="messages">
