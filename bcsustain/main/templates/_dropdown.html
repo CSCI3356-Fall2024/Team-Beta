@@ -1,0 +1,12 @@
+<ul class="dropdown-menu">
+    <li><a href="{% url 'landing' %}">Home (Landing)</a></li>
+    <li><a href="{% url 'action' %}">Action</a></li>
+    <li><a href="{% url 'supervisor' %}">Campaigns</a></li>
+    {% if is_supervisor %}
+        <li><a href="{% url 'campaign_form' %}">Create a Campaign (Campaign Form)</a></li>
+        <li><a href="{% url 'manage_supervisors' %}">Manage Supervisors</a></li>
+        <li><a href="{% url 'supervisorrewards' %}">Manage Rewards (Supervisor Rewards)</a></li>
+        <li><a href="{% url 'add_reward' %}">Add Reward</a></li>
+    {% endif %}
+    <li><a href="{% url 'rewards' %}">Rewards</a></li>
+</ul>

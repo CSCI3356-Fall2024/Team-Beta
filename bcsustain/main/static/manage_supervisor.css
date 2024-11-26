@@ -1,9 +1,8 @@
 /* In static/css/manage_supervisors.css */
 
 table {
-    width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 20px 20px;
     font-size: 18px;
 }
 th, td {

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 #from .models import CustomUser
-from .models import Campaign, Profile, Reward
+from .models import Campaign, Profile, Reward, Event
 
 """
 # Register your models here.
@@ -23,3 +23,7 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(Reward)
 class RewardAdmin(admin.ModelAdmin):
     list_display = ('name', 'points_required', 'available')
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date', 'points')

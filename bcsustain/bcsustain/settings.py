@@ -71,6 +71,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",  # Required by allauth
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'main.context_processors.add_is_supervisor',  # Ensure this line is present
+
             ],
         },
     },

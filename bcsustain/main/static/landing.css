@@ -12,7 +12,7 @@ body {
 
 .welcome-header {
     margin: 20px 20px;
-    padding: 20px, 20px;
+    padding: 0 0;
     text-align: left;
     background-color: #f4f4f4; /* Light gray background */
 }
@@ -41,10 +41,14 @@ body {
 
     min-width: 25%;
     min-height: 400px;
+    max-height: 400px; /* Restrict the height of the leaderboard */
+
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Add vertical scrolling */
+
 }
 
 .leaderboard h2 {
@@ -66,6 +70,10 @@ body {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 .highlight-dot {
@@ -78,7 +86,8 @@ body {
 
 /* Events Section */
 .events {
-    flex: 2;
+    min-width: 50%;
+    margin: 0 5px;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -89,7 +98,6 @@ body {
     color: black;
     font-size: 2em;
     margin-bottom: 15px;
-    padding: auto;
 }
 
 .event-cards {

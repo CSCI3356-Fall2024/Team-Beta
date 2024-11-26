@@ -5,31 +5,46 @@
     <title>BC Sustain Landing</title>
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
 </head>
+<!-- Debugging -->
+
 <body>
   <header>
-    <div class="navbar {% if is_supervisor %}supervisor-navbar{% else %}regular-navbar{% endif %}">
-          <div class="logo">
-              <!-- Logo with a link to the landing page -->
-              <a href="{% url 'landing' %}" class="logo-link">
-                  <img src="{% static 'bc_feed_your_mind.png' %}"
-                  alt="BC Dining Logo"
-                  class="BC-Dining-Logo">
-              </a>
-          </div>
-          <nav id="topbar">
-              <ul>
-                  <li><a href="{% url 'rewards' %}">Rewards</a></li>
-                  <li><a href="{% url 'action' %}">Action</a></li>
-                  <li><a href="{% url 'supervisor' %}">Supervisor</a></li>
-                  <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
-
-              </ul>
-          </nav>
-          <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image">
-          <a href="{% url 'profile_setup' %}" class="profile-link">
-              <img src="{% static 'default_profile_pic.png' %}" alt="Profile Pic" class="nav-right-image">
-          </a>
-
-      </div>
+    <!-- Apply supervisor-navbar class if user is a supervisor -->
+    <div class="navbar {% if is_supervisor %}supervisor-navbar{% endif %}">
+        <div class="logo">
+            <!-- Logo with a link to the landing page -->
+            <a href="{% url 'landing' %}" class="logo-link">
+                <img src="{% static 'bc_feed_your_mind.png' %}" alt="BC Dining Logo" class="BC-Dining-Logo">
+            </a>
+        </div>
+        <nav id="navbar">
+            <ul>
+              {% if is_supervisor %}
+                  <li><a href="{% url 'campaign_form' %}">Create a Campaign</a></li>
+                  <li><a href="{% url 'manage_supervisors' %}">Manage Supervisors</a></li>
+                  <li><a href="{% url 'supervisorrewards' %}">Manage Rewards</a></li>
+                  <li><a href="{% url 'add_reward' %}">Add Reward</a></li>
+              {% else %}
+                <li><a href="{% url 'rewards' %}">Rewards</a></li>
+                <li><a href="{% url 'action' %}">Action</a></li>
+                <li><a href="{% url 'supervisor' %}">Campaigns</a></li>
+                <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
+              {% endif %}
+            </ul>
+        </nav>
+        <div class="dropdown">
+            <img src="{% static '3bars.png' %}" alt="Three bars" class="nav-right-image dropdown-toggle" onclick="toggleDropdown()">
+            {% include '_dropdown.html' %}
+        </div>
+        <a href="{% url 'profile_setup' %}" class="profile-link">
+            <img src="{% static 'default_profile_pic.png' %}" alt="Profile Pic" class="nav-right-image">
+        </a>
+    </div>
   </header>
+  <script>
+    function toggleDropdown() {
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        dropdownMenu.classList.toggle('show');
+    }
+  </script>
 </body>

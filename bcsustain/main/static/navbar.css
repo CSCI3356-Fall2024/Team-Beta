@@ -22,7 +22,6 @@ header {
 .navbar .logo {
     display: flex;
     align-items: center;
-    margin-right: auto;
 }
 
 img[alt="BC Dining Logo"] {
@@ -35,6 +34,54 @@ img[alt="Three bars"] {
     height: auto;
 }
 
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align below the three bars */
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+}
+
+/* Dropdown menu items */
+.dropdown-menu li {
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Toggle menu display on click */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Profile Picture Styling */
 img[alt="Profile Pic"] {
     height: 50px; /* Set a fixed height */
     object-fit: cover; /* Ensures the image scales correctly within the bounds */
@@ -53,9 +100,6 @@ img[alt="Profile Pic"] {
 .profile-link img:hover {
     transform: scale(1.1); /* Slight zoom on hover */
 }
-
-
-
 
 /* Navbar navigation */
 .navbar nav {
@@ -95,10 +139,7 @@ img[alt="Profile Pic"] {
 /* Supervisor Navbar Styles */
 .supervisor-navbar {
     background-color: #c23939; /* Change background color for supervisor mode */
-}
-
-.supervisor {
-    background-color: #c23939; /* Change background color for supervisor mode */
+    color: yellow; /* Supervisor-specific text color */
 }
 
 .supervisor-navbar nav ul li {
@@ -107,6 +148,19 @@ img[alt="Profile Pic"] {
 
 .supervisor-navbar nav ul li a:hover {
     color: #ffcc00; /* Maintain hover effect for supervisor mode */
+}
+
+/* Supervisor Dropdown Styling */
+.supervisor-navbar .dropdown-menu {
+    background-color: #f9f2f2; /* Slightly different background for supervisors */
+}
+
+.supervisor-navbar .dropdown-menu li a {
+    color: #333; /* Override specific link colors */
+}
+
+.supervisor-navbar .dropdown-menu li a:hover {
+    background-color: #ffecec; /* Light hover effect for supervisors */
 }
 
 /* Mobile Responsiveness */
@@ -118,7 +172,7 @@ img[alt="Profile Pic"] {
     img[alt="Three bars"] {
         width: 25px;  /* Adjust icon size for mobile */
         height: auto;
-        margin-right:0;
+        margin-right: 0;
     }
 
     .navbar nav ul {
