@@ -96,7 +96,7 @@ def signup(request):
 
     return render(request, 'signup.html', {'form': form})
 
-#def custom_login(request):   OMER ADDED THIS. JUST LEAVE IT FOR NOW. TRYING TO MAKE OUR LOGIN NOT GO TO THE DJANGO DEFAULT
+def custom_login(request):   #OMER ADDED THIS. JUST LEAVE IT FOR NOW. TRYING TO MAKE OUR LOGIN NOT GO TO THE DJANGO DEFAULT
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')

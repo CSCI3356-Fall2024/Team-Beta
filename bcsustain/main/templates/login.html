@@ -12,7 +12,7 @@
 {% block content %}
   <main class="container">
     <h1>Login</h1>
-    <form method="POST" action="{% url 'login' %}">
+    <form method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         <div>
             <label for="email">Email Address (@bc.edu)</label>
@@ -26,7 +26,7 @@
     </form>
     <a href="#">Forgot password?</a>
     <div class="google-signin">
-        <a href="{% url 'account_login' %}">
+        <a href="/accounts/google/login/">
             <button>Sign in with Google</button>
         </a>
     </div>
