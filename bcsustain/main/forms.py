@@ -4,7 +4,7 @@ from .models import Profile
 from .models import Profile
 from .models import Campaign
 from django.core.exceptions import ValidationError #code inspired from Samary
-from datetime import datetime 
+from datetime import datetime
 from .models import Reward
 
 
@@ -30,7 +30,7 @@ class ProfileForm(forms.ModelForm):
     )
     class Meta:
         model = Profile
-        fields = ['google_username', 'google_email', 'graduation_year']
+        fields = ['google_username', 'google_email', 'graduation_year', 'profile_picture']
 
 class CampaignForm(forms.ModelForm):
     class Meta:

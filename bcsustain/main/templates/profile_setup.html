@@ -10,46 +10,101 @@
 {% endblock %}
 
 {% block content %}
-    <main class="container">
-        <h1>Profile</h1>
-        <div class="profile-picture">
-            <img src="{% static 'default_profile_pic.png' %}" alt="Profile Picture" id="profile-pic">
+<main class="container">
+    <h1>Profile</h1>
+    <div class="profile-picture">
+        <!-- Profile picture display with default fallback -->
+        <img
+            src="{{ profile_picture_url }}"
+            alt="Profile Picture"
+            id="profile-pic">
+
+
+        <div class="dropdown">
             <button class="edit-pic-button" title="Edit">✏️</button>
-            <input type="file" id="profile-pic-input" name="profile_picture" accept="image/*" style="display: none;">
+            <div class="dropdown-menu" style="display: none;">
+                <!-- Replace Photo Button -->
+                <button class="dropdown-item" id="replace-photo">Replace Photo</button>
+
+                <!-- Delete Photo Button wrapped in a form -->
+                <form method="POST" action="{% url 'profile_setup' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" name="delete_picture" class="dropdown-item" id="delete-photo">Delete Photo</button>
+                </form>
+            </div>
         </div>
+        <!-- Hidden input for uploading a new file -->
+        <input type="file" id="profile-pic-input" name="profile_picture" accept="image/*" style="display: none;">
+    </div>
 
-        <form method="POST" enctype="multipart/form-data" action="{% url 'profile_setup' %}">
-            {% csrf_token %}
-            {{ form.as_p }} <!-- Django form rendering -->
-            <div class="form-group">
-                <label for="school">School</label>
-                <input type="text" id="school" name="school" required placeholder="e.g., Boston College">
-            </div>
-            <div class="form-group">
-                <label for="graduation-year">Year of Graduation</label>
-                <input type="number" id="graduation-year" name="graduation_year" required min="2024" max="2030" placeholder="e.g., 2025">
-            </div>
-            <div class="form-group">
-                <label for="major1">Primary Major</label>
-                <input type="text" id="major1" name="major1" required placeholder="e.g., Computer Science">
-            </div>
-            <div class="form-group">
-                <label for="major2">Secondary Major (Optional)</label>
-                <input type="text" id="major2" name="major2" placeholder="e.g., Finance">
-            </div>
-            <button type="submit">Save Profile</button>
-        </form>
-    </main>
-  {% endblock %}
+    <form method="POST" enctype="multipart/form-data" action="{% url 'profile_setup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group">
+            <label for="school">School</label>
+            <input type="text" id="school" name="school" value="{{ profile.school }}" required placeholder="e.g., Boston College">
+        </div>
+        <div class="form-group">
+            <label for="graduation-year">Year of Graduation</label>
+            <input type="number" id="graduation-year" name="graduation_year" value="{{ profile.graduation_year }}" required min="2024" max="2030" placeholder="e.g., 2025">
+        </div>
+        <div class="form-group">
+            <label for="major1">Primary Major</label>
+            <input type="text" id="major1" name="major1" value="{{ profile.major1 }}" required placeholder="e.g., Computer Science">
+        </div>
+        <div class="form-group">
+            <label for="major2">Secondary Major (Optional)</label>
+            <input type="text" id="major2" name="major2" value="{{ profile.major2 }}" placeholder="e.g., Finance">
+        </div>
+        <button type="submit">Save Profile</button>
+    </form>
+</main>
 
-    <script>
-        document.querySelector('.edit-pic-button').addEventListener('click', () => {
-            document.getElementById('profile-pic-input').click();
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const editButton = document.querySelector('.edit-pic-button');
+        const dropdownMenu = editButton.closest('.dropdown').querySelector('.dropdown-menu');
+        const replacePhotoButton = document.getElementById('replace-photo');
+        const deletePhotoButton = document.getElementById('delete-photo'); // Corrected selector
+        const profilePicInput = document.getElementById('profile-pic-input');
+        const profilePic = document.getElementById('profile-pic');
+        const navbarProfilePic = document.getElementById('navbar-profile-pic'); // Navbar profile pic
+
+
+        // Toggle dropdown menu
+        editButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent event from bubbling to the document
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
-        document.getElementById('profile-pic-input').addEventListener('change', (event) => {
+
+        // Handle Replace Photo
+        replacePhotoButton.addEventListener('click', () => {
+            profilePicInput.click(); // Open file input dialog
+        });
+
+        // Update profile picture preview after file upload
+        profilePicInput.addEventListener('change', (event) => {
             const [file] = event.target.files;
             if (file) {
-                document.getElementById('profile-pic').src = URL.createObjectURL(file);
+                profilePic.src = URL.createObjectURL(file);
+                dropdownMenu.style.display = 'none'; // Hide dropdown
             }
         });
-    </script>
+
+        // Handle Delete Photo
+        deletePhotoButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent form submission
+            profilePic.src = "{% static 'default_profile_pic.png' %}"; // Reset to default image
+            deletePhotoButton.closest('form').submit(); // Submit the form to handle deletion on the backend
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.dropdown')) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+{% endblock %}

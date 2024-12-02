@@ -37,7 +37,10 @@
             {% include '_dropdown.html' %}
         </div>
         <a href="{% url 'profile_setup' %}" class="profile-link">
-            <img src="{% static 'default_profile_pic.png' %}" alt="Profile Pic" class="nav-right-image">
+          <img
+              src="{{ profile_picture_url }}"
+              alt="Profile Pic"
+              id="profile-pic">
         </a>
     </div>
   </header>

@@ -27,26 +27,38 @@ from django.contrib.auth import authenticate
 
 @login_required
 def profile_setup(request):
-    try:
-        profile = request.user.profile
-    except Profile.DoesNotExist:
-        print("Profile does not exist. Creating one...")
-        profile = Profile.objects.create(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    profile_picture_url = profile.profile_picture.url if profile.profile_picture else '/static/default_profile_pic.png'
+
 
     if request.method == 'POST':
-        print("POST request received.")
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            print("Form is valid. Saving profile...")
-            form.save() 
-            return redirect('landing') #redirect to landing
-        else:
-            print(f"Form errors: {form.errors}")  # Debugging omer
-    else:
-        form = ProfileForm(instance=profile) 
 
-    print("Rendering profile setup page.")
-    return render(request, 'profile_setup.html', {'form': form})
+        if 'delete_picture' in request.POST:
+            profile.reset_profile_picture(save=False)
+            profile.profile_picture = None
+            profile.save()
+            messages.success(request, "Profile picture removed successfully.")
+            return redirect('profile_setup')
+
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+
+        if form.is_valid():
+            print("FORM IS VALID")
+            form.save()
+            profile.refresh_from_db()
+            messages.success(request, "Profile updated successfully.")
+            return redirect('landing')
+        else:
+            messages.error(request, "There was an error updating your profile. Please try again.")
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'profile_setup.html', {
+        'form': form,
+        'profile': profile,
+        'profile_picture_url': profile_picture_url,
+    })
 
 def logout_view(request):
     logout(request)
@@ -139,7 +151,7 @@ def add_reward(request):
             messages.error(request, "There was an error adding the reward. Please check the form.")
     else:
         form = RewardForm()
-    
+
     return render(request, 'add_reward.html', {'form': form})
 
 

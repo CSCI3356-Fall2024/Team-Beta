@@ -32,6 +32,7 @@ img[alt="BC Dining Logo"] {
 img[alt="Three bars"] {
     width: 30px;  /* Smaller, more responsive size */
     height: auto;
+    margin-right: 20px;
 }
 
 /* Dropdown container */
@@ -83,9 +84,12 @@ img[alt="Three bars"] {
 
 /* Profile Picture Styling */
 img[alt="Profile Pic"] {
+
     height: 50px; /* Set a fixed height */
+    width: 50px;
     object-fit: cover; /* Ensures the image scales correctly within the bounds */
-    padding-left: 20px;
+    border-radius: 50%; /* Circular shape */
+
 }
 
 .profile-link {

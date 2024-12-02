@@ -72,6 +72,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'main.context_processors.add_is_supervisor',  # Ensure this line is present
+                'main.context_processors.add_profile_picture',  # Add this line
 
             ],
         },
@@ -159,3 +160,28 @@ ACCOUNT_EMAIL_REQUIRED = True  # Ensure email is required
 ACCOUNT_UNIQUE_EMAIL = True  # Enforce unique email
 SOCIALACCOUNT_AUTO_SIGNUP = True  # Enable automatic account creation
 SOCIALACCOUNT_LOGIN_ON_GET = True  # Login without confirmation screen
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',  # Adjust this as needed (e.g., DEBUG, WARNING)
+            'propagate': True,
+        },
+        '__main__': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # Captures debug messages for your app
+            'propagate': True,
+        },
+    },
+}
