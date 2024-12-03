@@ -10,27 +10,21 @@
   {% endblock %}
 </head>
 <body>
-  <div class="wrapper">
-    <header>
-      {% if user.is_authenticated %}
-        {% include 'navbar.html' %} <!-- Include navbar for all authenticated users -->
-      {% else %}
-        {% include 'navbar.html' %} <!-- Include same navbar for unauthenticated users -->
-      {% endif %}
-    </header>
+  <header>
+    {% if user.is_authenticated %}
+      {% include 'navbar.html' %}  <!-- Include navbar for all authenticated users -->
+    {% else %}
+      {% include 'navbar.html' %}  <!-- Include same navbar for unauthenticated users -->
+    {% endif %}
+  </header>
 
-    <main>
-      {% block content %}
-      <!-- Default content or placeholder -->
-      {% endblock %}
-    </main>
+  {% block content %}
+  <!-- Default content or placeholder -->
+  {% endblock %}
 
-    <footer>
-      <link rel="stylesheet" href="{% static 'footer.css' %}">
-      {% block footer %}
-        {% include 'footer.html' %}
-      {% endblock %}
-    </footer>
-  </div>
+  {% block footer %}
+  <link rel="stylesheet" href="{% static 'footer.css' %}">
+    {% include 'footer.html' %}
+  {% endblock %}
 </body>
 </html>

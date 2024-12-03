@@ -1,30 +1,37 @@
 footer {
   background-color: #7FC242;
-  padding: 10px 20px;
-  align-items: center; /* Center items vertically */
-  position: relative; /* Allow for precise positioning */
-  color: white;
-}
-
-.footer-content {
-  display: flex;
-  align-items: center; /* Vertically center the content */
-  justify-content: space-between; /* Center the text horizontally in the footer */
-  width: 100%; /* Make content span the full width */
-  position: relative; /* Allow absolute positioning of the image */
+  background-image: url("https://cdn.glitch.global/25842671-f156-4ca4-bbd6-4e98595aac9f/4db8fd2e-af1d-464b-b0e5-3612f1733640.image.png?v=1729466529701");
+  background-size: 40px 40px; /* Adjust the size of the background image */
+  background-position: calc(100% - 20px) center; /* Position the image on the far right */
+  background-repeat: no-repeat; /* Ensure the image does not repeat */
+  height: 70px;
+  padding: 0 20px; /* Add horizontal padding */
+  display: flex; /* Use Flexbox for layout */
+  justify-content: center; /* Center the text horizontally */
+  align-items: center; /* Center the text vertically */
+  color: white; /* Text color */
 }
 
 .footer-text {
-  text-align: center; /* Center-align the text */
-  flex: 1; /* Allow the text to take up remaining space */
+  text-align: center; /* Center the text */
+  flex: 1; /* Ensure the text takes available space */
 }
 
-.footer-image {
-  right: 20px; /* Align the image to the far right */
-  align-items: center;
+footer p {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem; /* Adjust text size */
 }
 
-.footer-image img {
-  max-height: 40px; /* Restrict the image height */
-  width: auto; /* Maintain aspect ratio */
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  footer {
+    background-size: 20px 20px; /* Adjust image size for mobile */
+    background-position: calc(100% - 10px) center; /* Adjust image position for smaller screens */
+    padding: 0 10px; /* Reduce padding */
+  }
+
+  footer p {
+    font-size: 0.9rem; /* Adjust text size */
+  }
 }

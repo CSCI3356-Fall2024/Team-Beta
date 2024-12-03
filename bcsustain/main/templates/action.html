@@ -11,60 +11,123 @@
 
 {% block content %}
 <main class="action-page">
+    <!-- Daily Ongoing Tasks -->
     <section>
-        <h1>Active Campaigns</h1>
+        <h1>Daily Ongoing Tasks</h1>
         <p class="lead text-body-secondary">
-            These are the campaigns available today that you can participate in to earn points.
+            These tasks have no deadlines and can be completed multiple times throughout the school year!
         </p>
     </section>
     <div class="events-container">
-        {% for campaign in active_campaigns %}
+        {% for task in ongoing_tasks %}
             <section class="events">
                 <div class="events-image">
-                    <img src="{{ campaign.get_image_url }}" alt="Campaign Image"
-                         onerror="this.onerror=null; this.src='{% static 'green2go.png' %}';" />
+                    <img src="{% static task.image %}" alt="Event Image"
+                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
+                    <button class="pin-icon" onclick="togglePin(this)">
+                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
+                    </button>
                 </div>
                 <div class="events-info">
-                    <h2 class="name">{{ campaign.name }}</h2>
-                    <p class="points">Points: {{ campaign.points }}pts</p>
-                    <p class="date">Campaign Dates: {{ campaign.start_date }} to {{ campaign.end_date }}</p>
+                    <h2 class="name">{{ task.name }}</h2>
+                    <p class="points">Points: {{ task.points }}pts</p>
+                    <p class="date">Time: {{ task.time }}</p>
                     <div class="btn-group">
-                        <!-- Complete button to gain points -->
-                        <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="showPopup({{ campaign.points }}); return false;">Complete</button>
-                        </form>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
                     </div>
                 </div>
             </section>
-        {% empty %}
-            <p>No active campaigns at this time.</p>
         {% endfor %}
     </div>
-</main>
 
-<!-- Success Popup Modal -->
-<div id="popup-modal" class="popup-modal" style="display: none;">
-    <div class="popup-content">
-        <p id="popup-message"></p>
-        <button onclick="closePopup()">Close</button>
+    <!-- Events and Speakers -->
+    <section>
+        <h1>Events and Speakers</h1>
+        <p class="lead text-body-secondary">
+            We invite students to come to these informational events about sustainability!
+        </p>
+    </section>
+    <div class="events-container">
+        {% for event in events %}
+            <section class="events">
+                <div class="events-image">
+                    <img src="{% static event.image %}" alt="Event Image"
+                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
+                    <button class="pin-icon" onclick="togglePin(this)">
+                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
+                    </button>
+                </div>
+                <div class="events-info">
+                    <h2 class="name">{{ event.name }}</h2>
+                    <p class="points">Points: {{ event.points }}pts</p>
+                    <p class="date">Time: {{ event.date }}</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
     </div>
-</div>
 
+    <!-- Volunteer Work -->
+    <section>
+        <h1>Volunteer Work</h1>
+        <p class="lead text-body-secondary">
+            Here are some opportunities for students to volunteer!
+        </p>
+    </section>
+    <div class="events-container">
+        {% for event in events %}
+            <section class="events">
+                <div class="events-image">
+                    <img src="{% static 'noimage.png' %}" alt="Event Image" />
+                    <button class="pin-icon" onclick="togglePin(this)">
+                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
+                    </button>
+                </div>
+                <div class="events-info">
+                    <h2 class="name">{{ event.name }}</h2>
+                    <p class="points">Points: {{ event.points }}pts</p>
+                    <p class="date">Time: {{ event.date }}</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+
+    <!-- Team and Individual Challenges -->
+    <section>
+        <h1>Team and Individual Challenges</h1>
+        <p class="lead text-body-secondary">
+            There are currently no challenges available!
+        </p>
+    </section>
+</main>
 {% endblock %}
 
 {% block scripts %}
     <script>
-        // Function to display the popup with the points
-        function showPopup(points) {
-            const popupMessage = document.getElementById('popup-message');
-            popupMessage.innerText = `You have gained ${points} points!`;
-            document.getElementById('popup-modal').style.display = 'block';
+        function togglePin(button) {
+            button.classList.toggle("pinned");
+            const img = button.querySelector('img');
+            if (button.classList.contains("pinned")) {
+                img.src = "{% static 'pinned-icon.png' %}";
+            } else {
+                img.src = "{% static 'pin.png' %}";
+            }
+            const isPinned = button.classList.contains("pinned");
+            localStorage.setItem("pinnedState", isPinned);
         }
 
-        // Function to close the popup
-        function closePopup() {
-            document.getElementById('popup-modal').style.display = 'none';
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const pinState = localStorage.getItem("pinnedState");
+            const pinButton = document.querySelector(".pin-icon");
+            if (pinState === "true") {
+                pinButton.classList.add("pinned");
+                pinButton.querySelector('img').src = "{% static 'pinned-icon.png' %}";
+            }
+        });
     </script>
 {% endblock %}
