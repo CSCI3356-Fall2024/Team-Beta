@@ -19,23 +19,8 @@
             alt="Profile Picture"
             id="profile-pic">
 
-
-        <div class="dropdown">
-            <button class="edit-pic-button" title="Edit">✏️</button>
-            <div class="dropdown-menu" style="display: none;">
-                <!-- Replace Photo Button -->
-                <button class="dropdown-item" id="replace-photo">Replace Photo</button>
-
-                <!-- Delete Photo Button wrapped in a form -->
-                <form method="POST" action="{% url 'profile_setup' %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" name="delete_picture" class="dropdown-item" id="delete-photo">Delete Photo</button>
-                </form>
-            </div>
-        </div>
-        <!-- Hidden input for uploading a new file -->
-        <input type="file" id="profile-pic-input" name="profile_picture" accept="image/*" style="display: none;">
     </div>
+
 
     <form method="POST" enctype="multipart/form-data" action="{% url 'profile_setup' %}">
         {% csrf_token %}
@@ -50,61 +35,33 @@
         </div>
         <div class="form-group">
             <label for="major1">Primary Major</label>
-            <input type="text" id="major1" name="major1" value="{{ profile.major1 }}" required placeholder="e.g., Computer Science">
+            <input type="text" id="major1" name="major1" value="{{ profile.major1 }}" required placeholder="e.g., Computer Science"> <!-- Primary Major -->
         </div>
         <div class="form-group">
             <label for="major2">Secondary Major (Optional)</label>
-            <input type="text" id="major2" name="major2" value="{{ profile.major2 }}" placeholder="e.g., Finance">
+            <input type="text" id="major2" name="major2" value="{{ profile.major2 }}" placeholder="e.g., Finance"> <!-- Secondary Major -->
         </div>
         <button type="submit">Save Profile</button>
     </form>
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const editButton = document.querySelector('.edit-pic-button');
-        const dropdownMenu = editButton.closest('.dropdown').querySelector('.dropdown-menu');
-        const replacePhotoButton = document.getElementById('replace-photo');
-        const deletePhotoButton = document.getElementById('delete-photo'); // Corrected selector
-        const profilePicInput = document.getElementById('profile-pic-input');
-        const profilePic = document.getElementById('profile-pic');
-        const navbarProfilePic = document.getElementById('navbar-profile-pic'); // Navbar profile pic
+  document.addEventListener('DOMContentLoaded', () => {
+      const chooseFile = document.getElementById('choose-file');
+      const profilePic = document.getElementById('profile-pic');
+      const navbarProfilePic = document.getElementById('navbar-profile-pic'); // For navbar if exists
 
-
-        // Toggle dropdown menu
-        editButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent event from bubbling to the document
-            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Handle Replace Photo
-        replacePhotoButton.addEventListener('click', () => {
-            profilePicInput.click(); // Open file input dialog
-        });
-
-        // Update profile picture preview after file upload
-        profilePicInput.addEventListener('change', (event) => {
-            const [file] = event.target.files;
-            if (file) {
-                profilePic.src = URL.createObjectURL(file);
-                dropdownMenu.style.display = 'none'; // Hide dropdown
-            }
-        });
-
-        // Handle Delete Photo
-        deletePhotoButton.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent form submission
-            profilePic.src = "{% static 'default_profile_pic.png' %}"; // Reset to default image
-            deletePhotoButton.closest('form').submit(); // Submit the form to handle deletion on the backend
-        });
-
-        // Close dropdown if clicked outside
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('.dropdown')) {
-                dropdownMenu.style.display = 'none';
-            }
-        });
-    });
+      // Update profile picture preview after file upload
+      chooseFile.addEventListener('change', (event) => {
+          const [file] = event.target.files; // Extract the first file
+          if (file) { // Check if a file was selected
+              profilePic.src = URL.createObjectURL(file); // Update profile picture preview
+              if (navbarProfilePic) {
+                  navbarProfilePic.src = URL.createObjectURL(file); // Optional: Update navbar picture
+              }
+          }
+      });
+  });
 </script>
 
 {% endblock %}
