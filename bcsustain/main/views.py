@@ -29,24 +29,26 @@ from django.contrib.auth import authenticate
 def profile_setup(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
 
-    profile_picture_url = profile.profile_picture.url if profile.profile_picture else '/static/default_profile_pic.png'
-
+    profile_picture_url = (
+        profile.profile_picture.url
+        if profile.profile_picture and profile.profile_picture.url
+        else '/static/profile_pictures/default_profile_pic.png'
+    )
 
     if request.method == 'POST':
-
         if 'delete_picture' in request.POST:
             profile.reset_profile_picture(save=False)
             messages.success(request, "Profile picture removed successfully.")
             return redirect('profile_setup')
 
         form = ProfileForm(request.POST, request.FILES, instance=profile)
-
         if form.is_valid():
             print("FORM IS VALID")
             form.save()
             profile.refresh_from_db()
             messages.success(request, "Profile updated successfully.")
             return redirect('landing')
+            
         else:
             messages.error(request, "There was an error updating your profile. Please try again.")
     else:
