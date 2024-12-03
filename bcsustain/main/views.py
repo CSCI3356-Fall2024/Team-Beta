@@ -153,48 +153,28 @@ def add_reward(request):
     return render(request, 'add_reward.html', {'form': form})
 
 
+@login_required
 def action(request):
+    # Get today's date
+    today = timezone.now().date()
 
-    ongoing_tasks = [
-    {
-        'name': 'Green2Go Box',
-        'points': 12,
-        'time': 'Ongoing',
-        'image': 'green2go.png'
-    }
-    ]
-    events = [
-        {
-            'name': 'Sustainability Talk',
-            'points': 10,
-            'date': '01/01/2024',
-            'image': 'noimage.png'
-        },
-        {
-            'name': 'Climate Change Webinar',
-            'points': 20,
-            'date': '02/01/2024',
-            'image': 'noimage.png'
-        }
-        ]
+    # Query active campaigns (those that are active today)
+    active_campaigns = Campaign.objects.filter(start_date__lte=today, end_date__gte=today, is_active=True)
 
-    volunteer_work = [
-        {
-            'name': 'Community Clean-Up',
-            'points': 15,
-            'date': '03/01/2024',
-            'image': 'noimage.png'
-        },
-        # Add more volunteer work as needed
-    ]
+    # Pass active campaigns to the template
+    return render(request, 'action.html', {'active_campaigns': active_campaigns})
 
-    context = {
-        'ongoing_tasks': ongoing_tasks,
-        'events': events,
-        'volunteer_work': volunteer_work,
-    }
-    return render(request, 'action.html', context)
+@login_required
+def complete_campaign(request, campaign_id):
+    campaign = get_object_or_404(Campaign, id=campaign_id)
 
+    # Add points to the user's profile
+    profile = request.user.profile
+    profile.points += campaign.points
+    profile.save()
+
+    # Redirect back to the action page or any other page after completion
+    return redirect('action')  # Redirect to action page (you can change this to any other page)
 
 def base(request):
     return render(request, 'base.html')
