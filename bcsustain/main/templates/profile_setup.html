@@ -16,15 +16,15 @@
         <!-- Profile picture display with default fallback -->
         <img
             src="{{ profile_picture_url }}"
-            alt="Profile Picture"
+            alt="PFP HERE"
             id="profile-pic">
 
 
         <div class="dropdown">
-            <button class="edit-pic-button" title="Edit">✏️</button>
+            <button class="edit-picture-button" title="Edit">✏️</button>
             <div class="dropdown-menu" style="display: none;">
                 <!-- Replace Photo Button -->
-                <button class="dropdown-item" id="replace-photo">Replace Photo</button>
+                <button class="dropdown-item" id="replace-profile-picture">Replace Photo</button>
 
                 <!-- Delete Photo Button wrapped in a form -->
                 <form method="POST" action="{% url 'profile_setup' %}" style="display:inline;">
@@ -61,50 +61,101 @@
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const editButton = document.querySelector('.edit-pic-button');
-        const dropdownMenu = editButton.closest('.dropdown').querySelector('.dropdown-menu');
-        const replacePhotoButton = document.getElementById('replace-photo');
-        const deletePhotoButton = document.getElementById('delete-photo'); // Corrected selector
-        const profilePicInput = document.getElementById('profile-pic-input');
-        const profilePic = document.getElementById('profile-pic');
-        const navbarProfilePic = document.getElementById('navbar-profile-pic'); // Navbar profile pic
+  document.addEventListener('DOMContentLoaded', () => {
+      const editButton = document.querySelector('.edit-picture-button');
+      const dropdownMenu = editButton.closest('.dropdown').querySelector('.dropdown-menu');
+      const deletePhotoButton = document.getElementById('delete-photo');
+      const profilePic = document.getElementById('profile-pic');
+      const navbarProfilePic = document.getElementById('navbar-profile-pic');
+
+      const replacePhotoButton = document.getElementById('replace-profile-picture');
+      const uploadPictureInput = document.getElementById('profile-pic-input');
+
+      // Toggle dropdown menu
+      editButton.addEventListener('click', (event) => {
+          event.stopPropagation();
+          dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+          console.log("Dropdown menu visibility toggled. Current state:", dropdownMenu.style.display);
+      });
+
+      // Handle Replace Photo
+      replacePhotoButton.addEventListener('click', () => {
+          console.log("Replace Photo button clicked");
+          uploadPictureInput.click(); // Open file input dialog
+      });
+
+      // Update profile picture preview after file upload
+      uploadPictureInput.addEventListener('change', (event) => {
+          const [file] = event.target.files;
+          console.log("File selected:", file);
+
+          if (file) {
+              updateProfilePictures(file); // Update the preview immediately
+              const previewURL = URL.createObjectURL(file);
+              console.log("File URL generated:", previewURL);
+              profilePic.src = previewURL;
+              if (navbarProfilePic) {
+                  navbarProfilePic.src = previewURL;
+              }
+              console.log("Profile picture updated with preview URL:", previewURL);
 
 
-        // Toggle dropdown menu
-        editButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent event from bubbling to the document
-            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-        });
+              // Create a FormData object to send the file via AJAX
+              const formData = new FormData();
+              formData.append('profile_picture', file); // Append the selected file
+              formData.append('csrfmiddlewaretoken', '{{ csrf_token }}'); // CSRF token for security
 
-        // Handle Replace Photo
-        replacePhotoButton.addEventListener('click', () => {
-            profilePicInput.click(); // Open file input dialog
-        });
+              console.log("FormData entries:", [...formData.entries()]);
 
-        // Update profile picture preview after file upload
-        profilePicInput.addEventListener('change', (event) => {
-            const [file] = event.target.files;
-            if (file) {
-                profilePic.src = URL.createObjectURL(file);
-                dropdownMenu.style.display = 'none'; // Hide dropdown
-            }
-        });
 
-        // Handle Delete Photo
-        deletePhotoButton.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent form submission
-            profilePic.src = "{% static 'default_profile_pic.png' %}"; // Reset to default image
-            deletePhotoButton.closest('form').submit(); // Submit the form to handle deletion on the backend
-        });
+              // Send the file to the server
+              fetch("{% url 'profile_setup' %}", {
+                  method: 'POST',
+                  body: formData,
+              })
+              .then(response => {
+                  if (response.ok) {
+                      console.log("Profile picture successfully updated on the server.");
+                  } else {
+                      console.error("Failed to update profile picture on the server.");
+                  }
+              })
+              .catch(error => {
+                  console.error("Error during the profile picture update:", error);
+              });
 
-        // Close dropdown if clicked outside
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('.dropdown')) {
-                dropdownMenu.style.display = 'none';
-            }
-        });
-    });
+              dropdownMenu.style.display = 'none'; // Hide dropdown
+              console.log("Dropdown menu hidden after file selection.");
+
+          }
+      });
+
+
+      // Handle Delete Photo
+      deletePhotoButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          const defaultPic = "{% static 'default_profile_pic.png' %}";
+          profilePic.src = defaultPic;
+          if (navbarProfilePic) {
+              navbarProfilePic.src = defaultPic;
+          }
+          console.log("Profile picture set to default.");
+
+          deletePhotoButton.closest('form').submit();
+          console.log("Delete photo form submitted.");
+
+      });
+
+      // Close dropdown if clicked outside
+      document.addEventListener('click', (event) => {
+          if (!event.target.closest('.dropdown')) {
+              dropdownMenu.style.display = 'none';
+              console.log("Dropdown menu closed due to click outside.");
+
+          }
+      });
+  });
+
 </script>
 
 {% endblock %}

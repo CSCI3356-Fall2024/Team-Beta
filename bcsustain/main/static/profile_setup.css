@@ -41,7 +41,7 @@ h1 {
     border: 2px solid #5b882c;
 }
 
-.edit-pic-button {
+.edit-picture-button {
     background-color: #5b882c;
     color: white;
     border: none;
@@ -58,7 +58,7 @@ h1 {
     right: 5px;
 }
 
-.edit-pic-button:hover {
+.edit-picture-button:hover {
     background-color: #4e7320;
 }
 

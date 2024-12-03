@@ -47,7 +47,7 @@ class Profile(models.Model):
     def reset_profile_picture(self):
         """Resets the profile picture to the default value."""
         self.profile_picture.delete(save=False)  # Delete the file but don't save yet
-        self.profile_picture = None
+        self.profile_picture = 'profile_pictures/default_profile_pic.png'  # Reset to default
         self.save()
 
     def __str__(self):

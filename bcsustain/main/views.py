@@ -24,36 +24,53 @@ from django.contrib.auth import logout
 from .forms import RewardForm
 from .models import RedeemedReward, Reward
 from django.contrib.auth import authenticate
+import logging
+logger = logging.getLogger(__name__)
 
 @login_required
 def profile_setup(request):
+    logger.info("Profile setup view accessed by user: %s", request.user.username)
+
+    # Get or create the user's profile
     profile, created = Profile.objects.get_or_create(user=request.user)
+    if created:
+        logger.info("New profile created for user: %s", request.user.username)
+    else:
+        logger.info("Existing profile loaded for user: %s", request.user.username)
 
+    # Determine the profile picture URL
     profile_picture_url = profile.profile_picture.url if profile.profile_picture else '/static/default_profile_pic.png'
-
+    logger.debug("Profile picture URL set to: %s", profile_picture_url)
 
     if request.method == 'POST':
+        logger.info("POST request received for user: %s", request.user.username)
 
         if 'delete_picture' in request.POST:
+            logger.info("Delete picture request initiated for user: %s", request.user.username)
             profile.reset_profile_picture(save=False)
             profile.profile_picture = None
             profile.save()
+            logger.info("Profile picture removed for user: %s", request.user.username)
             messages.success(request, "Profile picture removed successfully.")
             return redirect('profile_setup')
 
+        # Process form submission
         form = ProfileForm(request.POST, request.FILES, instance=profile)
-
         if form.is_valid():
-            print("FORM IS VALID")
+            logger.info("Profile form is valid for user: %s", request.user.username)
             form.save()
             profile.refresh_from_db()
+            logger.info("Profile updated successfully for user: %s", request.user.username)
             messages.success(request, "Profile updated successfully.")
             return redirect('landing')
         else:
+            logger.warning("Profile form validation failed for user: %s", request.user.username)
             messages.error(request, "There was an error updating your profile. Please try again.")
     else:
+        logger.info("GET request received for user: %s", request.user.username)
         form = ProfileForm(instance=profile)
 
+    logger.debug("Rendering profile setup page for user: %s", request.user.username)
     return render(request, 'profile_setup.html', {
         'form': form,
         'profile': profile,
