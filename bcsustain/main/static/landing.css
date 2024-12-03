@@ -1,7 +1,10 @@
 /* Global Styles */
 * {
     box-sizing: border-box;
+}
 
+main {
+  margin: 10px;
 }
 
 body {
