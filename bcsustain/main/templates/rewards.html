@@ -14,26 +14,25 @@
     <h1>Rewards</h1>
     <section class="rewards-container">
         <div class="points">
-            <h2>Points</h2>
-            <p class="all-time-score">All-time Score: {{ all_time_score }} PTS</p>
+            <h2>Redeemed</h2>
+            <p class="balance">Balance: {{ profile.points }} PTS</p>
             <ul>
                 {% for redeemed in redeemed_rewards %}
-                <li><span>{{ redeemed.redeemed_at|date:"F j, Y, g:i a" }}</span> {{ redeemed.reward.name }}<span class="points-value">{{ redeemed.points_spent }} pts</span>
+                    <li>
+                        <span>{{ redeemed.redeemed_at|date:"m/d/y" }}</span> 
+                        {{ redeemed.reward.name }} 
+                        <span class="points-value">{{ redeemed.points_spent }} pts</span>
+                    </li>
+                {% empty %}
+                    <li>No rewards redeemed yet.</li>
                 {% endfor %}
-                <li><span>09/27/24</span> Volunteer <span class="points-value">20 pts</span></li>
-                <li><span>09/27/24</span> Conference <span class="points-value">18 pts</span></li>
-                <li><span>09/27/24</span> Green2go Return <span class="points-value">12 pts</span></li>
-                <li><span>09/25/24</span> Dining Coupon <span class="points-value negative">-3 pts</span></li>
-                <li><span>09/24/24</span> Go Karting <span class="points-value negative">-4 pts</span></li>
-                <li><span>09/22/24</span> Phone Case <span class="points-value negative">-3 pts</span></li>
-                <li><span>09/17/24</span> Panel Guest <span class="points-value negative">-4 pts</span></li>
-                <li><span>09/07/24</span> Green2go Return <span class="points-value">12 pts</span></li>
-                <li><span>08/27/24</span> Green2go Return <span class="points-value">12 pts</span></li>
             </ul>
+            
+            
         </div>
         <div class="redeem">
-            <h2>Redeem</h2>
-            <p class="balance">Balance: {{ balance }} PTS</p>
+            <h2>Items to Redeem</h2>
+            <p class="balance">Balance: {{ profile.points }} PTS</p>
             <ul>
                 {% for reward in rewards %}
                 <li>{{ reward.name }}<span class="points-value">{{ reward.points_required }} pts</span></li>

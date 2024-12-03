@@ -29,24 +29,26 @@ from django.contrib.auth import authenticate
 def profile_setup(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
 
-    profile_picture_url = profile.profile_picture.url if profile.profile_picture else '/static/default_profile_pic.png'
-
+    profile_picture_url = (
+        profile.profile_picture.url
+        if profile.profile_picture and profile.profile_picture.url
+        else '/static/profile_pictures/default_profile_pic.png'
+    )
 
     if request.method == 'POST':
-
         if 'delete_picture' in request.POST:
             profile.reset_profile_picture(save=False)
             messages.success(request, "Profile picture removed successfully.")
             return redirect('profile_setup')
 
         form = ProfileForm(request.POST, request.FILES, instance=profile)
-
         if form.is_valid():
             print("FORM IS VALID")
             form.save()
             profile.refresh_from_db()
             messages.success(request, "Profile updated successfully.")
             return redirect('landing')
+            
         else:
             messages.error(request, "There was an error updating your profile. Please try again.")
     else:
@@ -152,49 +154,51 @@ def add_reward(request):
 
     return render(request, 'add_reward.html', {'form': form})
 
+# @user_passes_test(lambda u: u.is_superuser)  # Restrict access to superusers
+def delete_rewards(request):
+    rewards = Reward.objects.all()
 
+    if request.method == 'POST':
+        reward_id = request.POST.get('reward_id')
+        reward = get_object_or_404(Reward, id=reward_id)
+        reward.delete()
+        messages.success(request, f"Reward '{reward.name}' has been deleted.")
+        return redirect('delete_rewards')  # Refresh the manage rewards page
+
+    return render(request, 'delete_rewards.html', {'rewards': rewards})
+
+
+@login_required
 def action(request):
+    # Get today's date
+    today = timezone.now().date()
 
-    ongoing_tasks = [
-    {
-        'name': 'Green2Go Box',
-        'points': 12,
-        'time': 'Ongoing',
-        'image': 'green2go.png'
-    }
-    ]
-    events = [
-        {
-            'name': 'Sustainability Talk',
-            'points': 10,
-            'date': '01/01/2024',
-            'image': 'noimage.png'
-        },
-        {
-            'name': 'Climate Change Webinar',
-            'points': 20,
-            'date': '02/01/2024',
-            'image': 'noimage.png'
-        }
-        ]
+    # Query active campaigns (those that are active today)
+    active_campaigns = Campaign.objects.filter(start_date__lte=today, end_date__gte=today, is_active=True)
 
-    volunteer_work = [
-        {
-            'name': 'Community Clean-Up',
-            'points': 15,
-            'date': '03/01/2024',
-            'image': 'noimage.png'
-        },
-        # Add more volunteer work as needed
-    ]
+    # Pass active campaigns to the template
+    return render(request, 'action.html', {'active_campaigns': active_campaigns})
 
-    context = {
-        'ongoing_tasks': ongoing_tasks,
-        'events': events,
-        'volunteer_work': volunteer_work,
-    }
-    return render(request, 'action.html', context)
+@login_required
+def complete_campaign(request, campaign_id):
+    # Get the campaign
+    campaign = get_object_or_404(Campaign, id=campaign_id)
 
+    # Add points to the user's profile
+    profile = request.user.profile
+    profile.points += campaign.points
+    profile.save()
+
+    # Add a success message that will be displayed after the form submission
+    messages.success(request, f"You have gained {campaign.points} points!")
+
+    # Check if the request came from the Landing Page or Action Page
+    referer = request.META.get('HTTP_REFERER', '')
+
+    if 'action' in referer:
+        return redirect('action')  # Redirect to the Action Page if the request came from there
+    else:
+        return redirect('landing')  # R
 
 def base(request):
     return render(request, 'base.html')
@@ -235,11 +239,14 @@ def landing(request):
         end_date__gte=today,
         add_to_news=True
     )
+    #leaderboard - Almany
+    leaderboard = Profile.objects.order_by('-points')[:5]
 
     # Pass the active campaigns and role to the template
     return render(request, 'landing.html', {
         'active_campaigns': active_campaigns,
         'role': role,
+        'leaderboard': leaderboard,
     })
 
 def campaign_form(request):
@@ -376,12 +383,12 @@ from .models import Reward, Profile
 
 
 
-# Jacob Added this
-@login_required
-def rewards(request):
-    rewards = Reward.objects.filter(available=True)  # Query available rewards
-    return render(request, 'rewards.html', {'rewards': rewards})
+# @login_required
+# def rewards(request):
+#     rewards = Reward.objects.filter(available=True)  # Query available rewards
+#     return render(request, 'rewards.html', {'rewards': rewards})
 
+# Jacob Added this
 @login_required
 def redeem_reward(request, reward_id):
     reward = get_object_or_404(Reward, id=reward_id)
@@ -401,11 +408,25 @@ def redeem_reward(request, reward_id):
     user_profile.points -= reward.points_required
     user_profile.save()
 
+    # Create a RedeemedReward entry
+    RedeemedReward.objects.create(
+        user=request.user,
+        reward=reward,
+        points_spent=reward.points_required,
+    )
+
     # Success message
     messages.success(request, f"You successfully redeemed {reward.name}!")
     return redirect('rewards')
 
+@login_required
 def rewards(request):
+    user_profile = Profile.objects.get(user=request.user)
     redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
     rewards = Reward.objects.filter(available=True)  # or however you're querying rewards
-    return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})
+    return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards, 'profile': user_profile})
+
+
+# def rewards_view(request):
+#     user_profile = Profile.objects.get(user=request.user)  # Assuming a one-to-one relationship with User
+#     return render(request, 'rewards.html', {'profile': user_profile})

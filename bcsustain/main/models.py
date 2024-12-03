@@ -44,11 +44,10 @@ class Profile(models.Model):
     is_supervisor = models.BooleanField(default=False)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True, default='profile_pictures/default_profile_pic.png')
 
-    def reset_profile_picture(self):
-        """Resets the profile picture to the default value."""
-        self.profile_picture.delete(save=False)  # Delete the file but don't save yet
-        self.profile_picture = None
-        self.save()
+    def reset_profile_picture(self, save=True):
+        self.profile_picture = 'profile_pictures/default_profile_pic.png'
+        if save:
+            self.save()
 
     def __str__(self):
         return f"{self.user.username}'s Profile - {self.points} points"
