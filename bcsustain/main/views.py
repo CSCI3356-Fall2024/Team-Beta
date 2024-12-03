@@ -180,25 +180,26 @@ def action(request):
     return render(request, 'action.html', {'active_campaigns': active_campaigns})
 
 @login_required
-def complete_campaign(request, campaign_id):
-    # Get the campaign
-    campaign = get_object_or_404(Campaign, id=campaign_id)
+def complete_campaign(request, id):
+    # Retrieve the campaign by its ID
+    campaign = get_object_or_404(Campaign, id=id)
 
     # Add points to the user's profile
     profile = request.user.profile
     profile.points += campaign.points
     profile.save()
 
-    # Add a success message that will be displayed after the form submission
+    # Display a success message
     messages.success(request, f"You have gained {campaign.points} points!")
 
-    # Check if the request came from the Landing Page or Action Page
+    # Check if the request came from the Action page or the Landing page
     referer = request.META.get('HTTP_REFERER', '')
 
+    # Redirect logic based on the referring page
     if 'action' in referer:
-        return redirect('action')  # Redirect to the Action Page if the request came from there
+        return redirect('action')  # Redirect to the Action Page
     else:
-        return redirect('landing')  # R
+        return redirect('landing') 
 
 def base(request):
     return render(request, 'base.html')
