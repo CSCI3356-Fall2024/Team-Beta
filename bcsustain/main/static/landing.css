@@ -30,6 +30,9 @@ body {
 #landing-welcome h1{
     text-transform: capitalize;
 }
+.leaderboard-list li{
+    text-transform: capitalize;
+}
 
 /* Target only the main element in the landing page */
 .landing-page {
