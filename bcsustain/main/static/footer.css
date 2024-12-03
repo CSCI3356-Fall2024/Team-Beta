@@ -1,36 +1,41 @@
+
 footer {
   background-color: #7FC242;
   padding: 10px 20px;
+  align-items: center; /* Center items vertically */
+  position: relative; /* Allow for precise positioning */
   color: white;
-  display: flex;
-  justify-content: space-between; /* Spacing out text and image */
-  align-items: center; /* Vertically center the content */
+
+
+
+
+
+
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-between; /* Spread the text and image */
-  width: 100%; /* Full width */
-  align-items: center;
+  align-items: center; /* Vertically center the content */
+  justify-content: space-between; /* Center the text horizontally in the footer */
+  width: 100%; /* Make content span the full width */
+  position: relative; /* Allow absolute positioning of the image */
 }
 
 .footer-text {
-  text-align: center;
-  flex: 1;
+  text-align: center; /* Center-align the text */
+  flex: 1; /* Allow the text to take up remaining space */
+
 }
 
 .footer-image {
-  display: flex;
-  justify-content: center;
+  right: 20px; /* Align the image to the far right */
   align-items: center;
-  position: relative;
-  /* Explicitly control the size of the container */
-  height: 30px;  /* Ensure the container doesn't grow too large */
-  width: 30px;   /* Control the width of the container */
 }
 
+
+
+
 .footer-image img {
-  height: 100%; /* Limit the image's height to fit the container */
-  width: 100%;  /* Make width responsive, maintaining aspect ratio */
-  object-fit: contain; /* Ensure the image doesn't stretch */
+  max-height: 40px; /* Restrict the image height */
+  width: auto; /* Maintain aspect ratio */
 }
