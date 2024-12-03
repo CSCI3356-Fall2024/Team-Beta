@@ -376,12 +376,12 @@ from .models import Reward, Profile
 
 
 
-# Jacob Added this
-@login_required
-def rewards(request):
-    rewards = Reward.objects.filter(available=True)  # Query available rewards
-    return render(request, 'rewards.html', {'rewards': rewards})
+# @login_required
+# def rewards(request):
+#     rewards = Reward.objects.filter(available=True)  # Query available rewards
+#     return render(request, 'rewards.html', {'rewards': rewards})
 
+# Jacob Added this
 @login_required
 def redeem_reward(request, reward_id):
     reward = get_object_or_404(Reward, id=reward_id)
@@ -401,11 +401,25 @@ def redeem_reward(request, reward_id):
     user_profile.points -= reward.points_required
     user_profile.save()
 
+    # Create a RedeemedReward entry
+    RedeemedReward.objects.create(
+        user=request.user,
+        reward=reward,
+        points_spent=reward.points_required,
+    )
+
     # Success message
     messages.success(request, f"You successfully redeemed {reward.name}!")
     return redirect('rewards')
 
+@login_required
 def rewards(request):
+    user_profile = Profile.objects.get(user=request.user)
     redeemed_rewards = RedeemedReward.objects.filter(user=request.user).order_by('-redeemed_at')
     rewards = Reward.objects.filter(available=True)  # or however you're querying rewards
-    return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards})
+    return render(request, 'rewards.html', {'rewards': rewards, 'redeemed_rewards': redeemed_rewards, 'profile': user_profile})
+
+
+# def rewards_view(request):
+#     user_profile = Profile.objects.get(user=request.user)  # Assuming a one-to-one relationship with User
+#     return render(request, 'rewards.html', {'profile': user_profile})
