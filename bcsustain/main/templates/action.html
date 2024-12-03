@@ -11,99 +11,36 @@
 
 {% block content %}
 <main class="action-page">
-    <!-- Daily Ongoing Tasks -->
     <section>
-        <h1>Daily Ongoing Tasks</h1>
+        <h1>Active Campaigns</h1>
         <p class="lead text-body-secondary">
-            These tasks have no deadlines and can be completed multiple times throughout the school year!
+            These are the campaigns available today that you can participate in to earn points.
         </p>
     </section>
     <div class="events-container">
-        {% for task in ongoing_tasks %}
+        {% for campaign in active_campaigns %}
             <section class="events">
                 <div class="events-image">
-                    <img src="{% static task.image %}" alt="Event Image"
-                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
-                    <button class="pin-icon" onclick="togglePin(this)">
-                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
-                    </button>
+                    <img src="{{ campaign.get_image_url }}" alt="Campaign Image"
+                         onerror="this.onerror=null; this.src='{% static 'green2go.png' %}';" />
                 </div>
                 <div class="events-info">
-                    <h2 class="name">{{ task.name }}</h2>
-                    <p class="points">Points: {{ task.points }}pts</p>
-                    <p class="date">Time: {{ task.time }}</p>
+                    <h2 class="name">{{ campaign.name }}</h2>
+                    <p class="points">Points: {{ campaign.points }}pts</p>
+                    <p class="date">Campaign Dates: {{ campaign.start_date }} to {{ campaign.end_date }}</p>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
+                        <!-- Add button to complete the campaign and add points -->
+                        <form method="POST" action="{% url 'complete_campaign' campaign.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Complete</button>
+                        </form>
                     </div>
                 </div>
             </section>
+        {% empty %}
+            <p>No active campaigns at this time.</p>
         {% endfor %}
     </div>
-
-    <!-- Events and Speakers -->
-    <section>
-        <h1>Events and Speakers</h1>
-        <p class="lead text-body-secondary">
-            We invite students to come to these informational events about sustainability!
-        </p>
-    </section>
-    <div class="events-container">
-        {% for event in events %}
-            <section class="events">
-                <div class="events-image">
-                    <img src="{% static event.image %}" alt="Event Image"
-                         onerror="this.onerror=null; this.src='{% static 'noimage.png' %}';" />
-                    <button class="pin-icon" onclick="togglePin(this)">
-                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
-                    </button>
-                </div>
-                <div class="events-info">
-                    <h2 class="name">{{ event.name }}</h2>
-                    <p class="points">Points: {{ event.points }}pts</p>
-                    <p class="date">Time: {{ event.date }}</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
-                    </div>
-                </div>
-            </section>
-        {% endfor %}
-    </div>
-
-    <!-- Volunteer Work -->
-    <section>
-        <h1>Volunteer Work</h1>
-        <p class="lead text-body-secondary">
-            Here are some opportunities for students to volunteer!
-        </p>
-    </section>
-    <div class="events-container">
-        {% for event in events %}
-            <section class="events">
-                <div class="events-image">
-                    <img src="{% static 'noimage.png' %}" alt="Event Image" />
-                    <button class="pin-icon" onclick="togglePin(this)">
-                        <img src="{% static 'pin.png' %}" alt="Pin Icon" />
-                    </button>
-                </div>
-                <div class="events-info">
-                    <h2 class="name">{{ event.name }}</h2>
-                    <p class="points">Points: {{ event.points }}pts</p>
-                    <p class="date">Time: {{ event.date }}</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">See Description</button>
-                    </div>
-                </div>
-            </section>
-        {% endfor %}
-    </div>
-
-    <!-- Team and Individual Challenges -->
-    <section>
-        <h1>Team and Individual Challenges</h1>
-        <p class="lead text-body-secondary">
-            There are currently no challenges available!
-        </p>
-    </section>
 </main>
 {% endblock %}
 
