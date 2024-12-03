@@ -140,3 +140,16 @@ body {
     color: #666;
     margin: 5px 0;
 }
+
+button{
+    background-color: #5b882c; /* Green button */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #4e7320; /* Darker green on hover */
+}
