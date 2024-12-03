@@ -38,6 +38,12 @@
                     <h3>{{ campaign.name }}</h3>
                     <p>{{ campaign.points }} PTS | {{ campaign.location }}</p>
                     <p>{{ campaign.description }}</p>
+
+                    <!-- Complete button to gain points -->
+                    <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="showPopup({{ campaign.points }}); return false;">Complete</button>
+                    </form>
                 </div>
             {% empty %}
                 <p>No active campaigns at this time.</p>
@@ -45,4 +51,29 @@
         </div>
     </section>
 </main>
+
+<!-- Success Popup Modal -->
+<div id="popup-modal" class="popup-modal" style="display: none;">
+    <div class="popup-content">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // Function to display the popup with the points
+        function showPopup(points) {
+            const popupMessage = document.getElementById('popup-message');
+            popupMessage.innerText = `You have gained ${points} points!`;
+            document.getElementById('popup-modal').style.display = 'block';
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('popup-modal').style.display = 'none';
+        }
+    </script>
 {% endblock %}

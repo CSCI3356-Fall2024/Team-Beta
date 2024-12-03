@@ -29,10 +29,10 @@
                     <p class="points">Points: {{ campaign.points }}pts</p>
                     <p class="date">Campaign Dates: {{ campaign.start_date }} to {{ campaign.end_date }}</p>
                     <div class="btn-group">
-                        <!-- Add button to complete the campaign and add points -->
-                        <form method="POST" action="{% url 'complete_campaign' campaign.id %}">
+                        <!-- Complete button to gain points -->
+                        <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">Complete</button>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="showPopup({{ campaign.points }}); return false;">Complete</button>
                         </form>
                     </div>
                 </div>
@@ -42,29 +42,29 @@
         {% endfor %}
     </div>
 </main>
+
+<!-- Success Popup Modal -->
+<div id="popup-modal" class="popup-modal" style="display: none;">
+    <div class="popup-content">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
     <script>
-        function togglePin(button) {
-            button.classList.toggle("pinned");
-            const img = button.querySelector('img');
-            if (button.classList.contains("pinned")) {
-                img.src = "{% static 'pinned-icon.png' %}";
-            } else {
-                img.src = "{% static 'pin.png' %}";
-            }
-            const isPinned = button.classList.contains("pinned");
-            localStorage.setItem("pinnedState", isPinned);
+        // Function to display the popup with the points
+        function showPopup(points) {
+            const popupMessage = document.getElementById('popup-message');
+            popupMessage.innerText = `You have gained ${points} points!`;
+            document.getElementById('popup-modal').style.display = 'block';
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const pinState = localStorage.getItem("pinnedState");
-            const pinButton = document.querySelector(".pin-icon");
-            if (pinState === "true") {
-                pinButton.classList.add("pinned");
-                pinButton.querySelector('img').src = "{% static 'pinned-icon.png' %}";
-            }
-        });
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('popup-modal').style.display = 'none';
+        }
     </script>
 {% endblock %}
