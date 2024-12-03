@@ -5,6 +5,7 @@ footer {
   display: flex;
   justify-content: space-between; /* Spacing out text and image */
   align-items: center; /* Vertically center the content */
+  position: relative; /* Allow for absolute positioning of the image */
 }
 
 .footer-content {
@@ -20,15 +21,13 @@ footer {
 }
 
 .footer-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  bottom: 10px; /* Position the image at the bottom */
+  right: 20px; /* Align the image to the far right */
 }
 
 .footer-image img {
-  max-height: 40px;  /* Maximum height */
-  max-width: 40px;   /* Maximum width */
-  width: auto;       /* Maintain aspect ratio */
-  height: auto;      /* Maintain aspect ratio */
-  object-fit: contain; /* Ensure the image fits within the max dimensions */
+  height: 30px;  /* Set the height of the image */
+  width: auto;   /* Let width adjust to maintain aspect ratio */
+  object-fit: contain; /* Maintain aspect ratio and prevent stretching */
 }
