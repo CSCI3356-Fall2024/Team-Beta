@@ -5,7 +5,6 @@ footer {
   display: flex;
   justify-content: space-between; /* Spacing out text and image */
   align-items: center; /* Vertically center the content */
-  position: relative; /* Allow for absolute positioning of the image */
 }
 
 .footer-content {
@@ -21,13 +20,17 @@ footer {
 }
 
 .footer-image {
-  position: absolute;
-  bottom: 10px; /* Position the image at the bottom */
-  right: 20px; /* Align the image to the far right */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* Explicitly control the size of the container */
+  height: 30px;  /* Ensure the container doesn't grow too large */
+  width: 30px;   /* Control the width of the container */
 }
 
 .footer-image img {
-  height: 30px;  /* Set the height of the image */
-  width: auto;   /* Let width adjust to maintain aspect ratio */
-  object-fit: contain; /* Maintain aspect ratio and prevent stretching */
+  height: 100%; /* Limit the image's height to fit the container */
+  width: 100%;  /* Make width responsive, maintaining aspect ratio */
+  object-fit: contain; /* Ensure the image doesn't stretch */
 }
