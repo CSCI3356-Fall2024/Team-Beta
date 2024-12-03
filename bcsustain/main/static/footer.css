@@ -2,9 +2,9 @@ footer {
   background-color: #7FC242;
   padding: 10px 20px;
   color: white;
-  display: flex;
   justify-content: space-between; /* Spacing out text and image */
   align-items: center; /* Vertically center the content */
+  position: relative;
 }
 
 .footer-content {
@@ -12,6 +12,7 @@ footer {
   justify-content: space-between; /* Spread the text and image */
   width: 100%; /* Full width */
   align-items: center;
+  position: relative;
 }
 
 .footer-text {
@@ -20,15 +21,12 @@ footer {
 }
 
 .footer-image {
-  display: flex;
-  justify-content: center;
+  right: 20px;
   align-items: center;
 }
 
 .footer-image img {
-  max-height: 40px;  /* Maximum height */
   max-width: 40px;   /* Maximum width */
   width: auto;       /* Maintain aspect ratio */
-  height: auto;      /* Maintain aspect ratio */
-  object-fit: contain; /* Ensure the image fits within the max dimensions */
+
 }

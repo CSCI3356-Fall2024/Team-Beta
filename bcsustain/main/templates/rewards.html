@@ -12,27 +12,27 @@
 {% block content %}
   <main class="container">
     <h1>Rewards</h1>
+    <p class="balance">Balance: {{ profile.points }} PTS</p>
+    <p class = "warning"> WARNING: POINTS WILL EXPIRE AT THE END OF THE SEMESTER! <p>
     <section class="rewards-container">
         <div class="points">
             <h2>Redeemed</h2>
-            <p class="balance">Balance: {{ profile.points }} PTS</p>
             <ul>
                 {% for redeemed in redeemed_rewards %}
                     <li>
-                        <span>{{ redeemed.redeemed_at|date:"m/d/y" }}</span> 
-                        {{ redeemed.reward.name }} 
+                        <span>{{ redeemed.redeemed_at|date:"m/d/y" }}</span>
+                        {{ redeemed.reward.name }}
                         <span class="points-value">{{ redeemed.points_spent }} pts</span>
                     </li>
                 {% empty %}
                     <li>No rewards redeemed yet.</li>
                 {% endfor %}
             </ul>
-            
-            
+
+
         </div>
         <div class="redeem">
-            <h2>Items to Redeem</h2>
-            <p class="balance">Balance: {{ profile.points }} PTS</p>
+            <h2>Reward Shop</h2>
             <ul>
                 {% for reward in rewards %}
                 <li>{{ reward.name }}<span class="points-value">{{ reward.points_required }} pts</span></li>
@@ -79,4 +79,17 @@
     </div>
 {% endif %}
 </main>
+
+<!-- Place supervisor-specific links here -->
+{% if is_supervisor %}
+<main class="container">
+  <h2>Supervisor Tools</h2>
+  <ul>
+    <li><a href="{% url 'add_reward' %}">Add Reward</a></li>
+    <li><a href="{% url 'delete_rewards' %}">Delete Reward</a></li>
+
+  </ul>
+</main>
+{% endif %}
+
 {% endblock %}
