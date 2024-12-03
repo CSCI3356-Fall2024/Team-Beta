@@ -7,9 +7,6 @@ from django.core.exceptions import ValidationError #code inspired from Samary
 from datetime import datetime
 from .models import Reward
 
-
-
-
 class SupervisorForm(forms.ModelForm):
     class Meta:
         model = Profile

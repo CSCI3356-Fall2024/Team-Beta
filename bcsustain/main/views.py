@@ -36,8 +36,6 @@ def profile_setup(request):
 
         if 'delete_picture' in request.POST:
             profile.reset_profile_picture(save=False)
-            profile.profile_picture = None
-            profile.save()
             messages.success(request, "Profile picture removed successfully.")
             return redirect('profile_setup')
 
