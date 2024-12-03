@@ -22,7 +22,7 @@
               {% if is_supervisor %}
                   <li><a href="{% url 'campaign_form' %}">Create a Campaign</a></li>
                   <li><a href="{% url 'manage_supervisors' %}">Manage Supervisors</a></li>
-                  <li><a href="{% url 'supervisorrewards' %}">Manage Rewards</a></li>
+                  <li><a href="{% url 'delete_rewards' %}">Delete Rewards</a></li>
                   <li><a href="{% url 'add_reward' %}">Add Reward</a></li>
               {% else %}
                 <li><a href="{% url 'rewards' %}">Rewards</a></li>

@@ -154,6 +154,19 @@ def add_reward(request):
 
     return render(request, 'add_reward.html', {'form': form})
 
+# @user_passes_test(lambda u: u.is_superuser)  # Restrict access to superusers
+def delete_rewards(request):
+    rewards = Reward.objects.all()
+
+    if request.method == 'POST':
+        reward_id = request.POST.get('reward_id')
+        reward = get_object_or_404(Reward, id=reward_id)
+        reward.delete()
+        messages.success(request, f"Reward '{reward.name}' has been deleted.")
+        return redirect('delete_rewards')  # Refresh the manage rewards page
+
+    return render(request, 'delete_rewards.html', {'rewards': rewards})
+
 
 @login_required
 def action(request):
