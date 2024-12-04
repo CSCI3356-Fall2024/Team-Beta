@@ -1,9 +1,3 @@
-/* Reset defaults */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 /* Profile header container */
 .profile-header {
     display: flex;
@@ -13,6 +7,13 @@
 }
 
 /* Profile picture styling */
+.profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
 .profile-picture img {
     width: 125px;
     height: 125px;
@@ -24,17 +25,21 @@
 /* Button group styling */
 .button-group {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
+    flex-direction: column;
     gap: 10px; /* Space between buttons */
+    align-items: center;
+    justify-content: center;
 }
 
-/* Button styling */
+/* General button styling */
 .btn {
-    padding: 10px 20px;
+    padding: 10px 0;
+    width: 200px;
     font-size: 16px;
     border-radius: 5px;
-    cursor: pointer;
     text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn-primary {
@@ -45,16 +50,19 @@
 
 .btn-primary:hover {
     background-color: #4e7320;
+    transform: scale(1.05);
 }
 
 .btn-danger {
     color: #fff;
+    font-weight: bold;
     background-color: #dc3545;
     border: 1px solid #b52a38;
 }
 
 .btn-danger:hover {
     background-color: #c82333;
+    transform: scale(1.05);
 }
 
 /* General body styling */
@@ -63,10 +71,10 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Container for the form */
+/* Form container styling */
 .container {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -80,12 +88,11 @@ h1 {
     margin: 20px;
 }
 
-/* Profile picture styling */
-.profile-picture {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 /* Form group spacing */
@@ -109,7 +116,9 @@ label {
 /* Input fields */
 input[type="text"],
 input[type="number"],
-input[type="email"] {
+input[type="email"],
+input[type="file"],
+select {
     margin-bottom: 10px;
     width: 100%;
     padding: 8px;
@@ -119,101 +128,29 @@ input[type="email"] {
 }
 
 input[type="file"] {
-    margin-bottom: 10px;
     width: auto;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
     color: blue;
 }
 
-label.btn.btn-primary {
-  background-color: #5b882c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 100%;
-  height: 50px;
-  align-content: center;
-}
 
-
-/* Dropdown fields */
-select {
-    margin-bottom: 10px;
-}
-
-/* Button styling */
-button {
-    background-color: #5b882c;
+/* Save Profile Button */
+#save-profile-button {
+    background-color: gray; /* Default gray */
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    cursor: not-allowed; /* Indicate non-clickable */
+    opacity: 0.7;
+    width: auto;
+}
+
+#save-profile-button.enabled {
+    background-color: green;
     cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    height: 50px;
-    align-content: center;
-
+    opacity: 1;
 }
 
-button:hover {
-    background-color: #4e7320;
-}
-
-/* Ensure the file input is hidden */
-.custom-file-input {
-    display: none;
-}
-
-/* Align buttons horizontally */
-.button-group {
-    align-items: center;
-    display: flex;
-    justify-content: center;; /* Center align the buttons */
-}
-
-/* Upload Button (Styled as Primary) */
-.btn-primary {
-    color: #fff;
-    margin: 10px 0;
-    background-color: #5b882c; /* Match the theme color */
-    border: 1px solid #4e7320; /* Slight border for definition */
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.btn-primary:hover {
-    background-color: #4e7320;
-    transform: scale(1.05); /* Slight zoom effect */
-}
-
-/* Delete Button */
-.btn-danger {
-    color: #fff;
-    font-weight: bold;
-
-    background-color: #dc3545;
-    border: 1px solid #b52a38;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-    transform: scale(1.05); /* Slight zoom effect */
+#save-profile-button.enabled:hover {
+    background-color: darkgreen;
 }
 
 /* Thumbnail image styling */
@@ -223,7 +160,7 @@ button:hover {
     display: block;
 }
 
-/* File name display */
+/* File name and link styling */
 .file-name {
     margin-left: 10px;
     font-style: italic;
@@ -241,45 +178,25 @@ button:hover {
     text-decoration: none;
 }
 
-/* Styling for the upload-status container */
+/* Styling for upload status */
 #upload-status {
-    display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-    margin: 10px 0; /* Add space above and below the element */
-    font-size: 14px; /* Set the font size */
-    font-style: italic; /* Make the text italic */
-    color: #555; /* Subtle text color */
-    background-color: #f9f9f9; /* Light background for contrast */
-    padding: 10px; /* Inner spacing */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 5px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* Styling for the text inside file-name-display */
+/* File name display */
 #file-name-display {
-    font-weight: bold; /* Make the text bold */
-    color: #333; /* Darker text color for visibility */
-    text-align: center; /* Center-align the text */
-    margin-left: 5px; /* Add spacing from surrounding content */
-}
-
-/* Default styling for the Save Profile button */
-#save-profile-button {
-    background-color: gray; /* Default gray color */
-    color: white; /* White text for visibility */
-    border: none; /* Remove border */
-    cursor: not-allowed; /* Indicate it's not clickable */
-    opacity: 0.7; /* Slightly transparent for the disabled look */
-}
-
-/* Styling for the enabled state */
-#save-profile-button.enabled {
-    background-color: green; /* Green when clickable */
-    cursor: pointer; /* Change cursor to pointer */
-    opacity: 1; /* Fully opaque */
-}
-
-#save-profile-button.enabled:hover {
-    background-color: darkgreen; /* Darker green on hover */
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-left: 5px;
 }
