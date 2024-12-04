@@ -24,6 +24,9 @@ from django.contrib.auth import logout
 from .forms import RewardForm
 from .models import RedeemedReward, Reward
 from django.contrib.auth import authenticate
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 @login_required
 def profile_setup(request):
@@ -36,29 +39,34 @@ def profile_setup(request):
     )
 
     if request.method == 'POST':
-        if 'delete_picture' in request.POST:
-            profile.reset_profile_picture(save=False)
+        if 'delete_photo' in request.POST:
+            if profile.profile_picture:  # Check if a photo exists
+                profile.profile_picture.delete(save=True)  # Delete the photo from the filesystem
+                profile.profile_picture = None  # Clear the profile_picture field
+                profile.save()
             messages.success(request, "Profile picture removed successfully.")
             return redirect('profile_setup')
 
         form = ProfileForm(request.POST, request.FILES, instance=profile)
+
         if form.is_valid():
             print("FORM IS VALID")
             form.save()
-            profile.refresh_from_db()
+            #profile.refresh_from_db()
             messages.success(request, "Profile updated successfully.")
-            return redirect('landing')
-            
+            return redirect('profile_setup')
         else:
             messages.error(request, "There was an error updating your profile. Please try again.")
     else:
         form = ProfileForm(instance=profile)
 
-    return render(request, 'profile_setup.html', {
+    context = {
         'form': form,
         'profile': profile,
         'profile_picture_url': profile_picture_url,
-    })
+    }
+
+    return render(request, 'profile_setup.html', context)
 
 def logout_view(request):
     logout(request)
@@ -199,7 +207,7 @@ def complete_campaign(request, id):
     if 'action' in referer:
         return redirect('action')  # Redirect to the Action Page
     else:
-        return redirect('landing') 
+        return redirect('landing')
 
 def base(request):
     return render(request, 'base.html')

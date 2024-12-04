@@ -39,8 +39,11 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     google_username = models.CharField(max_length=100, null=True, blank=True)
     google_email = models.EmailField(unique=True, null=True, blank=True)
+    school = models.CharField(max_length=100, default= "Boston College", null=True, blank=True)
     graduation_year = models.PositiveIntegerField(null=True, blank=True)
     points = models.PositiveIntegerField(default=0)  # Field necessary for the leaderboard
+    major1 = models.CharField(max_length=100, null=True, blank=True)
+    major2 = models.CharField(max_length=100, default="N/A", null=True)
     is_supervisor = models.BooleanField(default=False)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True, default='profile_pictures/default_profile_pic.png')
 

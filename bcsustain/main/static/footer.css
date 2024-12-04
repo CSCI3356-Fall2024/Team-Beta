@@ -5,14 +5,17 @@ footer {
   align-items: center; /* Center items vertically */
   position: relative; /* Allow for precise positioning */
   color: white;
+  justify-content: space-between; /* Spacing out text and image */
+  align-items: center; /* Vertically center the content */
+  position: relative;
 }
 
 .footer-content {
   display: flex;
-  align-items: center; /* Vertically center the content */
-  justify-content: space-between; /* Center the text horizontally in the footer */
-  width: 100%; /* Make content span the full width */
-  position: relative; /* Allow absolute positioning of the image */
+  justify-content: space-between; /* Spread the text and image */
+  width: 100%; /* Full width */
+  align-items: center;
+  position: relative;
 }
 
 .footer-text {
@@ -22,12 +25,13 @@ footer {
 }
 
 .footer-image {
-  right: 20px; /* Align the image to the far right */
+  right: 20px;
   align-items: center;
 }
 
 
 .footer-image img {
-  max-height: 40px; /* Restrict the image height */
-  width: auto; /* Maintain aspect ratio */
+  max-width: 40px;   /* Maximum width */
+  width: auto;       /* Maintain aspect ratio */
+
 }

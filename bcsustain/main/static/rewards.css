@@ -41,7 +41,7 @@ h1 {
   flex: 1;
   background-color: #ececec;
   padding-top: 20px;
-  padding-bottom: 50px;
+  padding-bottom: 35px;
   border-radius: 10px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   height: 350px;
@@ -54,6 +54,9 @@ h2 {
     margin-bottom: 10px;
     color: #5b882c;
     text-align: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+
 }
 
 .all-time-score, .balance {
@@ -61,7 +64,12 @@ h2 {
     color: #5b882c;
     text-align: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid #333;
+}
+
+.warning {
+  font-style: bold;
+  color: red;
+  text-align: center;
 }
 
 .points ul, .redeem ul {
@@ -78,7 +86,7 @@ h2 {
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
-    
+
 }
 
 .points-value {

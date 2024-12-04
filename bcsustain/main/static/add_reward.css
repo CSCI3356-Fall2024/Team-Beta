@@ -10,7 +10,7 @@ body {
 h1 {
     text-align: center;
     color: #5b882c;
-    /* margin-top: 20px; */
+    margin-top: 20px;
     font-size: 28px;
 }
 
@@ -28,8 +28,8 @@ form {
 }
 
 /* Input and Textarea Styles */
-form input, 
-form textarea, 
+form input,
+form textarea,
 form select {
     width: 100%;
     padding: 10px;
@@ -40,8 +40,8 @@ form select {
     box-sizing: border-box; /* Ensure consistent sizing */
 }
 
-form input:focus, 
-form textarea:focus, 
+form input:focus,
+form textarea:focus,
 form select:focus {
     border-color: #7FC242;
     outline: none;

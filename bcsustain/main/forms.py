@@ -25,9 +25,34 @@ class ProfileForm(forms.ModelForm):
         initial = current_year+1,
         widget=forms.Select(attrs={'class':'form-select'})
     )
+
+    profile_picture = forms.ImageField(
+        label='Profile Picture',
+        widget=forms.ClearableFileInput(attrs={
+            'class': 'custom-file-input',
+            'id': 'custom-choose-file'
+        })
+    )
     class Meta:
         model = Profile
-        fields = ['google_username', 'google_email', 'graduation_year', 'profile_picture']
+        fields = ['google_username', 'google_email', 'school',
+                'graduation_year', 'major1', 'major2', 'profile_picture']
+        labels = {
+            'google_username' : 'Google Username',
+            'google_email' : 'Google Email',
+            'school': 'School',
+            'graduation_year': 'Graduation Year',
+            'major1': 'Primary Major',
+            'major2': 'Secondary Major (Optional)',
+            'profile_picture': 'Profile Picture',
+        }
+
+
+        widgets = {
+            'school': forms.TextInput(attrs={'placeholder': 'E.g. Boston College'}),
+            'major1': forms.TextInput(attrs={'placeholder': 'E.g. Computer Science'}),
+            'major2': forms.TextInput(attrs={'placeholder': 'E.g. Finance'}),
+        }
 
 class CampaignForm(forms.ModelForm):
     class Meta:

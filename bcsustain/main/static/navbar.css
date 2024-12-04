@@ -27,7 +27,13 @@ header {
 img[alt="BC Dining Logo"] {
     width: 200px;
     height: auto;
+    transition: transform 0.2s ease; /* Optional: Adds a hover effect */
 }
+
+img[alt="BC Dining Logo"]:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
 
 img[alt="Three bars"] {
     width: 30px;  /* Smaller, more responsive size */
@@ -176,7 +182,7 @@ img[alt="Profile Pic"] {
     img[alt="Three bars"] {
         width: 25px;  /* Adjust icon size for mobile */
         height: auto;
-        margin-right: 0;
+        margin-right: 5px;
     }
 
     .navbar nav ul {

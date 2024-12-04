@@ -10,58 +10,135 @@
 {% endblock %}
 
 {% block content %}
+<h1>Profile</h1>
 <main class="container">
-    <h1>Profile</h1>
-    <div class="profile-picture">
-        <!-- Profile picture display with default fallback -->
-        <img
-            src="{{navbar_profile_picture  }}"
-            alt="Profile Picture"
-            id="profile-pic">
-
-    </div>
-
-
     <form method="POST" enctype="multipart/form-data" action="{% url 'profile_setup' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <div class="form-group">
-            <label for="school">School</label>
-            <input type="text" id="school" name="school" value="{{ profile.school }}" required placeholder="e.g., Boston College">
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <!-- Profile Picture -->
+            <div class="profile-picture">
+                <a href="{{ full_profile_picture }}" target="_blank" id="profile-picture-link">
+                    <img src="{{ full_profile_picture }}" alt="Profile Picture" id="profile-pic" class="img-thumbnail">
+                </a>
+            </div>
+
+            <!-- Button Group -->
+            <div class="button-group">
+              {% if profile.profile_picture %}
+                <label for="custom-choose-file" class="btn btn-primary">Change Profile Picture</label>
+                <input type="file" id="custom-choose-file" name="profile_picture" class="custom-file-input" style="display: none;">
+                <button type="submit" name="delete_photo" value="true" class="btn btn-danger">Delete Photo</button>
+              {% else %}
+                <label for="custom-choose-file" class="btn btn-primary">Set Profile Picture</label>
+                <input type="file" id="custom-choose-file" name="profile_picture" class="custom-file-input" style="display: none;">
+              {% endif %}
+            </div>
         </div>
-        <div class="form-group">
-            <label for="graduation-year">Year of Graduation</label>
-            <input type="number" id="graduation-year" name="graduation_year" value="{{ profile.graduation_year }}" required min="2024" max="2030" placeholder="e.g., 2025">
+
+        <!-- Display Uploaded File Link -->
+        <div id="upload-status">
+            <span id="file-name-display" class="file-name"></span>
         </div>
-        <div class="form-group">
-            <label for="major1">Primary Major</label>
-            <input type="text" id="major1" name="major1" value="{{ profile.major1 }}" required placeholder="e.g., Computer Science"> <!-- Primary Major -->
-        </div>
-        <div class="form-group">
-            <label for="major2">Secondary Major (Optional)</label>
-            <input type="text" id="major2" name="major2" value="{{ profile.major2 }}" placeholder="e.g., Finance"> <!-- Secondary Major -->
-        </div>
-        <button type="submit">Save Profile</button>
+
+        <!-- Render Other Form Fields -->
+        {{ form.google_username.label_tag }} {{ form.google_username }}
+        {{ form.google_email.label_tag }} {{ form.google_email }}
+        {{ form.school.label_tag }} {{ form.school }}
+        {{ form.graduation_year.label_tag }} {{ form.graduation_year }}
+        {{ form.major1.label_tag }} {{ form.major1 }}
+        {{ form.major2.label_tag }} {{ form.major2 }}
+
+        <!-- Save Profile Button -->
+        <button type="submit" class="btn btn-primary" id="save-profile-button" disabled>Save Profile</button>
     </form>
 </main>
 
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-      const chooseFile = document.getElementById('choose-file');
+      const fileInput = document.getElementById('custom-choose-file');
       const profilePic = document.getElementById('profile-pic');
-      const navbarProfilePic = document.getElementById('navbar-profile-pic'); // For navbar if exists
+      const fileNameDisplay = document.getElementById('file-name-display');
+      const deleteButton = document.querySelector('button[name="delete_photo"]');
+      const saveProfileButton = document.getElementById('save-profile-button');
+      const formInputs = document.querySelectorAll('input, select, textarea'); // Include all form inputs
 
-      // Update profile picture preview after file upload
-      chooseFile.addEventListener('change', (event) => {
-          const [file] = event.target.files; // Extract the first file
-          if (file) { // Check if a file was selected
-              profilePic.src = URL.createObjectURL(file); // Update profile picture preview
-              if (navbarProfilePic) {
-                  navbarProfilePic.src = URL.createObjectURL(file); // Optional: Update navbar picture
-              }
+      let isChanged = false; // Track if any changes have been made
+
+      // Enable "Save Profile" when changes are detected
+      const enableSaveButton = () => {
+          if (isChanged) {
+              saveProfileButton.disabled = false;
+              saveProfileButton.classList.add('enabled'); // Add the enabled class
+          } else {
+              saveProfileButton.disabled = true;
+              saveProfileButton.classList.remove('enabled'); // Remove the enabled class
           }
-      });
-  });
-</script>
+      };
 
+      // Monitor changes on all form inputs
+      formInputs.forEach(input => {
+          input.addEventListener('change', () => {
+              isChanged = true;
+              enableSaveButton();
+          });
+      });
+
+      // Handle the "Upload Photo" functionality
+      if (fileInput) {
+          fileInput.addEventListener('change', () => {
+              const file = fileInput.files[0];
+              if (file) {
+                  const fileURL = URL.createObjectURL(file);
+
+                  // Update the profile picture preview dynamically
+                  profilePic.src = fileURL;
+
+                  // Display a clickable link for the newly uploaded file
+                  fileNameDisplay.innerHTML = `<a href="${fileURL}" target="_blank" class="file-link">Preview Uploaded File</a>`;
+              } else {
+                  fileNameDisplay.textContent = 'No file selected';
+              }
+
+              isChanged = true; // Mark as changed
+              enableSaveButton();
+          });
+      }
+
+      // Handle the "Delete Photo" functionality with confirmation
+      if (deleteButton) {
+          deleteButton.addEventListener('click', (event) => {
+              event.preventDefault(); // Prevent form submission
+
+              // Show confirmation prompt
+              const confirmDelete = confirm('Are you sure you want to delete your profile picture?');
+              if (!confirmDelete) return; // Exit if user cancels
+
+              // Proceed with the deletion
+              fetch(window.location.href, {
+                  method: 'POST',
+                  headers: {
+                      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                  },
+                  body: new URLSearchParams({
+                      delete_photo: true, // Send the delete action
+                  }),
+              })
+                  .then((response) => {
+                      if (response.ok) window.location.reload();
+                      else alert('Failed to delete profile picture.');
+
+                      isChanged = true; // Mark as changed
+                      enableSaveButton();
+                  })
+                  .catch((error) => console.error('Error:', error));
+          });
+      }
+  });
+  //STOP HERE!!!!!!!!!!!!!!!!!!!
+
+
+</script>
 {% endblock %}
