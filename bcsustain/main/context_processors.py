@@ -18,13 +18,9 @@ def add_profile_picture(request):
             profile_picture_url = request.user.profile.profile_picture.url
         except (AttributeError, ValueError):
             profile_picture_url = '/static/default_profile_pic.png'
-
-
         return {
-            'navbar_profile_picture': profile_picture_url,
             'full_profile_picture': profile_picture_url,  # Assuming same picture for now
         }
     return {
-        'navbar_profile_picture': '/static/default_profile_pic.png',
         'full_profile_picture': '/static/default_profile_pic.png',
     }

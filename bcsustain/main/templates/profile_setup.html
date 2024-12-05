@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Landing Page
+    Profile Setup
 {% endblock %}
 
 {% block styles %}
@@ -14,13 +14,12 @@
 <main class="container">
     <form method="POST" enctype="multipart/form-data" action="{% url 'profile_setup' %}">
         {% csrf_token %}
-
         <!-- Profile Header -->
         <div class="profile-header">
             <!-- Profile Picture -->
             <div class="profile-picture">
-                <a href="{{ full_profile_picture }}" target="_blank" id="profile-picture-link">
-                    <img src="{{ full_profile_picture }}" alt="Profile Picture" id="profile-pic" class="img-thumbnail">
+                <a href="{% url 'profile_setup' %}" target="_blank" id="profile-picture-link">
+                    <img src="{{ full_profile_picture }}" alt="Profile Picture" id="profile-pic-form" class="img-thumbnail">
                 </a>
             </div>
 
@@ -59,7 +58,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       const fileInput = document.getElementById('custom-choose-file');
-      const profilePic = document.getElementById('profile-pic');
+      const profilePic = document.getElementById('profile-pic-form');
       const fileNameDisplay = document.getElementById('file-name-display');
       const deleteButton = document.querySelector('button[name="delete_photo"]');
       const saveProfileButton = document.getElementById('save-profile-button');
@@ -87,7 +86,7 @@
       });
 
       // Handle the "Upload Photo" functionality
-      if (fileInput) {
+
           fileInput.addEventListener('change', () => {
               const file = fileInput.files[0];
               if (file) {
@@ -98,14 +97,11 @@
 
                   // Display a clickable link for the newly uploaded file
                   fileNameDisplay.innerHTML = `<a href="${fileURL}" target="_blank" class="file-link">Preview Uploaded File</a>`;
-              } else {
-                  fileNameDisplay.textContent = 'No file selected';
+                  isChanged = true; // Mark as changed
+                  enableSaveButton();
               }
-
-              isChanged = true; // Mark as changed
-              enableSaveButton();
           });
-      }
+
 
       // Handle the "Delete Photo" functionality with confirmation
       if (deleteButton) {
@@ -137,8 +133,5 @@
           });
       }
   });
-  //STOP HERE!!!!!!!!!!!!!!!!!!!
-
-
 </script>
 {% endblock %}

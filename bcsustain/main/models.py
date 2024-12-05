@@ -1,3 +1,7 @@
+#models.py is the data layer
+#Models are python classes that represent data tables
+#includes fields that correspond to table columns
+#includes methods for manipulating data
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings

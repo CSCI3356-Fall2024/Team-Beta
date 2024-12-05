@@ -1,3 +1,7 @@
+#views.py is the business logic layer
+#it contains the logic for handling requests and returning responses
+ #Views retrieve data from models and pass it to templates for rendering
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -28,10 +32,10 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-@login_required
-def profile_setup(request):
+@login_required #ensures that only authenticated users can access the view
+def profile_setup(request): #users not logged in are redirected to login page
     profile, created = Profile.objects.get_or_create(user=request.user)
-
+    #^^ tries to retrieve the Profile object associated with the logged in user, creating a new Profile otherwise
     profile_picture_url = (
         profile.profile_picture.url
         if profile.profile_picture and profile.profile_picture.url
@@ -57,9 +61,9 @@ def profile_setup(request):
             return redirect('profile_setup')
         else:
             messages.error(request, "There was an error updating your profile. Please try again.")
-    else:
+    else: #Handling 'GET' requests
         form = ProfileForm(instance=profile)
-
+        #creates ProfileForm prefilled with user's current profile data
     context = {
         'form': form,
         'profile': profile,
