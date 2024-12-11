@@ -18,7 +18,7 @@ class CampaignAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'google_email', 'graduation_year', 'points', 'is_supervisor')
+    list_display = ('user', 'google_username','google_email', 'graduation_year', 'points', 'is_supervisor')
 
 @admin.register(Reward)
 class RewardAdmin(admin.ModelAdmin):

@@ -31,6 +31,9 @@ from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 @login_required #ensures that only authenticated users can access the view
 def profile_setup(request): #users not logged in are redirected to login page
@@ -54,9 +57,9 @@ def profile_setup(request): #users not logged in are redirected to login page
         form = ProfileForm(request.POST, request.FILES, instance=profile)
 
         if form.is_valid():
-            print("FORM IS VALID")
+            logger.info("FORM IS VALID")
             form.save()
-            #profile.refresh_from_db()
+            profile.refresh_from_db()
             messages.success(request, "Profile updated successfully.")
             return redirect('profile_setup')
         else:
