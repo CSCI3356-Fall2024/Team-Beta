@@ -32,7 +32,7 @@
                         <!-- Complete button to gain points -->
                         <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="showPopup({{ campaign.points }}); return false;">Complete</button>
+                            <button type="submit" class="complete-btn">Complete</button>
                         </form>
                     </div>
                 </div>
@@ -41,6 +41,7 @@
             <p>No active campaigns at this time.</p>
         {% endfor %}
     </div>
+    
 </main>
 
 <!-- Success Popup Modal -->
@@ -50,19 +51,16 @@
         <button onclick="closePopup()">Close</button>
     </div>
 </div>
-
 {% endblock %}
 
 {% block scripts %}
     <script>
-        // Function to display the popup with the points
         function showPopup(points) {
             const popupMessage = document.getElementById('popup-message');
             popupMessage.innerText = `You have gained ${points} points!`;
             document.getElementById('popup-modal').style.display = 'block';
         }
 
-        // Function to close the popup
         function closePopup() {
             document.getElementById('popup-modal').style.display = 'none';
         }
