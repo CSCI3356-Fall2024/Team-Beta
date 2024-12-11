@@ -43,25 +43,21 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     google_username = models.CharField(max_length=100, null=True, blank=True)
     google_email = models.EmailField(unique=True, null=True, blank=True)
-    school = models.CharField(max_length=100, default= "Boston College", null=True, blank=True)
+    school = models.CharField(max_length=100, default="Boston College", null=True, blank=True)
     graduation_year = models.PositiveIntegerField(null=True, blank=True)
-    points = models.PositiveIntegerField(default=0)  # Field necessary for the leaderboard
+    points = models.PositiveIntegerField(default=0)  # Points earned (used for the leaderboard)
+    points_spent = models.PositiveIntegerField(default=0)  # Track points spent on rewards
     major1 = models.CharField(max_length=100, null=True, blank=True)
     major2 = models.CharField(max_length=100, default="N/A", null=True)
     is_supervisor = models.BooleanField(default=False)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True, default='profile_pictures/default_profile_pic.png')
 
-    def reset_profile_picture(self, save=True):
-        self.profile_picture = 'profile_pictures/default_profile_pic.png'
-        if save:
-            self.save()
+    def total_points(self):
+        """Calculate the total points after deducting the points spent."""
+        return self.points - self.points_spent
 
     def __str__(self):
-        return f"{self.user.username}'s Profile - {self.points} points"
-
-    def is_complete(self):
-        return bool(self.google_username and self.google_email and self.graduation_year)
-
+        return f"{self.user.username}'s Profile - {self.total_points()} points"
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_or_update_user_profile(sender, instance, created, **kwargs):

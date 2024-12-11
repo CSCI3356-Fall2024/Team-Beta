@@ -239,12 +239,6 @@ def landing(request):
     # Get the user's profile if it exists
     profile = getattr(request.user, 'profile', None)
 
-    # Check if the user logged in with Google and if their profile is incomplete
-    google_account = SocialAccount.objects.filter(user=request.user, provider='google').exists()
-
-    if google_account and profile and not profile.is_complete():
-        return redirect('profile_setup')
-
     # Determine the user's role (Supervisor or Student) if logged in
     role = "Supervisor" if profile and getattr(profile, 'is_supervisor', False) else "Student"
 
@@ -255,10 +249,10 @@ def landing(request):
         end_date__gte=today,
         add_to_news=True
     )
-    #leaderboard - Almany
+
+    # Leaderboard
     leaderboard = Profile.objects.order_by('-points')[:5]
 
-    # Pass the active campaigns and role to the template
     return render(request, 'landing.html', {
         'active_campaigns': active_campaigns,
         'role': role,
@@ -416,12 +410,12 @@ def redeem_reward(request, reward_id):
         return redirect('rewards')
 
     # Check if the user has enough points
-    if user_profile.points < reward.points_required:
+    if user_profile.total_points() < reward.points_required:
         messages.error(request, "You do not have enough points to redeem this reward.")
         return redirect('rewards')
 
-    # Deduct points and save
-    user_profile.points -= reward.points_required
+    # Deduct points by increasing points_spent
+    user_profile.points_spent += reward.points_required
     user_profile.save()
 
     # Create a RedeemedReward entry
