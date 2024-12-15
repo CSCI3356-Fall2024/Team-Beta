@@ -11,8 +11,9 @@
 
 {% block content %}
 <main class="action-page">
+    <!-- Permanent Campaigns Section -->
     <section>
-        <h1>Action</h1>
+        <h1>Permanent Campaigns</h1>
         <div class="events-container">
             {% for campaign in permanent_campaigns %}
                 <section class="events">
@@ -37,9 +38,9 @@
             {% endfor %}
         </div>
     </section>
-
+    <!-- Active Campaigns Section -->
     <section>
-        <h1>Campaigns</h1>
+        <h1>Active Campaigns</h1>
         <div class="events-container">
             {% for campaign in active_campaigns %}
                 <section class="events">

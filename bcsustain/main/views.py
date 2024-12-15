@@ -186,9 +186,15 @@ def delete_rewards(request):
 @login_required
 def action(request):
     today = timezone.now().date()
-    active_campaigns = Campaign.objects.filter(start_date__lte=today, end_date__gte=today, is_active=True)
+    # Fetch active campaigns that are not marked as permanent
+    active_campaigns = Campaign.objects.filter(
+        start_date__lte=today,
+        end_date__gte=today,
+        is_active=True,
+        is_permanent=False  # Exclude permanent campaigns
+    )
+    # Fetch only permanent campaigns
     permanent_campaigns = Campaign.objects.filter(is_permanent=True)
-
     return render(request, 'action.html', {
         'active_campaigns': active_campaigns,
         'permanent_campaigns': permanent_campaigns,
