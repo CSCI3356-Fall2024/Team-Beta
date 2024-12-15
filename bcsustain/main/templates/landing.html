@@ -29,8 +29,8 @@
         </ul>
     </section>
 
-    <section class="events">
-        <h2>Active Campaigns</h2>
+    <section class="Campaigns">
+        <h2>Campaigns</h2>
         <div class="event-cards">
             {% for campaign in active_campaigns %}
                 <div class="event-card">
@@ -48,6 +48,27 @@
                 <p>No active campaigns at this time.</p>
             {% endfor %}
         </div>
+    </section>
+
+    <section class="Action">
+          <h2>Action</h2>
+          <div class="event-cards">
+              {% for campaign in active_campaigns %}
+                  <div class="event-card">
+                      <img src="{{ campaign.get_image_url }}" alt="Campaign Image">
+                      <h3>{{ campaign.name }}</h3>
+                      <p>{{ campaign.points }} PTS | {{ campaign.location }}</p>
+                      <p>{{ campaign.description }}</p>
+
+                      <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="showPopup({{ campaign.points }}); return false;">Complete</button>
+                      </form>
+                  </div>
+              {% empty %}
+                  <p>No active campaigns at this time.</p>
+              {% endfor %}
+          </div>
     </section>
 </main>
 
