@@ -1,0 +1,83 @@
+/* General Container Styling */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styling */
+.container h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label Styling */
+form p label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Input and Select Styling */
+form p input[type="text"],
+form p input[type="email"],
+form p input[type="file"],
+form p textarea,
+form p select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* Focus State */
+form p input:focus,
+form p textarea:focus,
+form p select:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+/* Button Styling */
+form .btn-success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form .btn-success:hover {
+    background-color: #218838;
+}
+
+/* Error Message Styling */
+form .errorlist {
+    color: #dc3545;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+/* CSRF Token Styling */
+form input[name="csrfmiddlewaretoken"] {
+    display: none;
+}

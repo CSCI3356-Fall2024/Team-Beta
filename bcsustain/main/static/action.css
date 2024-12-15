@@ -81,13 +81,12 @@ button:hover {
 
 /* Add this to create a horizontally scrollable container for the events */
 .events-container {
-    display: inline-flex;
-    flex-wrap: nowrap;
-    padding: 20px 0;
-    margin-left: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    gap: 30px;
+    display: flex;
+    overflow-x: auto;     /* Enables horizontal scrolling */
+    white-space: nowrap;  /* Prevents content from wrapping to the next line */
+    padding: 10px 0;      /* Adds vertical padding for aesthetics */
+    gap: 15px;            /* Adds spacing between event sections */
+    scroll-behavior: smooth; /* Enables smooth scrolling */
 }
 /* Permanent Campaign Section */
 .permanent-campaign {

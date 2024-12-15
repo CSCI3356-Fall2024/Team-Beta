@@ -40,7 +40,6 @@ body {
 /* Target only the main element in the landing page */
 .landing-page {
     padding-left: 20px; /* Adds padding inside the main section */
-    display: flex; /* Flexbox to arrange sections horizontally */
     gap: 20px; /* Adds 20px space between sections */
     margin: 20px 0;
 }
@@ -49,14 +48,14 @@ body {
 .leaderboard {
 
     min-width: 25%;
-    min-height: 400px;
-    max-height: 400px; /* Restrict the height of the leaderboard */
+    max-height: 200px; /* Restrict the height of the leaderboard */
 
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* Add vertical scrolling */
+    margin-bottom: 25px;
 
 }
 
@@ -94,9 +93,10 @@ body {
 }
 
 /* Events Section */
-.events {
+.Campaigns,
+.Action{
     min-width: 50%;
-    margin: 0 5px;
+    margin: 25px 5px;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -104,7 +104,8 @@ body {
     height: 400px;
 }
 
-.events h2 {
+.Campaigns h2,
+.Action h2{
     color: black;
     font-size: 2em;
     margin-bottom: 15px;
