@@ -28,6 +28,7 @@ class Campaign(models.Model):
     )
     add_to_news = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_permanent = models.BooleanField(default=False)  # New field for permanent campaigns
     image = models.ImageField(upload_to='campaign_images/', blank=True, null=True)
 
     def get_image_url(self):
@@ -37,6 +38,7 @@ class Campaign(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 class Profile(models.Model):

@@ -89,6 +89,34 @@ button:hover {
     scroll-behavior: smooth;
     gap: 30px;
 }
+/* Permanent Campaign Section */
+.permanent-campaign {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f0f8e0; /* Light green background */
+  border: 2px solid #5b882c;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.permanent-campaign .events {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.permanent-campaign .events-image img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.permanent-campaign .events-info {
+  text-align: left;
+}
+
 
 
 

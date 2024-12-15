@@ -12,36 +12,58 @@
 {% block content %}
 <main class="action-page">
     <section>
-        <h1>Active Campaigns</h1>
-        <p class="lead text-body-secondary">
-            These are the campaigns available today that you can participate in to earn points.
-        </p>
-    </section>
-    <div class="events-container">
-        {% for campaign in active_campaigns %}
-            <section class="events">
-                <div class="events-image">
-                    <img src="{{ campaign.get_image_url }}" alt="Campaign Image"
-                         onerror="this.onerror=null; this.src='{% static 'green2go.png' %}';" />
-                </div>
-                <div class="events-info">
-                    <h2 class="name">{{ campaign.name }}</h2>
-                    <p class="points">Points: {{ campaign.points }}pts</p>
-                    <p class="date">Campaign Dates: {{ campaign.start_date }} to {{ campaign.end_date }}</p>
-                    <div class="btn-group">
-                        <!-- Complete button to gain points -->
-                        <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
-                            {% csrf_token %}
-                            <button type="submit" class="complete-btn">Complete</button>
-                        </form>
+        <h1>Permanent Campaigns</h1>
+        <div class="events-container">
+            {% for campaign in permanent_campaigns %}
+                <section class="events">
+                    <div class="events-image">
+                        <img src="{{ campaign.get_image_url }}" alt="Campaign Image"
+                             onerror="this.onerror=null; this.src='{% static 'green2go.png' %}';" />
                     </div>
-                </div>
-            </section>
-        {% empty %}
-            <p>No active campaigns at this time.</p>
-        {% endfor %}
-    </div>
-    
+                    <div class="events-info">
+                        <h2 class="name">{{ campaign.name }}</h2>
+                        <p class="points">Points: {{ campaign.points }}pts</p>
+                        <p class="date">Always Available</p>
+                        <div class="btn-group">
+                            <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
+                                {% csrf_token %}
+                                <button type="submit" class="complete-btn">Complete</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            {% empty %}
+                <p>No permanent campaigns available.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <h1>Active Campaigns</h1>
+        <div class="events-container">
+            {% for campaign in active_campaigns %}
+                <section class="events">
+                    <div class="events-image">
+                        <img src="{{ campaign.get_image_url }}" alt="Campaign Image"
+                             onerror="this.onerror=null; this.src='{% static 'green2go.png' %}';" />
+                    </div>
+                    <div class="events-info">
+                        <h2 class="name">{{ campaign.name }}</h2>
+                        <p class="points">Points: {{ campaign.points }}pts</p>
+                        <p class="date">Campaign Dates: {{ campaign.start_date }} to {{ campaign.end_date }}</p>
+                        <div class="btn-group">
+                            <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
+                                {% csrf_token %}
+                                <button type="submit" class="complete-btn">Complete</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            {% empty %}
+                <p>No active campaigns at this time.</p>
+            {% endfor %}
+        </div>
+    </section>
 </main>
 
 <!-- Success Popup Modal -->
@@ -66,3 +88,4 @@
         }
     </script>
 {% endblock %}
+

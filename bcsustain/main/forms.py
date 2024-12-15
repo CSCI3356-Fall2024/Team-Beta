@@ -57,7 +57,10 @@ class ProfileForm(forms.ModelForm):
 class CampaignForm(forms.ModelForm):
     class Meta:
         model = Campaign
-        fields = ['name', 'points', 'start_date', 'end_date', 'location', 'description', 'delivery_method', 'add_to_news', 'image']
+        fields = ['name', 'points', 'start_date', 'end_date', 'location', 'description', 'delivery_method', 'add_to_news', 'is_permanent', 'image']
+        labels = {
+            'is_permanent': 'Mark as Permanent Campaign',
+        }
 
 
 class RewardForm(forms.ModelForm):

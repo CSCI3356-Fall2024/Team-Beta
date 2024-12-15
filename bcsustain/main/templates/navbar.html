@@ -21,6 +21,7 @@
             <ul>
               {% if is_supervisor %}
                   <li><a href="{% url 'campaign_form' %}">Create a Campaign</a></li>
+                  <li><a href="{% url 'add_permanent_campaign' %}">Create an Action</a></li>
                   <li><a href="{% url 'supervisor' %}">Campaigns</a></li>
                   <li><a href="{% url 'manage_supervisors' %}">Manage Supervisors</a></li>
                   <li><a href="{% url 'delete_rewards' %}">Delete Rewards</a></li>

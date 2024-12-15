@@ -185,14 +185,14 @@ def delete_rewards(request):
 
 @login_required
 def action(request):
-    # Get today's date
     today = timezone.now().date()
-
-    # Query active campaigns (those that are active today)
     active_campaigns = Campaign.objects.filter(start_date__lte=today, end_date__gte=today, is_active=True)
+    permanent_campaigns = Campaign.objects.filter(is_permanent=True)
 
-    # Pass active campaigns to the template
-    return render(request, 'action.html', {'active_campaigns': active_campaigns})
+    return render(request, 'action.html', {
+        'active_campaigns': active_campaigns,
+        'permanent_campaigns': permanent_campaigns,
+    })
 
 @login_required
 def complete_campaign(request, id):
@@ -379,6 +379,20 @@ def campaign_form(request):
     else:
         form = CampaignForm()
     return render(request, 'campaign_form.html', {'form': form})
+def add_permanent_campaign(request):
+    if request.method == 'POST':
+        form = CampaignForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.is_permanent = True  # Ensure the campaign is marked as permanent
+            form.save()
+            messages.success(request, "Permanent campaign added successfully!")
+            return redirect('action')
+        else:
+            messages.error(request, "There was an error adding the permanent campaign.")
+    else:
+        form = CampaignForm()
+
+    return render(request, 'add_permanent_campaign.html', {'form': form})
 
 #@login_required
 def delete_campaign(request, campaign_id):

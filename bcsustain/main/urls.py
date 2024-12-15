@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import (
     signup, login, rewards, supervisorrewards, add_reward, action, base,
     supervisor, landing, campaign_form, profile_setup, manage_supervisors,
-    delete_campaign, redeem_reward, logout_view, delete_rewards, complete_campaign
+    delete_campaign, redeem_reward, logout_view, delete_rewards, complete_campaign, add_permanent_campaign
 )
 from django.contrib.auth.views import LogoutView
 from django.contrib import admin
@@ -26,6 +26,7 @@ urlpatterns = [
     path('campaign_form/', campaign_form, name='campaign_form'),
 
     path('profile_setup/', profile_setup, name='profile_setup'),
+    path('campaigns/add_permanent/', add_permanent_campaign, name='add_permanent_campaign'),
     
     path('manage-supervisors/', manage_supervisors, name='manage_supervisors'),
     path('campaign/delete/<int:campaign_id>/', delete_campaign, name='delete_campaign'),
