@@ -1,0 +1,22 @@
+databases:
+  - name: bcsustaindb
+    plan: free
+    databaseName: bcsustain
+    user: bcsustain
+
+services:
+  - type: web
+    plan: free
+    name: bcsustain
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "cd bcsustain && python3 -m gunicorn bcsustain.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bcsustaindb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
