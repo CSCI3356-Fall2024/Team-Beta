@@ -245,22 +245,39 @@ def landing(request):
     # Get the user's profile if it exists
     profile = getattr(request.user, 'profile', None)
 
+    # Check if the user logged in with Google and if their profile is incomplete
+    google_account = SocialAccount.objects.filter(user=request.user, provider='google').exists()
+
+    if google_account and profile and not profile.is_complete():
+        return redirect('profile_setup')
+
     # Determine the user's role (Supervisor or Student) if logged in
     role = "Supervisor" if profile and getattr(profile, 'is_supervisor', False) else "Student"
 
-    # Get active campaigns for today
+    # Get today's date
     today = timezone.now().date()
+
+    # Fetch regular active campaigns (not permanent)
     active_campaigns = Campaign.objects.filter(
         start_date__lte=today,
         end_date__gte=today,
-        add_to_news=True
+        is_active=True,
+        is_permanent=False
+    )
+
+    # Fetch permanent campaigns (actions)
+    permanent_campaigns = Campaign.objects.filter(
+        is_active=True,
+        is_permanent=True
     )
 
     # Leaderboard
-    leaderboard = Profile.objects.order_by('-points')[:5]
+    leaderboard = profile.__class__.objects.order_by('-points')[:5]
 
+    # Pass the data to the template
     return render(request, 'landing.html', {
         'active_campaigns': active_campaigns,
+        'permanent_campaigns': permanent_campaigns,
         'role': role,
         'leaderboard': leaderboard,
     })

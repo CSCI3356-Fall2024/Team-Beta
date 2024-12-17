@@ -16,6 +16,7 @@
 </div>
 
 <main class="landing-page">
+    <!-- Leaderboard Section -->
     <section class="leaderboard">
         <h2>Leaderboard</h2>
         <ul class="leaderboard-list">
@@ -29,6 +30,7 @@
         </ul>
     </section>
 
+    <!-- Campaigns Section -->
     <section class="Campaigns">
         <h2>Campaigns</h2>
         <div class="event-cards">
@@ -41,7 +43,7 @@
 
                     <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="showPopup({{ campaign.points }}); return false;">Complete</button>
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Complete</button>
                     </form>
                 </div>
             {% empty %}
@@ -50,25 +52,26 @@
         </div>
     </section>
 
+    <!-- Action Section for Permanent Campaigns -->
     <section class="Action">
-          <h2>Action</h2>
-          <div class="event-cards">
-              {% for campaign in active_campaigns %}
-                  <div class="event-card">
-                      <img src="{{ campaign.get_image_url }}" alt="Campaign Image">
-                      <h3>{{ campaign.name }}</h3>
-                      <p>{{ campaign.points }} PTS | {{ campaign.location }}</p>
-                      <p>{{ campaign.description }}</p>
+        <h2>Actions</h2>
+        <div class="event-cards">
+            {% for campaign in permanent_campaigns %}
+                <div class="event-card">
+                    <img src="{{ campaign.get_image_url }}" alt="Campaign Image">
+                    <h3>{{ campaign.name }}</h3>
+                    <p>{{ campaign.points }} PTS | {{ campaign.location }}</p>
+                    <p>{{ campaign.description }}</p>
 
-                      <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this campaign and earn {{ campaign.points }} points?');">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="showPopup({{ campaign.points }}); return false;">Complete</button>
-                      </form>
-                  </div>
-              {% empty %}
-                  <p>No active campaigns at this time.</p>
-              {% endfor %}
-          </div>
+                    <form method="POST" action="{% url 'complete_campaign' campaign.id %}" onsubmit="return confirm('Are you sure you want to complete this action and earn {{ campaign.points }} points?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Complete</button>
+                    </form>
+                </div>
+            {% empty %}
+                <p>No permanent campaigns at this time.</p>
+            {% endfor %}
+        </div>
     </section>
 </main>
 
