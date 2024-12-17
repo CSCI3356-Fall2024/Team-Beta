@@ -46,15 +46,13 @@ body {
 
 /* Leaderboard Section */
 .leaderboard {
-
     min-width: 25%;
-    max-height: 200px; /* Restrict the height of the leaderboard */
-
+    max-height: 250px; /* Fixed height for scrolling */
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Add vertical scrolling */
+    overflow-y: auto; /* Vertical scrolling */
     margin-bottom: 25px;
 
 }
@@ -96,12 +94,13 @@ body {
 .Campaigns,
 .Action{
     min-width: 50%;
+    max-height: 400px; /* Fixed height for scrolling */
     margin: 25px 5px;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    height: 400px;
+    overflow-y: auto; /* Vertical scrolling */
 }
 
 .Campaigns h2,

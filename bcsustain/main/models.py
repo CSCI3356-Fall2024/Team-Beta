@@ -60,6 +60,10 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile - {self.total_points()} points"
+    
+    def is_complete(self):
+        """Check if the profile has all required fields filled out."""
+        return bool(self.google_username and self.google_email and self.graduation_year)
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
