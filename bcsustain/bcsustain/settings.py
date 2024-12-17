@@ -28,7 +28,8 @@ SECRET_KEY = "django-insecure-f540mmh95_*4d#uxxt+=-ag&%z+7=!!fcqy^@b&bkw-cdk45_@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOST = ['*']
+ALLOWED_HOSTS = ['bcsustain.onrender.com', '127.0.0.1', 'localhost']
+
 
 # Application definition
 SITE_ID = 3  # This corresponds to the professor's setup
